@@ -1,0 +1,33 @@
+import java.io.*;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
+public class currentTime
+{
+	public static void main(String [] args)
+	{
+		
+		Calendar midnight = GregorianCalendar.getInstance();
+		midnight.set(GregorianCalendar.HOUR,0);
+		midnight.set(GregorianCalendar.MINUTE,0);
+		midnight.set(GregorianCalendar.SECOND,0);
+
+		System.out.println("" + midnight.get(GregorianCalendar.YEAR) + "," + 
+										midnight.get(GregorianCalendar.MONTH) + "," +
+										midnight.get(GregorianCalendar.DATE) + ", " +
+										midnight.get(GregorianCalendar.HOUR) + "," + 
+										midnight.get(GregorianCalendar.MINUTE) + "," + 
+										midnight.get(GregorianCalendar.SECOND));
+
+		long currentMS = System.currentTimeMillis();
+		long midnightMS = midnight.getTimeInMillis();
+
+		System.out.println("Current MS: " + currentMS + " or " + GregorianCalendar.getInstance().toString());
+		System.out.println("Midnight MS: " + midnightMS + " or " + midnight.toString());
+
+		System.out.println("ms since midnight: " + (currentMS - midnightMS));
+
+	}
+}
+		
+//GregorianCalendar(int year, int month, int date, int hour, int minute, int second)

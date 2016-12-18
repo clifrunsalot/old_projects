@@ -1,0 +1,71 @@
+#Must be of one of the two formats below.  Index begins at "1".
+#
+# If a log grep, then
+#  <tc_number>,<index>,<egrep command>
+#
+# If a db grep, then
+#  <tc_number>,<index>,<db2 command>
+#
+# IMPORTANT!!!!!  BE SURE THAT THE INDICES ARE UNIQUE FOR EACH TESTCASE.
+# For example, the following two greps will cause the grepper to work incorrectly:
+#              V
+#            1,3, egrep -i "find that" /tmp/log.txt
+#            1,3, egrep -i "find this" /tmp/log.txt
+#              ^
+#
+
+1,1,egrep -i "Red Hat Enterprise Linux WS release 3" /etc/redhat-release
+1,2,egrep -i "hrbt" /tmp/scSystemManagerDebugLog* | egrep fccc
+1,3,egrep -i "cfpim" /tmp/scSystemManagerDebugLog* | egrep -i start
+2,1,ls -1 /fcs/current/services/BCME/log/fcccme_cfpim_Basic* | tail -n 1 | xargs -i awk '/Read CFPIM Sc:Config file/,/Default scFcsLogin CDLP Message timeout from Config File/{print}' {}
+2,2,ls -1 /fcs/current/services/BCME/log/fcccme_cfpim_Basic* | tail -n 1 | xargs -i egrep -i "CFPIM established socket client connection to FBCB2 socket server" {}
+2,3,ls -1 /fcs/current/services/BCME/log/fcccme_cfpim_Basic* | tail -n 1 | xargs -i head -n 1 {};ls -1 /fcs/current/services/BCME/log/fcccme_cfpim_Basic* | tail -n 1 | xargs -i egrep -i "Establishing socket connection to Platform Application" {}
+2,4,ls -1 /fcs/current/services/BCME/log/fcccme_cfpim_Cdlp* | tail -n 1 | xargs -i egrep -i "ServicesReg" {} | egrep -i "fbcb2"
+2,5,ls -1 /fcs/current/services/BCME/log/fcccme_cfpim_Basic* | tail -n 1 | xargs -i egrep -i "CFPIM established socket client connection to FBCB2 socket server" {};ls -1 /fcs/current/services/BCME/log/fcccme_cfpim_Cdlp* | tail -n 1 | xargs -i egrep -i "ServicesReg" {} | egrep -i "fbcb2"
+2,6,ls -1 /fcs/current/services/BCME/log/fcccme_cfpim_Detail* | tail -n 1 | xargs -i awk '/CPayloadServicesReg::display/,/m_usiBitFields=0x1f80/{print}' {}
+2,7,ls -1 /fcs/current/services/BCME/log/fcccme_cfpim_Cdlp* | tail -n 1 | xargs -i egrep -i "ServicesReg" {} | egrep -i "ACK from:fbcb2"
+2,8,ls -1 /fcs/current/services/BCME/log/fcccme_cfpim_Cdlp* | tail -n 1 | xargs -i egrep -i "ServicesReg" {} | egrep -i "ACK from:fbcb2";ls -1 /fcs/current/services/BCME/log/fcccme_cfpim_Cdlp* | tail -n 1 | xargs -i egrep -i "RmteDsplyCtrl" {} | egrep -i "to:fbcb2"
+2,9,ls -1 /fcs/current/services/BCME/log/fcccme_cfpim_Detail* | tail -n 1 | xargs -i egrep -i -A 20 "RmteDsplyCtrl" {}
+2,10,ls -1 /fcs/current/services/BCME/log/fcccme_cfpim_Basic* | tail -n 1 | xargs -i egrep -i "Sending Remote Display Control Msg to FBCB2" {}; ls -1 /fcs/current/services/BCME/log/fcccme_cfpim_Basic* | tail -n 1 | xargs -i egrep -i "CFPIM Initialization : Did not receive expected" {} | egrep -i "RmteDsplyCtrl"
+2,11,ls -1 /fcs/current/services/BCME/log/fcccme_cfpim_Cdlp* | tail -n 1 | xargs -i egrep -i "RmteDsplyCtrl" {} | egrep -i "NAK from:FBCB2"
+2,12,ls -1 /fcs/current/services/BCME/log/fcccme_cfpim_Cdlp* | tail -n 1 | xargs -i egrep -i "RmteDsplyCtrl" {} | egrep -i "ACK from:FBCB2"
+2,13,ls -1 /fcs/current/services/BCME/log/fcccme_cfpim_Cdlp* | tail -n 1 | xargs -i egrep -i "RmteDsplyCtrl" {} | egrep -i "ACK from:FBCB2";ls -1 /fcs/current/services/BCME/log/fcccme_cfpim_Cdlp* | tail -n 1 | xargs -i egrep -i "ConfigDataReq" {} | egrep -i "to:FBCB2" 
+2,14,ls -1 /fcs/current/services/BCME/log/fcccme_cfpim_Cdlp* | tail -n 1 | xargs -i egrep -i "ConfigDataResp" {} | egrep -i "from:FBCB2|to:URNRMI"
+2,15,ls -1 /fcs/current/services/BCME/log/fcccme_cfpim_Detail* | tail -n 1 | xargs -i egrep -i -A 22 "ConfigDataResp" {}
+2,16,ls -1 /fcs/current/services/BCME/log/fcccme_cfpim_Cdlp* | tail -n 1 | xargs -i egrep -i "FailsafeConfig" {} | egrep -i "from:FBCB2|to:FBCB2"
+2,17,ls -1 /fcs/current/services/BCME/log/fcccme_cfpim_Cdlp* | tail -n 1 | xargs -i egrep -i "FailsafeConfig" {} | egrep -i "from:PA|to:PA"
+2,18,ls -1 /fcs/current/services/BCME/log/fcccme_cfpim_Cdlp* | tail -n 1 | xargs -i egrep -i "VncServerConfig" {} | egrep -i "from:FBCB2|to:FBCB2"
+2,19,ls -1 /fcs/current/services/BCME/log/fcccme_cfpim_Cdlp* | tail -n 1 | xargs -i egrep -i "VncServerConfig" {} | egrep -i "to:FCSLOGIN"
+2,20,ls -1 /fcs/current/services/BCME/log/fcccme_cfpim_Cdlp* | tail -n 1 | xargs -i egrep -i "VncClientConfig" {} | egrep -i "from:FBCB2|to:FBCB2"
+2,21,egrep -i "fcccme_cfpim_clockSetter failed to set clock" /tmp/soscoe_start.out 
+2,22,ls -1 /fcs/current/services/BCME/log/fcccme_cfpim_Cdlp* | tail -n 1 | xargs -i egrep -i "5040" {} | egrep -i "to:FBCB2"
+2,23,ls -1 /fcs/current/services/BCME/log/fcccme_cfpim_Cdlp* | tail -n 1 | xargs -i egrep -i "5040" {} | egrep -i "from:PA|to:PA"
+2,24,ls -1 /fcs/current/services/BCME/log/fcccme_cfpim_Cdlp* | tail -n 1 | xargs -i egrep -i "FailsafeConfig" {} | egrep -i "from:FBCB2|to:FBCB2|to:FCSLOGIN"
+2,25,ls -1 /fcs/current/services/BCME/log/fcccme_cfpim_Cdlp* | tail -n 1 | xargs -i egrep -i "ShutdownReq" {} | egrep -i "from:PA";ls -1 /fcs/current/services/BCME/log/fcccme_cfpim_Cdlp* | tail -n 1 | xargs -i egrep -i "ShutdownResp" {} | egrep -i "to:PA"
+2,26,ls -1 /fcs/current/services/BCME/log/fcccme_cfpim_Detail* | tail -n 1 | xargs -i egrep -i -A 14 " ShutdownReq" {}
+2,27,ls -1 /fcs/current/services/BCME/log/fcccme_cfpim_Basic* | tail -n 1 | xargs -i egrep -i "Setting CFPIM Shutdown State to SENT TO SOSCOE" {}
+2,28,ls -1 /fcs/current/services/BCME/log/fcccme_cfpim_Basic* | tail -n 1 | xargs -i egrep -i "CFPIM Successfully requested shutdown to the SOSCOE Master System Manager" {}
+3,1,ls -1 /fcs/current/services/BCME/log/fcccme_cfpim_Basic* | tail -n 1 | xargs -i egrep -i "Setting CFPIM Logon state to LOGGED ON" {}
+3,2,ls -1 /fcs/current/services/BCME/log/fcccme_cfpim_Cdlp* | tail -n 1 | xargs -i egrep -i "StatusReq" {} | egrep -i "from:PA";ls -1 /fcs/current/services/BCME/log/fcccme_cfpim_Cdlp* | tail -n 1 | xargs -i egrep -i "StatusResp" {} | egrep -i "to:PA"
+3,3,ls -1 /fcs/current/services/BCME/log/fcccme_cfpim_Detail* | tail -n 1 | xargs -i egrep -i "m_uiVNCViewerStatus=0" {}
+3,4,ls -1 /fcs/current/services/BCME/log/fcccme_cfpim_Detail* | tail -n 1 | xargs -i egrep -i -A 14 " StatusResp" {}
+3,5,ls -1 /fcs/current/services/BCME/log/fcccme_cfpim_Cdlp* | tail -n 1 | xargs -i egrep -i "StatusReq" {} | egrep -i "from:PA|to:PA"
+3,6,ls -1 /fcs/current/services/BCME/log/fcccme_cfpim_Basic* | tail -n 1 | xargs -i egrep -i -A 3 "Could not created cdlp" {}
+4,1,ls -1 /fcs/current/services/BCME/log/fcccme_cfpim_Cdlp* | tail -n 1 | xargs -i egrep -i "VersionReq" {} | egrep -i "from:PA";ls -1 /fcs/current/services/BCME/log/fcccme_cfpim_Cdlp* | tail -n 1 | xargs -i egrep -i "VersionResp" {} | egrep -i "to:PA"
+4,2,echo "CONFIG FILE";egrep -A 4 "BCS Version Info" /fcs/current/services/BCME/data/fcccme_cfpim_bcs_versions.txt;echo;echo "DETAIL LOG";ls -1 /fcs/current/services/BCME/log/fcccme_cfpim_Detail* | tail -n 1 | xargs -i egrep -i -A 15 " VersionResp" {}
+4,3,ls -1 /fcs/current/services/BCME/log/fcccme_cfpim_Cdlp* | tail -n 1 | xargs -i egrep -i "VersionReq" {} | egrep -i "from:PA|to:PA"
+5,1,ls -1 /fcs/current/services/BCME/log/fcccme_cfpim_Basic* | tail -n 1 | xargs -i egrep -i "Declared FBCB2 Failover|Declared PA Failover" {}
+5,2,egrep -i -A 3 "Initial" /fcs/current/services/BCME/data/fcccme_cfpim_fbcb2_failsafe_config.txt
+5,3,ls -1 /fcs/current/services/BCME/log/fcccme_cfpim_Basic* | tail -n 1 | xargs -i egrep -i -A 1 "FBCB2 Set Initial Failsafe Timeout" {}
+5,4,ls -1 /fcs/current/services/BCME/log/fcccme_cfpim_Cdlp* | tail -n 1 | xargs -i egrep -i "FailsafeConfig" {} | egrep -i "from:FBCB2|to:FBCB2"
+5,5,egrep -i -A 3 "Initial" /fcs/current/services/BCME/data/fcccme_cfpim_PA_failsafe_config.txt
+5,6,ls -1 /fcs/current/services/BCME/log/fcccme_cfpim_Cdlp* | tail -n 1 | xargs -i egrep -i "FailsafeConfig" {} | egrep -i "from:PA|to:PA"
+5,7,ls -1 /fcs/current/services/BCME/log/fcccme_cfpim_Basic* | tail -n 1 | xargs -i egrep -i "FBCB2 Recycle" {}
+5,8,egrep -i -A 4 "Default FBCB2 Initial Failsafe Timeout" /fcs/current/services/BCME/data/fcccme_cfpim_CfpimConfig.xml
+6,1,egrep -i -A 10 "Default PA Initial Failsafe Timeout" /fcs/current/services/BCME/data/fcccme_cfpim_CfpimConfig.xml;echo;egrep -i -A 1 "CDLP Message Latency \(Used for clock setting \- in milliseconds\)" /fcs/current/services/BCME/data/fcccme_cfpim_CfpimConfig.xml
+6,2,ls -1 /fcs/current/services/BCME/log/fcccme_cfpim_Cdlp* | tail -n 1 | xargs -i egrep -i "\(5040\)PV" {} | egrep -i "from:PA|to:PA"
+6,3,ls -1 /fcs/current/services/BCME/log/fcccme_cfpim_Cdlp* | tail -n 1 | xargs -i egrep -i "\(5040\)PV" {} | egrep -i "from:FBCB2|to:FBCB2"
+6,4,ls -1 /fcs/current/services/BCME/log/fcccme_cfpim_Basic* | tail -n 1 | xargs -i egrep -i "Setting CFPIM FBCB2 Last Message Received time" {}; egrep -i "SUCCESS: fcccme_cfpim_clockSetter set clock to" /tmp/soscoe_start.out
+6,5,ls -1 /fcs/current/services/BCME/log/fcccme_cfpim_Basic* | tail -n 1 | xargs -i egrep -i "Setting CFPIM PA Last Message Received time" {}
+6,6,egrep -i "SUCCESS: fcccme_cfpim_clockSetter set clock to" /tmp/soscoe_start.out
+6,7,ls -1 /fcs/current/services/BCME/log/fcccme_cfpim_Basic* | tail -n 1 | xargs -i egrep -i "TFOM was not good" {}

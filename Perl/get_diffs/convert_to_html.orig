@@ -1,0 +1,173 @@
+#!/usr/bin/perl
+
+use strict;
+
+my $prev_char = '<';
+my $latest_char = '>';
+my $modified_char = '|';
+my $left_curly = '-|';
+my $right_curly = '|-';
+
+my $COLS=220;
+my $file = "";
+my $remote = "";
+
+
+sub insert_header {
+	my $title = $_[0];
+	my $remote_control = $_[1];
+	eval {$title} && eval {$remote_control}
+		or warn "Bad string arg in call to insert_header(string, string)" and return;
+	my $out=<<HEADER;
+<html>
+<head>
+<title>$title</title>
+<SCRIPT>
+<!-- hide
+function show_remote(url) {
+	window.open(url);
+	self.name="main";
+}
+//-->
+</SCRIPT>
+</head>
+<body>
+<center>
+<form>
+<input type=button value="Open Remote Control" onClick="show_remote('$remote_control')">
+</form>
+</center>
+HEADER
+	return $out;
+}
+
+sub insert_footer {
+	my $out=<<FOOTER;
+</body>
+</html>
+FOOTER
+}
+
+sub remove_brackets {
+	my $tmp_line = $_[0];
+	$tmp_line    =~ s/>/&gt;/g;
+	$tmp_line    =~ s/</&lt;/g;
+	return $tmp_line;
+}
+
+sub color_prev {
+	my $line           = $_[0];
+	my $changed        = -1;
+	my $begin_font     = '<b><font color="red">';
+	my $end_font       = '</font></b>';
+	my $right_side_len = length($line) - $COLS; 
+	my $left_side_len  = length($line) - $right_side_len;
+	if (substr($line, $COLS, 1) eq $prev_char) {
+		substr($line, $COLS, 1, $left_curly);
+		my $right_side_str = substr($line, $COLS + 2, $right_side_len);
+		my $left_side_str = substr($line, 0, $left_side_len + 2);
+		$right_side_str = &remove_brackets($right_side_str);
+		$left_side_str = &remove_brackets($left_side_str);
+		$line = sprintf "%s",$begin_font.$left_side_str.$end_font.$right_side_str.'<BR>';
+		print $line;
+		$changed = 1;
+	}
+}
+
+sub color_latest {
+	my $line           = $_[0];
+	my $changed        = -1;
+	my $begin_font     = '<b><font color="blue">';
+	my $end_font       = '</font></b>';
+	my $right_side_len = length($line) - $COLS; 
+	my $left_side_len  = length($line) - $right_side_len;
+	if (substr($line, $COLS, 1) eq $latest_char) {
+		substr($line, $COLS, 1, $right_curly);
+		my $right_side_str = substr($line, $COLS, $right_side_len);
+		my $left_side_str = substr($line, 0, $left_side_len - 1);
+		$right_side_str = &remove_brackets($right_side_str);
+		$left_side_str = &remove_brackets($left_side_str);
+		$line = sprintf "%s", $left_side_str.$begin_font.$right_side_str.$end_font.'<br>';
+		print $line;
+		$changed = 1;
+	}
+}
+
+sub color_modified {
+	my $line       = $_[0];
+	my $changed    = -1;
+	my $begin_font = '<b><font color="green">';
+	my $end_font   = '</font></b>';
+	if (substr($line, $COLS, 1) eq $modified_char) {
+		$line = &remove_brackets($line);
+		$line = sprintf "%s",$begin_font.$line.$end_font.'<br>';
+		print $line;
+		$changed = 1;
+	}
+}
+
+sub insert_name_links {
+	my $line         = $_[0];
+	my $changed      = -1;
+	my $begin_href_a = '<a name="';
+	my $begin_href_b = '">';
+	my $end_href     = '</a>';
+	if ($line =~ m/filename:\s+(.*)/i) {
+		my $save_line = $line;
+		my $name = $1;
+		$line = $begin_href_a.$name.$begin_href_b.$line.$end_href.'<br>';
+		print $line;
+		$changed = 1;
+	}
+}
+
+###########################
+#                         #
+#      Main Processing    #
+#                         #
+###########################
+
+if (scalar(@ARGV) == 2) {
+	$file   = $ARGV[0];
+	$remote = $ARGV[1];
+} elsif (scalar(@ARGV) == 3) {
+	$COLS   = $ARGV[0];
+	$file   = $ARGV[1];
+	$remote = $ARGV[2];
+}
+
+# subtract 1 to get actual location
+$COLS = ($COLS/2) - 1;
+
+print &insert_header("$file","$remote");
+print "<pre>";
+
+open(IN, "<", $file) or die "unable to load $file: $!";
+my @contents = <IN>;
+foreach my $line (@contents) {
+	$line =~ s/\n//;
+	if (&insert_name_links($line) == 1) {
+		next;
+	}
+	if (&color_prev($line) == 1) {
+		next;
+	}
+	if (&color_latest($line) == 1) {
+		next;
+	}
+	if (&color_modified($line) == 1) {
+		next;
+	}
+	$line = &remove_brackets($line);
+	print $line.'<br>';
+}
+close(IN);
+
+
+undef (@contents);
+print "</pre>";
+print &insert_footer();
+
+
+
+

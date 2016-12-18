@@ -1,0 +1,49 @@
+<html>
+<head>
+
+<style><!--
+.relative { position:relative; }
+//--></style>
+
+<script language="JavaScript"><!--
+var colors= new Array('#ff0000','#00ff00','#0000ff');
+
+function change(i) {
+    var color = colors[Math.floor(colors.length*Math.random())]
+    if (document.layers)
+        window.document.layers['id' + i].bgColor = color;
+    else if (document.all)
+        window.document.all['id' + i].style.background = color;
+}
+
+function loop() {
+  change(Math.floor(9*Math.random()));
+  setTimeout('loop()',50);
+}
+//--></script>
+
+</head>
+
+<body onLoad="loop()">
+
+<table>
+<tr>
+<td id="id0" class="relative">test</td>
+<td id="id1" class="relative">test</td>
+<td id="id2" class="relative">test</td>
+</tr>
+<tr>
+<td id="id3" class="relative">test</td>
+<td id="id4" class="relative">test</td>
+<td id="id5" class="relative">test</td>
+</tr>
+<tr>
+<td id="id6" class="relative">test</td>
+<td id="id7" class="relative">test</td>
+<td id="id8" class="relative">test</td>
+</tr>
+</table>
+
+</body>
+</html>
+

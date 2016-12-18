@@ -1,0 +1,182 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0060)http://htmlgoodies.earthweb.com/stips/scripttip92script.html -->
+<HTML><HEAD>
+<META http-equiv=Content-Type content="text/html; charset=windows-1252">
+<META content="MSHTML 5.50.4807.2300" name=GENERATOR></HEAD>
+<BODY><NOBR><XMP>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<script language="javascript">
+//
+    Titles=[ "General Programming",
+             "Testing",
+             "Windows",
+             "Assembly",
+             "Data Base",
+             "Statistical",
+             "Graphical",
+             "Text",
+             "Spreadsheet",
+             "Command"];
+  
+    var nCols = 4;              // Number of columns in the tables
+    var bgColor = "Yellow";     // Pop-up table background color
+    var fgColor = "Black";      // Pop-up table text color
+    Text = new Array(10);       // Array of arrays of pop-up table data
+//
+//       Language     Years Last Used   Bold
+//       -----------  ----- ---------   ----
+    Text[0] = new Array(
+         "C",         13, "Current", 1,
+         "C++",        5, "Current", 1,
+         "FORTRAN",   30, 1986,      1,
+         "BASIC",     20, 1987,      1,
+         "PROLOG",     1, 1990,      1,
+         "ADA",      1/2, 1985,      0,
+         "LISP",       2, 1975,      0,
+         "PL/1",       1, 1978,      0,
+         "APL",        2, 1971,      0,
+         "COBOL",    1/4, 1967,      0);
+    Text[1] = new Array(
+         "QA Partner (4Test)", 6, "Current", 1,
+         "DTM",                3, 1986,      0,
+         "WinRunner",        1/4, 1997,      0);
+    Text[2] = new Array(
+         "C++",          5, "Current", 1,
+         "C++ Builder",  2, "Current", 1,
+         "Java",       1/2, "Current", 0,
+         "JavaScript",0.08,"Current",  0,
+         "Delphi",     1/4, 1997,      0,
+         "Visual Basic", 1, "Current", 0,
+         "SAS/AF",       2, 1991,      0);
+    Text[3] = new Array(
+         "MASM",      1, 1985,    0,
+         "GMAP",      1, 1986,    0,
+         "BAL",       1, 1971,    0);
+    Text[4] = new Array(
+         "SQL*Plus", 12, "Current", 1,
+         "SAS/SQL",   1, 1991,      0,
+         "Access",    1, "Current", 1,
+         "SIR",       3, 1979,      0,
+         "dBase",     3, 1985,      0,
+         "Rbase",     4, 1987,      0);
+    Text[5] = new Array(
+         "SAS",      8, 1990,    1,
+         "SPSS",     2, 1971,    0,
+         "Minitab",  3, 1980,    0,
+         "SIR",      1, 1979,    0,
+         "P-STAT",   2, 1985,    0,
+         "GLIM",     1, 1985,    0);
+    Text[6] = new Array(
+         "Corel",     1/2, 1997,     0,
+         "Tel-A-Graph", 1, 1986,     0,
+         "SAS/GRAPH",   8, 1990,     0);
+    Text[7] = new Array(
+         "Word",        10, "Current", 1,
+         "WordPerfect", 15, 1988,      1,
+         "TPU",          8, 1987,      0,
+         "EEL",          5, 1971,      0,
+         "SNOBOL",       5, 1971,      1,
+         "Postscript",   1, 1995,      0);
+    Text[8] = new Array(
+         "Excel",       2, "Current", 1,
+         "Lotus 1-2-3", 5, 1986,      0);
+    Text[9] =  new Array(
+         "MS-DOS",   18, "Current", 1,
+         "NDOS",     15, "Current", 1,
+         "DCL",      10, 1992,      1,
+         "JCL",      10, 1971,      0,
+         "UNIX",      5, 1980,      0);
+function eShow(name)
+{
+    document.all(name).style.display = "inline";
+}
+function eHide(name)
+{
+    document.all(name).style.display = "none";
+}
+</script>
+</head>
+
+
+<BODY BGCOLOR="FFFFFF">
+<p><b>Pop-up table sample</b></p>
+
+  
+<div style="position:relative">
+<script language="javascript">
+    for (var j = 0; j < Titles.length; ++j)
+    {
+        name = Titles[j];
+        document.write(
+        "<div style=\"position:absolute;top:5px;width:350px\">\n" +
+        "    <table id=\"" + name + "\"" +
+        " cellpadding=1 cellspacing=4 border=2" +
+        " bgColor=" + bgColor+ "\n style=" +
+        "\"display:none; position:absolute; left:200px\">");
+        document.write(
+            "<tr bgColor=" + bgColor+ ">");
+        document.write(
+            "  <th bgColor=" + fgColor + " align=center>" +
+            " <font color=" + bgColor + ">Language</font>");
+        document.write(
+            "  <th bgColor=" + fgColor + " align=center>" +
+            " <font color=" + bgColor + ">Years Used</font>");
+        document.write
+            ("  <th bgColor=" + fgColor + " align=center>" +
+             " <font color=" + bgColor + ">Last Used</font>");
+        for (var i = 0; i < Text[j].length; i = i + nCols)
+        {
+            if (Text[j][i + 3] == 0)
+            {
+                document.write(
+                "  <tr><td>" + Text[j][i] + 
+                "\n    <td align=\"center\">" + Text[j][i+1] + 
+                "\n    <td>" + Text[j][i+2] + "\n  </tr>");
+            }
+            else
+            {
+                document.write(
+                "  <tr><td><b>" + Text[j][i] + 
+                "</b>\n    <td align=\"center\"><b>" + Text[j][i+1] + 
+                "</b>\n    <td><b>" + Text[j][i+2] + "</b>\n  </tr>");
+            }
+        }
+        document.write("</table>");
+        document.write("</div>");
+    }
+</script>
+</div>
+  
+<table border="0" cellspacing="4">
+<script language="javascript">
+  for (var i = 0; i < Titles.length; ++i)
+  {
+    document.write("<tr>\n<td><p align=\"right\">");
+    document.write(Titles[i] + ":</p>");
+
+    document.write("</td>\n<td><a onMouseOver=\"eShow(&quot;" + Titles[i] + "&quot;)\"");
+    document.write("onMouseOut=\"eHide(&quot;" + Titles[i] + "&quot;)\"</a>");
+    document.write("<font color=\"#0000FF\" size=\"3\" face=\"Arial\">");
+    for (var j = 0; j < Text[i].length; j = j + nCols)
+    {
+      if (j > 0)
+      {
+        document.write(", ");
+      }
+      if (Text[i][j + 3] == 1)
+      {
+        document.write("<b>" + Text[i][j] + "</b>");
+      }
+      else
+      {
+        document.write(Text[i][j]);
+      }
+    }
+    document.write("\n</font></a></td></tr>")
+  }
+</script>
+</table></BODY></HTML>
+
+
+</XMP></NOBR></BODY></HTML>

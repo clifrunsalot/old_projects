@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE DeviceConfiguration [
+
+	<!ELEMENT DeviceConfiguration (DomainName, IORString, Types+)>
+	
+	<!ELEMENT DomainName (#PCDATA)>
+
+	<!ELEMENT IORString (#PCDATA)>
+	
+	<!ELEMENT Types	(Type+)>
+	<!ELEMENT Type (ID, TypeName, DeviceList+)>
+	<!ELEMENT ID (#PCDATA)>
+	<!ELEMENT TypeName (#PCDATA)>
+	<!ELEMENT DeviceList (DeviceName+)>
+	<!ELEMENT DeviceName (#PCDATA)>
+]>
+
+<DeviceConfiguration>
+
+	<DomainName>JTRS170</DomainName>
+
+	<IORString>c:\some\where\on\my\harddrive\IORString.ior</IORString>
+	
+	<Types>
+		<Type>
+			<ID>SerialID</ID>
+			<TypeName>SerialIDString</TypeName>
+			<DeviceList>
+				<DeviceName>SerialDevice1</DeviceName>
+				<DeviceName>SerialDevice2</DeviceName>
+				<DeviceName>SerialDevice3</DeviceName>
+				<DeviceName>SerialDevice4</DeviceName>
+			</DeviceList>
+		</Type>
+				
+		<Type>
+			<ID>AudioID</ID>
+			<TypeName>AudioIDString</TypeName>
+			<DeviceList>
+				<DeviceName>AudioDevice0</DeviceName>
+				<DeviceName>AudioDevice2</DeviceName>
+				<DeviceName>AudioDevice3</DeviceName>
+			</DeviceList>
+		</Type>
+	
+		<Type>
+			<ID>CryptoID</ID>
+			<TypeName>CryptoIDString</TypeName>
+			<DeviceList>
+				<DeviceName>CryptoDevice1</DeviceName>
+			</DeviceList>
+		</Type>
+	
+		<Type>
+			<ID>ISWAPIID</ID>
+			<TypeName>ISWAPIIDString</TypeName>
+			<DeviceList>
+				<DeviceName>ISWAPIDevice2</DeviceName>
+				<DeviceName>ISWAPIDevice5</DeviceName>
+				<DeviceName>ISWAPIDevice7</DeviceName>
+			</DeviceList>
+		</Type>
+	
+		<Type>
+			<ID>MiRTOSID</ID>
+			<TypeName>MiRTOSIDString</TypeName>
+			<DeviceList>
+				<DeviceName>MiRTOSDevice1</DeviceName>
+			</DeviceList>
+		</Type>
+	
+		<Type>
+			<ID>DSPID</ID>
+			<TypeName>DSPIDString</TypeName>
+			<DeviceList>
+				<DeviceName>DSPDevice1</DeviceName>
+			</DeviceList>
+		</Type>
+	
+		<Type>
+			<ID>TransceiverID</ID>
+			<TypeName>TransceiverIDString</TypeName>
+			<DeviceList>
+				<DeviceName>TransceiverDevice1</DeviceName>
+				<DeviceName>TransceiverDevice200</DeviceName>
+			</DeviceList>
+		</Type>
+		
+	</Types>
+	
+</DeviceConfiguration>

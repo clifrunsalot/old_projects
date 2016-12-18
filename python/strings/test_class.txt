@@ -1,0 +1,27 @@
+    class NlosFireOrder {
+        
+    public nmescModule.GeodeticCoordinate targetCoordinates_;
+    public nmescModule.MethodOfControlType methodOfControl_;
+    public nmescModule.MethodOfFireType methodOfFire_;
+    public nmescModule.AmmoRequest ammo_;
+    public ULong numberOfRounds_;
+    public boolean autoCorrect_;
+    public boolean specialInstructionsSpecified_;
+    public nmescModule.SpecialInstructions specialInstructions_;
+    public boolean impactTimeLimitSpecified_;
+    public mgvarchscModule.TimestampType impactTimeLimit_;
+    public boolean heightOfBurstSpecified_;
+    public int heightOfBurst_;
+    public boolean angleOfFireSpecified_;
+    public nmescModule.TrajectoryType angleOfFire_;
+    public boolean sheafSpecified_;
+    public nmescModule.SheafDefinitionType sheaf_;
+    public boolean timeBetweenRoundsSpecified_;
+    public ScLongList timeBetweenRounds_;
+
+    static final int dataTypeVersion = 1;
+    static final int dataTypeInheritanceDepth = 0;
+    static boolean s_registrationRequired = true;
+
+    }
+

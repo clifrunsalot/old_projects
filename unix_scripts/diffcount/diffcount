@@ -1,0 +1,129 @@
+#!/bin/bash
+
+#
+# This script provides the modified LOC for files. The args are a
+# list of files where there are at least two files. Each pair of
+# files is assumed to contain the files to be compared against
+# each other.
+#
+
+# Uncomment to debug
+#set -x
+
+# Substitute diff command here
+DIFF_CMD='diff -y --suppress-common-lines'
+
+# Global MLOC var
+mloc=0
+
+# Global flag
+bad_file=0
+
+# Displays message upon incorrect usage or as processing
+# errors occur.
+function usage
+{
+  cat<<-USAGE
+
+  Usage: diffcount <file1> <file2> [<file3> <file4> ...]
+
+  where <file?> is a text file that is not empty.
+
+  Note: The number of files passed to the command must be even. Each
+        file within a pair will be compared to the other to produce
+        a result.
+
+USAGE
+  exit 1
+}
+
+# Processes diff between two files. All files must be checked
+# for existence and non-zero size prior to being passed in.
+function handlePair
+{
+  f1=$1
+  f2=$2
+
+  cnt="$(${DIFF_CMD} ${f1} ${f2} | wc -l)"
+  ((mloc = mloc + cnt))
+  printf "%s %06d %s, %s" "Modified LOC:" $cnt "${f1}" "${f2}"
+  printf "\n"
+}
+
+# Make sure each file exists and is not empty.
+function verify
+{
+  for i in "$@"
+  do
+    if [[ ! -s $i ]]
+    then
+      printf "ERROR: %s must exist and not be empty\n" "$i"
+      bad_file=1
+    fi
+  done
+
+  if [[ $bad_file -ne 0 ]]
+  then
+    exit 1
+  fi
+
+}
+
+# Processes list of files
+function handleList
+{
+  files=$*
+
+  # Create an array of filenames
+  list=( $(printf "%s" "$files" | sed -e 's/ /\n/g' ) )
+
+  verify "${list[@]}"
+
+  # Create pairs of filenames, put ':' between pair elements, 
+  # and recreate list.
+  list=( `echo ${list[@]} | xargs -n 2 printf "%s:%s\n"` )
+
+  printf "\n"
+
+  # Parse each element of list and send args to handlePair
+  # functions.
+  for i in "${list[@]}"
+  do
+    pair=`echo $i | sed -e 's/:/ /g'`
+    handlePair $pair 
+  done
+  printf "Total MLOC = %d" $mloc
+
+  printf "\n\n"
+}
+
+###############################
+#                             #
+# Main processing begins here #
+#                             #
+###############################
+
+
+# Make sure num of command-line args > 0
+if [[ "$#" -eq 0 ]]
+then
+  usage
+else
+
+  # Save args count
+  count="$#"
+
+  # Transform args into individually quoted elements
+  list="$@"
+
+  # Process if count is even; otherwise display usage
+  if [[ `expr $count % 2` -eq 0 ]]
+  then
+    handleList "${list[@]}"
+  else
+    usage
+  fi
+
+fi
+
+

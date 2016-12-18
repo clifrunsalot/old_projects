@@ -1,0 +1,49 @@
+<!-- basic template file for HTML -->
+
+<HTML>
+<head>
+  <TITLE>Cube</TITLE>
+  <STYLE TYPE="TEXT/CSS">
+    H1{ color: green }
+    H2{ color: red }
+  </STYLE>
+  
+  </head>
+  <BODY>
+  <script language="javascript">
+  <!--
+  function on(color,n)
+  {
+    if (document.layers)
+        window.document.layers['cell'+n].bgColor = color;
+    else if (document.all)
+        window.document.all['cell'+n].style.background = color;
+  }
+  
+  function off(color,n)
+  {
+    if (document.layers)
+        window.document.layers['cell'+n].bgColor = color;
+    else if (document.all)
+        window.document.all['cell'+n].style.background = color;
+  }
+  //-->
+  </script>
+  <table border="2" cellpadding="20">
+  	<tr>
+  		<td id="cell0"><a href="javascript:void(null)" onmouseover="on('red',0);" onmouseout="off('white',0);"><H1>X</H1></a></td>
+  		<td id="cell1"><a href="javascript:void(null)" onmouseover="on('red',1);" onmouseout="off('white',1);"><H1>X</H1></a></td>
+  		<td id="cell2"><a href="javascript:void(null)" onmouseover="on('red',2);" onmouseout="off('white',2);"><H1>X</H1></a></td>
+  	</tr>
+  	<tr>
+  		<td id="cell3"><a href="javascript:void(null)" onmouseover="on('red',3);" onmouseout="off('white',3);"><H1>X</H1></a></td>
+  		<td id="cell4"><a href="javascript:void(null)" onmouseover="on('red',4);" onmouseout="off('white',4);"><H1>X</H1></a></td>
+  		<td id="cell5"><a href="javascript:void(null)" onmouseover="on('red',5);" onmouseout="off('white',5);"><H1>X</H1></a></td>
+  	</tr>
+  	<tr>
+  		<td id="cell6"><a href="javascript:void(null)" onmouseover="on('red',6);" onmouseout="off('white',6);"><H1>X</H1></a></td>
+  		<td id="cell7"><a href="javascript:void(null)" onmouseover="on('red',7);" onmouseout="off('white',7);"><H1>X</H1></a></td>
+  		<td id="cell8"><a href="javascript:void(null)" onmouseover="on('red',8);" onmouseout="off('white',8);"><H1>X</H1></a></td>
+  	</tr>
+  </table>
+</HTML>

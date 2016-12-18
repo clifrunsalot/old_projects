@@ -1,0 +1,349 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+
+{
+	package Diff;
+
+	sub new
+	{
+		my $self = {};
+		$self->{NAME} = undef;
+		$self->{SLOC} = undef;
+		bless ($self);
+		return $self;
+	}
+
+	sub name 
+	{
+		my $self = shift;
+		if (@_)
+		{
+			$self->{NAME} = shift;
+		}
+		return $self->{NAME};
+	}
+
+	sub sloc
+	{
+		my $self = shift;
+		if (@_)
+		{
+			$self->{SLOC} = shift;
+		}
+		return $self->{SLOC};
+	}
+1; # Required - This acts like an import statement.
+}
+
+my $total_number_files = 0;
+my $COLS = 160;
+my $total_changed_sloc = 0;
+my $total_files_changed = 0;
+my @final_list = ();
+my $file_object = undef;
+
+# Creates header for file being diff'd. Shows versions covered by CO.
+sub create_header {
+
+	my $vob = $_[0];
+	my $path = $_[1];
+	my $filename = $_[2];
+	my $branch = $_[3];
+	my $versions = $_[4];
+
+	print "\n\n\n";
+	print "#################################\n";
+	print "####                         ####\n";
+	print "####      Diff Listing       ####\n";
+	print "####                         ####\n";
+	print "#################################\n";
+	print "\n";
+
+	print "filename: $filename\n";
+	print "path:     $path\n";
+	print "vob :     $vob\n";
+	print "branch:   $branch\n";
+	print "versions: $versions\n\n";
+	
+}
+
+# Does math to get prev and latest versions
+sub get_prev_latest {
+	my $arry = $_[0];
+	my $first = @{$arry}[0] - 1;
+	my $latest = @{$arry}[$#{@{$arry}}];
+	return ($first, $latest);
+}
+
+# Extracts the previous and latest version of each file
+sub get_prev_latest_versions {
+
+	my @list = map {local $_ = $_; $_ =~ tr/ //d;$_} @_;
+
+	my ($deleted, 
+		$one_ver_no_co, 
+		$only_ver_co, 
+		$one_ver_one_co, 
+		$prev_ver, 
+		$latest_ver) = (0, 0, 0, 0, 0, 0);
+
+	my @versions = (); 
+
+	$deleted        = (scalar(grep {/\bD\b/} @list) > 0) ? 1 : 0;
+	$one_ver_no_co  = ((scalar(grep {/\b[A|O]\b/} @list) == 0) 
+				&& (scalar(grep {/\b\d+\b/} @list) == 1)) ? 1 : 0;
+	$only_ver_co    = ((scalar(grep {/\b[A|O]\b/} @list) > 0) 
+				&& (scalar(grep {/\b\d+\b/} @list) == 0)) ? 1 : 0;
+	$one_ver_one_co = ((scalar(grep {/\b[A|O]\b/} @list) > 0) 
+				&& (scalar(grep {/\b\d+\b/} @list) == 1)) ? 1 : 0;
+	@versions       = grep {/\d+/} @list;
+
+	my $file = {
+		'deleted'        => $deleted,
+		'one_ver_no_co'  => $one_ver_no_co,
+		'only_ver_co'    => $only_ver_co,
+		'one_ver_one_co' => $one_ver_one_co,
+		'versions'       => \@versions,
+		'size'           => scalar(@versions)
+	};
+
+	if ($file->{'deleted'} == 1) {
+		$prev_ver = -1;
+		$latest_ver = 0;
+	}
+	
+	elsif ($file->{'one_ver_no_co'} == 1) {
+		$prev_ver = @{$file->{'versions'}}[0];
+		$latest_ver = @{$file->{'versions'}}[0];
+	}
+
+	elsif ($file->{'only_ver_co'} == 1) {
+		$prev_ver = -2;
+		$latest_ver = 0;
+	}
+
+	elsif ($file->{'one_ver_one_co'} == 1) {
+		$prev_ver = @{$file->{'versions'}}[0];
+		$latest_ver = @{$file->{'versions'}}[0];
+	}
+	
+	elsif (scalar(@{$file->{'versions'}}) > 1) {
+		($prev_ver, $latest_ver) = &get_prev_latest(\@{$file->{'versions'}});
+	}
+
+	return ($prev_ver, $latest_ver);
+	
+}
+
+# Uses the cleardiff tool to get diff between the prev and latest version of file
+sub create_sloc_files {
+
+	my $vob = $_[0];
+	my $path = $_[1];
+	my $filename = $_[2];
+	my $branch = $_[3];
+	my $versions = $_[4];
+	my $prev_ver = 0;
+	my $latest_ver = 0;
+	my $divider = 0;
+	
+	my @ver_list = split(",",$versions);
+	@ver_list = map {local $_ = $_; $_ =~ tr/ //d;$_} @ver_list;
+
+	($prev_ver, $latest_ver) = &get_prev_latest_versions(@ver_list);
+
+	my $complete_path = "\/vobs\/$vob\/$path\/$filename";
+
+	if ($prev_ver == $latest_ver) {
+
+		my $file_new = "./differences/new.$filename";
+		my @args = ("cat $complete_path\@\@$branch\/$prev_ver > $file_new");
+		system (@args);
+
+		@args = ("cat $complete_path\@\@$branch\/$prev_ver | wc -l");
+		$divider = qx (@args);
+
+	} else {
+	
+		my $file_diff = "./differences/short.diff.$filename.$prev_ver-$latest_ver";
+		my @args = ("cleardiff -b -quiet -col $COLS $complete_path\@\@$branch\/$prev_ver $complete_path\@\@$branch\/$latest_ver > $file_diff");
+
+		system(@args);
+
+		# Count lines that are not actually changes, as in formatting lines
+		open(IN,"< $file_diff") or die "Unable to open $file_diff: $?\n";
+		while(<IN>) {
+
+			if ((!/^\-+?\[.*?\]\-+\|\-+?\[.*?\]\-+$/)
+				&& (!/^ +?\-\|.$/s)
+				&& (!/^ +?\|\-.$/s)) {
+				$divider++;
+			}
+
+		}
+		close(IN);
+	
+	}
+
+	my $sloc_file = "/tmp/sloc.txt";
+
+
+	open(OUT,"> $sloc_file") or die "Unable to open $sloc_file: ?!\n";
+	print OUT $divider;
+	close(OUT);
+
+	##########################################
+
+	my $sloc = `cat $sloc_file`;
+	chomp($sloc);
+
+	# Add file to list for display later
+	my $file_object = Diff->new();
+	$file_object->name($complete_path);
+	$file_object->sloc($sloc);
+	push @final_list, $file_object;
+	
+	$total_changed_sloc = $sloc + $total_changed_sloc;
+	print "\nApproximate Changed SLOC = $sloc for $filename\n";
+	$total_number_files++;
+}
+
+sub insert_header {
+
+	my $output = $_[0];
+	my $version = $_[1];
+	my $complete_path = $_[2];
+	my $isPrevious = $_[3];
+	my $ver_header = "";
+
+	if ($isPrevious == 0) {
+		$ver_header   = "***** Version: $version (Before changes) *****\n\n";
+	} else {
+		$ver_header   = "***** Version: $version (Latest Checked in changes) *****\n\n";
+	}
+
+	open(OUT, ">$output") or die "Unable to write to $output: $!";
+	print OUT $ver_header;
+
+	open(IN, "< $complete_path") or die "Unable to read $complete_path: $!\n";
+	while (<IN>) {
+		print OUT;
+	}
+	close(IN);
+	close(OUT);
+	return $output;
+
+}
+
+# Delete all files in the difference subdir, if there is one.
+my $diff_dir = './differences';
+if (opendir(DIR, "$diff_dir")) {
+	my @dir_list = map {"$diff_dir\/$_"} grep {!/^\.$|^\.\.$/} readdir(DIR);
+	close(DIR);
+	unlink @dir_list;
+	undef @dir_list;
+}
+
+
+for my $f (<>) {
+
+	chomp($f);
+	if ($f =~ /^#(\d+)#$/s) {
+		$COLS = $1;
+		next;
+	}
+	
+
+	my ($vob, $path, $filename, $branch, $versions) = ("", "", "", "", "");
+	my $earliest_ver = 0;
+	my $latest_ver = 0;
+	my $prev_ver = 0;
+	
+	unless ($f =~ /^$/) {
+
+		#parse out tokens
+		($vob, $path, $filename, $branch, $versions) = split ("@",$f);
+
+		#print header for each file being diffed
+		&create_header($vob, $path, $filename, $branch, $versions);
+		my @tmp_vers = split(",",$versions);
+
+		($prev_ver, $latest_ver) = &get_prev_latest_versions(@tmp_vers);
+
+		if ($prev_ver == -1) {
+			print "\n ******** No Diff provided because file was deleted! ********* \n";
+			next;
+		}
+		if ($prev_ver == -2) {
+			print "\n ******** No Diff provided because only version is checked out! ********* \n";
+			next;
+		}
+
+		my $complete_path = "\/vobs\/$vob\/$path\/$filename";
+		my $complete_prev_ver = "$complete_path\@\@$branch\/$prev_ver";
+		my $complete_latest_ver = "$complete_path\@\@$branch\/$latest_ver";
+
+		$prev_ver =~ s/\s*(\d+)\s*/$1/;
+		$latest_ver =~ s/\s*(\d+)\s*/$1/;
+
+		my $diff_1 = "\.\/differences\/$filename\.ver\.$prev_ver";
+		my $diff_2 = "\.\/differences\/$filename\.ver\.$latest_ver";
+
+		$diff_1 = &insert_header($diff_1, $prev_ver, $complete_prev_ver, 0);
+		$diff_2 = &insert_header($diff_2, $latest_ver, $complete_latest_ver, 1);
+	
+		if ($prev_ver != $latest_ver) {
+			#diff the files and send to the main diff file
+			my $file_diff = "./differences/long.diff.$filename.$prev_ver-$latest_ver";
+			my @args =  ("diff -t --side-by-side -W $COLS $diff_1 $diff_2 | tee $file_diff");
+			if (system (@args) != 0) {
+				print "\n\nERROR while processing @args: $?\n\n";
+			}
+		} else {
+			my @args = ("cat", $diff_1);
+			if (system (@args) != 0) {
+				print "\n\nERROR while processing @args; $?\n\n";
+			}
+		}
+
+		&create_sloc_files($vob, $path, $filename, $branch, $versions);
+
+	}
+
+}
+
+my $toc_file = 'toc.txt';
+open(SLOC_FORMAT, ">", $toc_file) or die "Unable to write to $toc_file: $!";
+chomp($total_changed_sloc);
+
+my ($name, $sloc) = ("", 0);
+
+if (scalar(@final_list) > 0)
+{
+
+print SLOC_FORMAT "
+MOD SLOC   FILENAME
+--------   ------------------------------------------------------------------------------------------------------------------------\n";
+
+	foreach my $f (@final_list) {
+		$name = $f->name;
+		$sloc = $f->sloc;
+		printf SLOC_FORMAT "%8d   %s\n",$sloc,$name;
+	}
+
+	$sloc = $total_changed_sloc;
+	$name = "Total";
+	print SLOC_FORMAT "----------------------\n";
+	printf SLOC_FORMAT "%8d   %s\n",$sloc,$name;
+	print SLOC_FORMAT "\n";
+	print SLOC_FORMAT "Total number of files changed: $total_number_files\n";
+	print SLOC_FORMAT "\n\n";
+
+}
+
+close(SLOC_FORMAT);
+
+
+

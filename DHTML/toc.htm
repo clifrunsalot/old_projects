@@ -1,0 +1,94 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>New Page 1</title>
+
+<style>
+span {cursor: hand;}
+.onme {color: yellow;}
+.offme {color: black;}
+</style>
+
+<script language="javascript">
+<!--
+
+function onoff(idname)
+{
+	if (idname.style.display == "none")
+	{
+		idname.style.display = "";
+	}
+	else
+		idname.style.display = "none";
+}
+
+function getonme()
+{
+	el = event.srcElement;
+	if (el.getAttribute("litup") != null)
+		el.className = "onme";
+}
+
+function getoffme()
+{
+	el = event.srcElement;
+	if (el.getAttribute("litup") != null)
+		el.className = "offme";
+}
+
+document.onmouseover = getonme;
+document.onmouseout = getoffme;
+
+//-->
+</script>
+
+<base target="main">
+</head>
+
+<body bgcolor="#FF9933">
+
+<a style="text-decoration='none'" onClick="parent.document.frames(2).location.href='main.htm'"><span litup>Home</span></a>
+
+<br>
+
+<a style="text-decoration='none'" onClick="javascript:onoff(tools_folder);"><span litup>Tools</span></a>
+<div id="tools_folder" style="display='none'; text-decoration='none';">
+	<a onClick="parent.document.frames(2).location.href='lett_how_to.htm'"><span litup>&nbsp;&nbsp;&nbsp;&nbsp;bootnet</span></a>
+	<br>
+	<a onClick="parent.document.frames(2).location.href='lett_how_to.htm'"><span litup>&nbsp;&nbsp;&nbsp;&nbsp;fp</span></a>
+	<br>
+	<a onClick="parent.document.frames(2).location.href='lett_how_to.htm'"><span litup>&nbsp;&nbsp;&nbsp;&nbsp;runlevel</span></a>
+	<br>
+	<a onClick="parent.document.frames(2).location.href='lett_how_to.htm'"><span litup>&nbsp;&nbsp;&nbsp;&nbsp;version</span></a>
+</div>
+
+<br>
+
+<a style="text-decoration='none'" onClick="javascript:onoff(how_to_folder);"><span litup>How-To</span></a>
+<div id="how_to_folder" style="display='none'; text-decoration='none';">
+	<a onClick="parent.document.frames(2).location.href='lett_how_to.htm'"><span litup>&nbsp;&nbsp;&nbsp;&nbsp;Do CAAS Translations</span></a>
+	<br>
+	<a onClick="parent.document.frames(2).location.href='lett_how_to.htm'"><span litup>&nbsp;&nbsp;&nbsp;&nbsp;Setup LAN Communications</span></a>
+	<br>
+	<a onClick="parent.document.frames(2).location.href='lett_how_to.htm'"><span litup>&nbsp;&nbsp;&nbsp;&nbsp;Use LETT</span></a>
+	<br>
+	<a onClick="parent.document.frames(2).location.href='lett_how_to.htm'"><span litup>&nbsp;&nbsp;&nbsp;&nbsp;Use SQL</span></a>
+</div>
+
+<br>
+
+<a style="text-decoration='none'" onClick="javascript:onoff(ref_folder);" litup>References</a>
+<div id="ref_folder" style="display='none'; text-decoration='none';">
+	<a onClick="parent.document.frames(2).location.href='lett_how_to.htm'" litup>&nbsp;&nbsp;&nbsp;&nbsp;Raytheon Ada Standards</a>
+	<br>
+	<a onClick="parent.document.frames(2).location.href='lett_how_to.htm'" litup>&nbsp;&nbsp;&nbsp;&nbsp;Situation Workstation Layout</a>
+</div>
+
+
+
+</body>
+</html>
+

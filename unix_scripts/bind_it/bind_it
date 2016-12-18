@@ -1,0 +1,76 @@
+#!/bin/ksh
+
+tower_name=xxx
+base=yyy
+
+print "Which baseline"
+print "    a) /AFATDS/a99/main"
+print "    b) Type it in yourself"
+read baseline
+
+case "$baseline"
+in
+	*a) base="/AFATDS/a99/main"
+		print "Baseline: $base"
+		;;
+	*b) print "Enter baseline: "
+		read base
+		print "Baseline: $base"
+		;;
+esac
+
+print "Which tower"
+print "    a) SUN/situation/situation_t2.wrk"
+print "    b) SUN/situation/situation_t3.wrk"
+print "    c) SUN/situation/situation_t5.wrk"
+print "    d) SUN/situation/situation_t6.wrk"
+print "    e) SUN/situation/situation_t7.wrk"
+print "    f) SUN/situation/situation_t8.wrk"
+print "    g) SUN/situation/situation_t9.wrk"
+print "    h) Type it in yourself"
+read tower
+
+case "$tower"
+in
+     *a) tower_name="SUN/situation/situation_t2.wrk"
+          ;;
+
+     *b) tower_name="SUN/situation/situation_t3.wrk"
+          ;;
+
+     *c) tower_name="SUN/situation/situation_t5.wrk"
+          ;;
+
+     *d) tower_name="SUN/situation/situation_t6.wrk"
+          ;;
+
+     *e) tower_name="SUN/situation/situation_t7.wrk"
+          ;;
+
+     *f) tower_name="SUN/situation/situation_t8.wrk"
+          ;;
+
+     *g) tower_name="SUN/situation/situation_t9.wrk"
+          ;;
+
+	*h) print "Enter tower: "
+		read tower_name
+		;;
+esac
+
+apex_bind -b $base -t $tower_name 2>&1 | tee bind_results
+
+print "Executing apex_bind -b $base -t $tower_name"
+
+print "Would you like to see the results?"
+
+read answer
+
+case "$answer"
+in
+	*[Yy]) more bind_results
+		;;
+	*[Nn]) print "Bye"
+esac
+
+

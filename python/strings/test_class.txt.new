@@ -1,0 +1,132 @@
+class NlosFireOrder {
+
+    /**
+     * Reference to targetCoordinates_.
+     * 
+     */
+    public nmescModule.GeodeticCoordinate targetCoordinates_;
+
+    /**
+     * Reference to methodOfControl_.
+     * 
+     */
+    public nmescModule.MethodOfControlType methodOfControl_;
+
+    /**
+     * Reference to methodOfFire_.
+     * 
+     */
+    public nmescModule.MethodOfFireType methodOfFire_;
+
+    /**
+     * Reference to ammo_.
+     * 
+     */
+    public nmescModule.AmmoRequest ammo_;
+
+    /**
+     * Reference to numberOfRounds_.
+     * 
+     */
+    public ULong numberOfRounds_;
+
+    /**
+     * Reference to autoCorrect_.
+     * 
+     */
+    public boolean autoCorrect_;
+
+    /**
+     * Reference to specialInstructionsSpecified_.
+     * 
+     */
+    public boolean specialInstructionsSpecified_;
+
+    /**
+     * Reference to specialInstructions_.
+     * 
+     */
+    public nmescModule.SpecialInstructions specialInstructions_;
+
+    /**
+     * Reference to impactTimeLimitSpecified_.
+     * 
+     */
+    public boolean impactTimeLimitSpecified_;
+
+    /**
+     * Reference to impactTimeLimit_.
+     * 
+     */
+    public mgvarchscModule.TimestampType impactTimeLimit_;
+
+    /**
+     * Reference to heightOfBurstSpecified_.
+     * 
+     */
+    public boolean heightOfBurstSpecified_;
+
+    /**
+     * Reference to heightOfBurst_.
+     * 
+     */
+    public int heightOfBurst_;
+
+    /**
+     * Reference to angleOfFireSpecified_.
+     * 
+     */
+    public boolean angleOfFireSpecified_;
+
+    /**
+     * Reference to angleOfFire_.
+     * 
+     */
+    public nmescModule.TrajectoryType angleOfFire_;
+
+    /**
+     * Reference to sheafSpecified_.
+     * 
+     */
+    public boolean sheafSpecified_;
+
+    /**
+     * Reference to sheaf_.
+     * 
+     */
+    public nmescModule.SheafDefinitionType sheaf_;
+
+    /**
+     * Reference to timeBetweenRoundsSpecified_.
+     * 
+     */
+    public boolean timeBetweenRoundsSpecified_;
+
+    /**
+     * Reference to timeBetweenRounds_.
+     * 
+     */
+    public ScLongList timeBetweenRounds_;
+
+
+    /**
+     * Reference to dataTypeVersion.
+     * 
+     */
+    static final int dataTypeVersion = 1;
+
+    /**
+     * Reference to dataTypeInheritanceDepth.
+     * 
+     */
+    static final int dataTypeInheritanceDepth = 0;
+
+    /**
+     * Reference to s_registrationRequired.
+     * 
+     */
+    static boolean s_registrationRequired = true;
+
+
+}
+

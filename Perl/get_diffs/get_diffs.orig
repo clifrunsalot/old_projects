@@ -1,0 +1,175 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+use IO::Dir;
+
+sub usage{
+
+	print <<USE;
+
+   Usage: get_diffs [col_count] <branch> <co_number>
+
+   where [col_count] is number columns to display; the default is 160 
+   	 <branch> is the branch where the changes were made
+              (e.g. "/main/rfw_int_b2e/rfw_dev_b2e")
+         <co_number> is the CO used to make the changes
+              (e.g. "BCME-1111")
+
+USE
+}
+
+
+my $cols = 160;
+my $branch = "";
+my $co = "";
+
+#
+# Parse arguments
+#
+if (scalar(@ARGV) == 3) {
+	$cols = $ARGV[0];
+	$branch = $ARGV[1];
+	$co = $ARGV[2];
+} elsif (scalar(@ARGV) == 2) {
+	$branch = $ARGV[0];
+	$co = $ARGV[1];
+} else {
+	&usage;
+	exit;
+}
+
+my $output = uc($co);
+my $BASEDIR = ".";
+$output = "All_$output.differences.txt";
+my $diff_list = "$BASEDIR/co_diff.list";
+my $diff_dir = "$BASEDIR/differences";
+my $errors = "errors.txt";
+
+
+#
+# Make directory to hold individual diff files
+#
+if(!mkdir($diff_dir)) {
+	mkdir($diff_dir);
+} else {
+	rmdir($diff_dir);
+	mkdir($diff_dir);
+}
+
+#
+# Clean out existing files
+#
+my @cmd = ("cat /dev/null > $diff_list");
+system(@cmd);
+@cmd = ("cat /dev/null > $output");
+system(@cmd);
+
+#
+# Send col count out to file
+#
+if ($cols > 0) {
+	my @args = ("echo \"#$cols#\" > $diff_list");
+	system(@args);
+	if(system(@args) != 0) {
+		print "\n\nERROR while processing @args: $?\n\n";
+	}
+}
+
+#
+# Create list of files effected by this CO
+#
+my $clearcase = "/FCS/SCM/enCompass/bin/cc_files -m -ver -fbr ";
+my @list_cmd = ("$clearcase $branch -co $co >> $diff_list");
+if (system(@list_cmd) != 0) {
+	print "Unable to invoke cc_files on $co: $?";
+}
+
+#
+# Create diffs of each file on the list
+#
+my $diff_tool = '/Home/cbhuds/bin/clifs_diff_tool';
+my @diff_cmd = ("cat $diff_list | $diff_tool > $output 2>&1");
+if (system(@diff_cmd) != 0) {
+	print "Unable to invoke $diff_tool: $?";
+}
+
+#
+# Convert main file into webpage
+#
+my $toc_webpage = "Diff_List_for_$co\.html";
+my $toc_file    = "toc.txt";
+my $html_tool   = '/Home/cbhuds/bin/convert_to_html';
+my $html_file   = $output.'.html';
+my @conv_cmd    = ("$html_tool $cols $output $toc_webpage > $html_file");
+if (system(@conv_cmd) != 0) {
+	print "Unable to invoke $html_tool: $?";
+}
+
+#
+# Convert toc.txt into a webpage
+#
+
+sub insert_goto_cmd {
+
+	my $open_cmd =<<OPEN; 
+function change_site(url){
+	window.opener.location=url;
+} 
+OPEN
+	return $open_cmd;
+}
+
+sub create_toc_page {
+
+	my $infile  = $_[0];
+	my $outfile = $_[1];
+	my $main    = $_[2];
+	open(IN, "<", $infile) or die "Unable to read $infile: $!";
+	open(OUT, ">", $outfile) or die "Unable to write to $outfile: $!";
+
+	my $ref_begin_a = "<a href=\"javascript:change_site(\'";
+	my $ref_begin_b = "\')\">";
+	my $ref_end  = '</a><br>';
+
+	print OUT '<html>';
+	print OUT "<head><title>Diff Index for $co</title>";
+	print OUT '<script>';
+	print OUT &insert_goto_cmd;
+	print OUT '</script>';
+	print OUT '</head>';
+	print OUT '<body><pre>';
+	foreach my $line (<IN>) {
+
+		if ($line =~ m#/#) {
+
+			$line =~ m/(\d+)\s+(.*)/;
+			my $sloc = $1;
+			my $path = $2;
+			$path =~ m#.*/(.*)#i;
+			my $name = $1;
+			unless ($name =~ /^$/) {
+				my $new_line = $ref_begin_a.$main.'#'.$name.$ref_begin_b.$path.$ref_end;
+				printf OUT "%8d   %s", $sloc, $new_line;
+			}
+		} else {
+			print OUT $line;
+		}
+	}
+	print OUT "</pre></body>";
+	print OUT "</html>";
+
+	close(IN);
+	close(OUT);
+}
+
+&create_toc_page($toc_file, $toc_webpage, $html_file);
+
+sub clean_up {
+	my @cmd = ("rm -rf $toc_file $output $diff_list $diff_dir");
+	system(@cmd);
+}
+
+&clean_up;
+
+

@@ -1,0 +1,55 @@
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+
+class MySurvey extends JFrame
+{
+	MySurvey()
+	{
+		contentPane = getContentPane();
+		setTitle("Survey");
+		setSize(300,150);
+		
+		panel = new JPanel();
+		
+		label = new JLabel("Rate Nastasha Henstridge's appeal:");
+		
+		one_radio = new JRadioButton("1");
+		two_radio = new JRadioButton("2");
+		three_radio = new JRadioButton("3");
+		four_radio = new JRadioButton("Not Comment");
+		
+		panel.add(label);
+		panel.add(one_radio);
+		panel.add(two_radio);
+		panel.add(three_radio);
+		panel.add(four_radio);
+		contentPane.add(panel);
+		
+		addWindowListener(new WindowAdapter()
+		{
+			public void windowClosing(WindowEvent e)
+			{
+				System.exit(0);
+			}
+		});
+	}
+	
+	private Container contentPane;
+	private JPanel panel;
+	private JLabel label;
+	private JRadioButton one_radio,
+						two_radio,
+						three_radio,
+						four_radio;
+}
+
+public class survey
+{
+	public static void main(String [] args)
+	{
+		JFrame svy = new MySurvey();
+		svy.setVisible(true);
+	}
+}

@@ -1,0 +1,88 @@
+import os, sys, decimal
+
+secsInMin = 60
+minsInDeg = 60
+
+def usage():
+  """
+  Usage: [python] getDeg.py <lat|lon> < [ d m s | f ] >
+
+  where d is degree part of coordinate
+        m is minute part of coordinate
+        s is second part of coordinate
+        f is decimal form of degree coordinate
+
+        -180 <= d <= 179 for Longitude
+        -89 <= g < 80 for latitude
+
+  """
+  print usage.__doc__
+
+def getDeg(i, d, m, s):
+  """
+  Returns Decimal form of degree
+  ind - latitude or longitude designation
+  d - Degree
+  m - Minute
+  s - Second
+  """
+  ind = i
+  deg = int(d)
+  min = float(m)
+  sec = float(s)
+  fraction = float(0)
+  ok = False
+
+  if ind == 'lon' and deg in range(-180,180):
+    ok = True
+  elif ind == 'lat' and deg in range(-90,90):
+    ok = True
+
+  if ok == True:
+    fraction = (sec/(secsInMin*minsInDeg)) + min/(minsInDeg)
+    sFrac = str(fraction)
+    print str(d) + '.' + sFrac.split('.')[1]
+  else:
+    usage()
+
+def getDMS(f):
+  """
+  Returns parsed degrees, minutes, and seconds of decimal form of degrees.
+  f - Decimal form of degree
+  """
+  whole = f.split('.')[0]
+  frac = '0.' + f.split('.')[1]
+  print frac
+  
+  minStr = str(float(frac)*60)
+  min = minStr.split('.')[0]
+  secStr = minStr[1:]
+  sec = (str(float(secStr)*60)).split('.')[0]
+
+  print whole + ' ' + min + ' ' + sec
+  
+if __name__ == "__main__":
+  """
+  Main method
+  """
+
+  lst = ['lat','lon']
+  if sys.argv[1] in lst:
+
+    try:
+      if len(sys.argv) == 5:
+        try:
+          getDeg(sys.argv[1], int(sys.argv[2]), int(sys.argv[3]), int(sys.argv[4]))
+        except Exception, e:
+          raise
+      else:
+        try:
+          print 'c'
+          getDMS(str(float(sys.argv[1])))
+        except Exception, e:
+          raise
+    except Exception, e:
+      usage()
+  else:
+    usage()
+

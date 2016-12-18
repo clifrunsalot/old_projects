@@ -1,0 +1,16 @@
+protocol:a220:
+
+enumeration:
+a220,
+Channel_Configuration_Type,
+Protocol_Configuration_Type,
+Disable_Channel_Type,
+Enable_Channel_Type,
+Netcon_Configuration_Type,
+end,
+
+
+
+
+
+

@@ -1,0 +1,64 @@
+# COMPANY NAME: Raytheon Company
+# COPYRIGHT: Copyright (c) 2009 Raytheon Company
+# UNPUBLISHED WORK
+# PROJECT NAME: FCS BCME
+# CONTRACT NUMBER: 3EC1721
+#
+# DISTRIBUTION STATEMENT D: Distribution authorized to the Department of
+# Defense and U.S. DOD contractors administrative or operational use (29
+# October 2003). Other requests for this document shall be referred to
+# Program Manager Future Combat Systems (Brigade Combat Team),
+# ATTN: PM FCS (BCT) Security Office, ATTN:  SFAE-FCS-I/515, 6501 East
+# Eleven Mile Road, Warren, MI  48397-5000
+#
+#
+# WARNING - This document contains technical data whose export may be
+# restricted by the Arms Export Control Act (Title 22, U.S.C., Sec 2751,
+# et seq) or the Export Administration Act of 1979, as amended (Title 
+# 50, U.S.C., App. 2401 et seq). Violations of these export laws are 
+# subject to severe criminal penalties. Disseminate in accordance with 
+# provisions of DoD Directive 5230.25.
+#
+#
+# @history
+#
+# 2009-xx-xx  rssa  BCME-xxxx   Initial Release
+# 2009-06-17  dfkazm  BCME-2100   Call to collectVersions script
+# 2009-06-25  dfkazm  BCME-2100   update
+# 2009-07-21  dfkazm  BCME-2118   added Test Case Version call
+#
+#------------------------------------------------------------------------------
+
+# call the test case version script
+dec runscript ../../common/controller/collectVersions.sh TC0000096_v01
+
+#------------------------------------------------------------------------------
+
+# Start the decider Services
+dec start cis not_dm not_sw
+#------------------------------------------------------------------------------
+
+# Sleep 90 secs Give the Services some time to start
+sleep 10
+
+# Ensure decider Services Started
+dec isStarted cis not_dm not_sw
+#obs isStarted not_dm not_sw
+
+sleep 20
+
+dec start runTester
+sleep 30
+
+dec kill cis not_dm not_sw runTester
+
+echo Done
+
+# Stop SOSCOE
+#dec soscoeStop
+
+# Collect the Logs
+#dec collectLogs $TCID
+
+# Process the Logs
+#processLogs

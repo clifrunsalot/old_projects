@@ -1,0 +1,11 @@
+this is the test before the Run Level:   1
+Starting process /h/AFATDS/bin/supervise_mission_situation1/this a test
+Starting process /h/AFATDS/bin/supervise_mission_situation2/this a test
+Starting process /h/AFATDS/bin/supervise_mission_situation3/this a test
+Starting process /h/AFATDS/bin/manage_display/this a test
+this is the test before the Run Level:   2
+Starting process /h/AFATDS/bin/mission_manage_data/this a test
+Starting process /h/AFATDS/bin/supervise_unit_situation/this a test
+this is the test before the Run Level:   3
+Starting process /h/AFATDS/bin/manage_unit_data/this a test
+Starting process /h/AFATDS/bin/process_fire_mission/this a test

@@ -1,0 +1,53 @@
+#!/bin/bash
+
+#set -x
+
+low_mem=100
+low_swap=100
+lowest_disk=100
+echo "100" > low_mem.txt
+echo "100" > low_swap.txt
+echo "100" > lowest_disk.txt
+
+while (( 1 ))
+do
+
+  clear
+
+  # get time
+  tm=$(date "+%D %r")
+
+  # get free physical memory
+  mem=$(printf "%2.0f" $(free | egrep -i "mem" | awk '{ans=$4/$2;}END{print ans*100;}'))
+
+  # get free swap memory
+  swap=$(printf "%2.0f" $(free | egrep -i "swap" | awk '{ans=$4/$2;}END{print ans*100;}'))
+
+  # update lowest mem to date 
+  [[ $low_mem -gt $mem ]] && (( low_mem=mem )) && [[ $(echo "$low_mem $tm" > low_mem.txt) ]] 
+
+  # update lowest swap to date 
+  [[ $low_swap -gt $swap ]] && (( low_swap=swap )) && [[ $(echo "$low_swap $tm" > low_swap.txt) ]] 
+
+  # get used disk space
+  disk=$(df | awk '{ans+=$5;}END{print ans}')
+
+  # update used disk space to date
+  [[ $lowest_disk -gt $disk ]] && (( lowest_disk=disk )) && [[ $(echo "$lowest_disk $tm" > lowest_disk.txt) ]]
+
+  # display values
+  printf " %s  %s\n" "Phys Swap Disk" "$tm"
+  echo   " ---- ---- ----"
+  printf " %2.0f%%  %2.0f%% %2.0f%%" $mem $swap $disk
+
+  echo
+  echo
+  echo "  lowest mem: " $(cat low_mem.txt | awk '{printf "%03d    %s %s", $1, $2, $3}')
+  echo " lowest swap: " $(cat low_swap.txt | awk '{printf "%03d    %s %s", $1, $2, $3}')
+  echo " lowest disk: " $(cat lowest_disk.txt | awk '{printf "%03d    %s %s", $1, $2, $3}')
+  echo
+
+  sleep 5
+done
+
+

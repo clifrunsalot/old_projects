@@ -1,0 +1,83 @@
+<html>
+
+<head>
+
+<title>New Page 1</title>
+
+<STYLE>
+
+SPAN {cursor: hand ; }
+.onme {color: blue ;
+		font-weight: bold; }
+.offme {color: red ; }
+
+</STYLE>
+
+<SCRIPT LANGUAGE="JavaScript">
+
+function getonme()
+{
+	var el = event.srcElement ;
+	if (el.getAttribute("litUp") != null)
+	{
+		el.className = "onme" ;
+	}
+}
+
+function getoffme()
+{
+	var el = event.srcElement ;
+	if (el.getAttribute("litUp") != null)
+	{
+		el.className = "offme";
+	}
+}
+
+document.onmouseover = getonme ;
+document.onmouseout = getoffme ;
+
+function show(idname)
+{
+	if (idname.style.display == "none")
+	{
+		idname.style.display = "";
+	}
+	else
+	{
+		idname.style.display = "none";
+	}
+}
+
+</SCRIPT>
+
+
+</head>
+
+<body>
+
+<a href="#" style="text-decoration='none'"><span title="link 1" litup>link 1</span></a>
+
+<div id="subtree" style="display='none'">
+		<a href="#" style="text-decoration='none'"><span litup>&nbsp;&nbsp;&nbsp;&nbsp;sub1</span></a>
+		<br>
+		<a href="#" style="text-decoration='none'"><span litup>&nbsp;&nbsp;&nbsp;&nbsp;sub2</span></a>
+		<br>
+		<a href="#" style="text-decoration='none'"><span litup>&nbsp;&nbsp;&nbsp;&nbsp;sub3</span></a>
+</div>
+
+<br>
+<br>
+
+<a href="#" style="text-decoration='none'" onMouseClick="javascript:show(subtree2)" ><span title="link 2" litup>link 2</span></a>
+
+<div id="subtree2" style="display='none'">
+		<a href="#" style="text-decoration='none'"><span litup>&nbsp;&nbsp;&nbsp;&nbsp;sub1</span></a>
+		<br>
+		<a href="#" style="text-decoration='none'"><span litup>&nbsp;&nbsp;&nbsp;&nbsp;sub2</span></a>
+		<br>
+		<a href="#" style="text-decoration='none'"><span litup>&nbsp;&nbsp;&nbsp;&nbsp;sub3</span></a>
+</div>
+
+</body>
+
+</html>

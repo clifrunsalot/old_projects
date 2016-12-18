@@ -1,0 +1,7 @@
+./test_files/script.mtc
+./test_files/TC0000293_requirements.tex
+./test_files/TC0000294_local.sh
+./test_files/TC0000294_remote.sh
+./test_files/requirements.tex
+./test_files/runTest.sh
+./test_files/requirements.tex
