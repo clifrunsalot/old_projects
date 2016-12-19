@@ -1,0 +1,107 @@
+
+<html><head>
+		<title>Find the Extra Face</title>
+		<style>
+
+			#leftSide {position: absolute; width: 400px; height: 400px}
+			#rightSide {position: absolute; width: 400px; height: 400px; left: 400px; border-left: 1px solid black}
+			img {position: absolute;}
+
+		</style>
+	</head>
+	<body onload="generateFaces()">
+
+		<div id="titles">
+			<h2>Find the Face Game</h2>
+			Click on the extra smiling face to continue playing!
+		</div>	
+
+		<div id="boxes">
+
+			<div id="leftSide"></div>
+			<div id="rightSide"></div>
+
+		</div>
+
+		<script>
+
+			// Default values 
+			var theBody = document.getElementsByTagName("body")[0];
+			var theLeftSide = document.getElementById("leftSide");
+			var theRightSide = document.getElementById("rightSide");
+			var divLeftBorder = 400;
+			var divBottomBorder = 400;
+			var imgSrc = "http://home.cse.ust.hk/~rossiter/mooc/matching_game/smile.png";
+			var numberOfFaces = 5;
+			var imgWidth = 0;
+			var imgHeight = 0;
+			var leftSideDiv = "";
+			var rightSideDiv = "";
+
+			// Call this to clear out child nodes inside an element.
+			function removeChildNodes(divSide){
+				while(divSide.childNodes.length > 0){
+					divSide.removeChild(divSide.lastChild);
+				}
+			}
+
+			// Generates 'numberOfFaces' with each call.
+			function generateFaces(){
+
+				// Clear out left and right side before restarting.
+				removeChildNodes(theLeftSide);
+				removeChildNodes(theRightSide);
+
+				for(var i=0; i<numberOfFaces; i++){
+
+					var face = document.createElement("img");
+					face.src = imgSrc;
+
+					// Capture image dimensions here; this assumes the image is smaller
+					// than the <div> dimensions.
+					imgWidth = 100;
+					imgHeight = 100;
+
+					// Subtract image dimensions from div width and height to avoid 
+					// crossing outside the <div> box.
+					face.style.left = Math.floor(Math.random() * (divLeftBorder - imgWidth)) + "px"; 
+					face.style.top = Math.floor(Math.random() * (divBottomBorder - imgHeight)) + "px";
+
+					// Add the new image to the <div>
+					document.getElementById("leftSide").appendChild(face);
+
+				}	
+
+				// Create a handler to generate more images if the correct one was clicked.
+				theLeftSide.lastChild.onclick = function nextLevel(event){
+					event.stopPropagation();
+					numberOfFaces += 5;
+					generateFaces();
+				};
+
+				// Clone "leftSide" <div> 
+				leftSideDiv = document.getElementById("leftSide").cloneNode(true);
+
+				// Remove the last child from the right side; this has one-less img
+				leftSideDiv.removeChild(leftSideDiv.lastChild);
+
+				// Append leftSideDiv to rightSideDiv
+				rightSideDiv = document.getElementById("rightSide");
+				rightSideDiv.appendChild(leftSideDiv); 
+			}
+
+
+			// End the game if the incorrect image was clicked.
+			theBody.onclick = function gameOver(){
+				theBody.onclick = null;
+				theLeftSide.lastChild.onclick = null;
+				alert("Game Over!\n\nRefresh the page to start over.");
+			};
+
+
+		</script>
+
+	
+
+
+</body></html>
