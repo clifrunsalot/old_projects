@@ -1,0 +1,5 @@
+# Insert text every n rows.
+awk 'BEGIN{row=0}{if(row==100){print "GOTCHA";row=0}else{print $0};row=row+1;}' syslog > syslog_crap
+
+
+
