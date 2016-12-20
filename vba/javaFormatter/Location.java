@@ -1,12 +1,3 @@
-/**
- * COMPANY NAME: Raytheon Company
- * COPYRIGHT: Copyright (c) 2004 Raytheon Company
- * UNPUBLISHED WORK
- * ALL RIGHTS RESERVED
- * PROJECT NAME: AFATDS
- * CONTRACT NUMBER: DAAB07-C-E708
- */
-
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -36,8 +27,6 @@ import java.awt.Toolkit;
 *	</pre>
 *
 *
-*	@author Clif Hudson AV7-3928
-*   @version AV7-3928 04 Feb 2004 Intial Release
 */
 
 public class Location{
