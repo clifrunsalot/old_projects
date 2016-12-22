@@ -1,0 +1,276 @@
+Dec 17 14:31:04 netbook dhclient[860]: DHCPREQUEST of 192.168.0.16 on wlp7s0 to 255.255.255.255 port 67 (xid=0x2d7201ec)
+Dec 17 14:31:05 netbook dhclient[860]: DHCPACK of 192.168.0.16 from 192.168.0.1
+Dec 17 14:31:05 netbook NetworkManager[654]: <info>  [1482003065.1452]   address 192.168.0.16
+Dec 17 14:31:05 netbook NetworkManager[654]: <info>  [1482003065.1454]   gateway 192.168.0.1
+Dec 17 14:31:05 netbook NetworkManager[654]: <info>  [1482003065.1455]   server identifier 192.168.0.1
+Dec 17 14:31:05 netbook avahi-daemon[592]: Joining mDNS multicast group on interface wlp7s0.IPv4 with address 192.168.0.16.
+Dec 17 14:31:05 netbook avahi-daemon[592]: Registering new address record for 192.168.0.16 on wlp7s0.IPv4.
+Dec 17 14:31:05 netbook dhclient[860]: bound to 192.168.0.16 -- renewal in 1566 seconds.
+Dec 17 14:57:11 netbook dhclient[860]: DHCPREQUEST of 192.168.0.16 on wlp7s0 to 192.168.0.1 port 67 (xid=0x2d7201ec)
+Dec 17 14:57:12 netbook dhclient[860]: DHCPACK of 192.168.0.16 from 192.168.0.1
+Dec 17 14:57:12 netbook NetworkManager[654]: <info>  [1482004632.4779]   address 192.168.0.16
+Dec 17 14:57:12 netbook NetworkManager[654]: <info>  [1482004632.4781]   gateway 192.168.0.1
+Dec 17 14:57:12 netbook NetworkManager[654]: <info>  [1482004632.4782]   server identifier 192.168.0.1
+Dec 17 14:57:12 netbook dhclient[860]: bound to 192.168.0.16 -- renewal in 1378 seconds.
+Dec 17 18:10:34 netbook dhclient[835]: DHCPREQUEST of 192.168.0.16 on wlp7s0 to 255.255.255.255 port 67 (xid=0x56d1e0ea)
+Dec 17 18:10:34 netbook dhclient[835]: DHCPOFFER of 192.168.0.16 from 192.168.0.1
+Dec 17 18:10:35 netbook dhclient[835]: DHCPACK of 192.168.0.16 from 192.168.0.1
+Dec 17 18:10:35 netbook NetworkManager[607]: <info>  [1482016235.6093]   address 192.168.0.16
+Dec 17 18:10:35 netbook NetworkManager[607]: <info>  [1482016235.6139]   gateway 192.168.0.1
+Dec 17 18:10:35 netbook NetworkManager[607]: <info>  [1482016235.6160]   server identifier 192.168.0.1
+Dec 17 18:10:35 netbook avahi-daemon[611]: Joining mDNS multicast group on interface wlp7s0.IPv4 with address 192.168.0.16.
+Dec 17 18:10:35 netbook avahi-daemon[611]: Registering new address record for 192.168.0.16 on wlp7s0.IPv4.
+Dec 17 18:10:35 netbook dhclient[835]: bound to 192.168.0.16 -- renewal in 1414 seconds.
+Dec 17 18:34:10 netbook dhclient[835]: DHCPREQUEST of 192.168.0.16 on wlp7s0 to 192.168.0.1 port 67 (xid=0x56d1e0ea)
+Dec 17 18:34:11 netbook dhclient[835]: DHCPACK of 192.168.0.16 from 192.168.0.1
+Dec 17 18:34:11 netbook NetworkManager[607]: <info>  [1482017651.2410]   address 192.168.0.16
+Dec 17 18:34:11 netbook NetworkManager[607]: <info>  [1482017651.2413]   gateway 192.168.0.1
+Dec 17 18:34:11 netbook NetworkManager[607]: <info>  [1482017651.2414]   server identifier 192.168.0.1
+Dec 17 18:34:11 netbook dhclient[835]: bound to 192.168.0.16 -- renewal in 1717 seconds.
+Dec 17 19:02:48 netbook dhclient[835]: DHCPREQUEST of 192.168.0.16 on wlp7s0 to 192.168.0.1 port 67 (xid=0x56d1e0ea)
+Dec 17 19:02:49 netbook dhclient[835]: DHCPACK of 192.168.0.16 from 192.168.0.1
+Dec 17 19:02:49 netbook NetworkManager[607]: <info>  [1482019369.9764]   address 192.168.0.16
+Dec 17 19:02:49 netbook NetworkManager[607]: <info>  [1482019369.9766]   gateway 192.168.0.1
+Dec 17 19:02:49 netbook NetworkManager[607]: <info>  [1482019369.9767]   server identifier 192.168.0.1
+Dec 17 19:02:50 netbook dhclient[835]: bound to 192.168.0.16 -- renewal in 1790 seconds.
+Dec 17 19:32:40 netbook dhclient[835]: DHCPREQUEST of 192.168.0.16 on wlp7s0 to 192.168.0.1 port 67 (xid=0x56d1e0ea)
+Dec 17 19:32:41 netbook dhclient[835]: DHCPACK of 192.168.0.16 from 192.168.0.1
+Dec 17 19:32:41 netbook NetworkManager[607]: <info>  [1482021161.1412]   address 192.168.0.16
+Dec 17 19:32:41 netbook NetworkManager[607]: <info>  [1482021161.1415]   gateway 192.168.0.1
+Dec 17 19:32:41 netbook NetworkManager[607]: <info>  [1482021161.1416]   server identifier 192.168.0.1
+Dec 17 19:32:42 netbook dhclient[835]: bound to 192.168.0.16 -- renewal in 1678 seconds.
+Dec 17 19:55:32 netbook avahi-daemon[611]: Leaving mDNS multicast group on interface wlp7s0.IPv4 with address 192.168.0.16.
+Dec 18 11:24:19 netbook dhclient[891]: DHCPREQUEST of 192.168.0.16 on wlp7s0 to 255.255.255.255 port 67 (xid=0x6015a108)
+Dec 18 11:24:19 netbook dhclient[891]: DHCPOFFER of 192.168.0.16 from 192.168.0.1
+Dec 18 11:24:20 netbook dhclient[891]: DHCPACK of 192.168.0.16 from 192.168.0.1
+Dec 18 11:24:20 netbook NetworkManager[623]: <info>  [1482078260.3860]   address 192.168.0.16
+Dec 18 11:24:20 netbook NetworkManager[623]: <info>  [1482078260.3933]   gateway 192.168.0.1
+Dec 18 11:24:20 netbook NetworkManager[623]: <info>  [1482078260.3956]   server identifier 192.168.0.1
+Dec 18 11:24:20 netbook avahi-daemon[624]: Joining mDNS multicast group on interface wlp7s0.IPv4 with address 192.168.0.16.
+Dec 18 11:24:20 netbook avahi-daemon[624]: Registering new address record for 192.168.0.16 on wlp7s0.IPv4.
+Dec 18 11:24:20 netbook dhclient[891]: bound to 192.168.0.16 -- renewal in 1433 seconds.
+Dec 18 11:48:13 netbook dhclient[891]: DHCPREQUEST of 192.168.0.16 on wlp7s0 to 192.168.0.1 port 67 (xid=0x6015a108)
+Dec 18 11:48:14 netbook dhclient[891]: DHCPACK of 192.168.0.16 from 192.168.0.1
+Dec 18 11:48:14 netbook NetworkManager[623]: <info>  [1482079694.6320]   address 192.168.0.16
+Dec 18 11:48:14 netbook NetworkManager[623]: <info>  [1482079694.6323]   gateway 192.168.0.1
+Dec 18 11:48:14 netbook NetworkManager[623]: <info>  [1482079694.6324]   server identifier 192.168.0.1
+Dec 18 11:48:14 netbook dhclient[891]: bound to 192.168.0.16 -- renewal in 1616 seconds.
+Dec 18 12:15:10 netbook dhclient[891]: DHCPREQUEST of 192.168.0.16 on wlp7s0 to 192.168.0.1 port 67 (xid=0x6015a108)
+Dec 18 12:15:11 netbook dhclient[891]: DHCPACK of 192.168.0.16 from 192.168.0.1
+Dec 18 12:15:11 netbook NetworkManager[623]: <info>  [1482081311.2339]   address 192.168.0.16
+Dec 18 12:15:11 netbook NetworkManager[623]: <info>  [1482081311.2356]   gateway 192.168.0.1
+Dec 18 12:15:11 netbook NetworkManager[623]: <info>  [1482081311.2357]   server identifier 192.168.0.1
+Dec 18 12:15:11 netbook dhclient[891]: bound to 192.168.0.16 -- renewal in 1589 seconds.
+Dec 18 12:41:40 netbook dhclient[891]: DHCPREQUEST of 192.168.0.16 on wlp7s0 to 192.168.0.1 port 67 (xid=0x6015a108)
+Dec 18 12:41:41 netbook dhclient[891]: DHCPACK of 192.168.0.16 from 192.168.0.1
+Dec 18 12:41:41 netbook NetworkManager[623]: <info>  [1482082901.9120]   address 192.168.0.16
+Dec 18 12:41:41 netbook NetworkManager[623]: <info>  [1482082901.9123]   gateway 192.168.0.1
+Dec 18 12:41:41 netbook NetworkManager[623]: <info>  [1482082901.9124]   server identifier 192.168.0.1
+Dec 18 12:41:41 netbook dhclient[891]: bound to 192.168.0.16 -- renewal in 1493 seconds.
+Dec 18 13:06:34 netbook dhclient[891]: DHCPREQUEST of 192.168.0.16 on wlp7s0 to 192.168.0.1 port 67 (xid=0x6015a108)
+Dec 18 13:06:35 netbook dhclient[891]: DHCPACK of 192.168.0.16 from 192.168.0.1
+Dec 18 13:06:35 netbook NetworkManager[623]: <info>  [1482084395.2960]   address 192.168.0.16
+Dec 18 13:06:35 netbook NetworkManager[623]: <info>  [1482084395.2963]   gateway 192.168.0.1
+Dec 18 13:06:35 netbook NetworkManager[623]: <info>  [1482084395.2963]   server identifier 192.168.0.1
+Dec 18 13:06:35 netbook dhclient[891]: bound to 192.168.0.16 -- renewal in 1798 seconds.
+Dec 18 13:36:33 netbook dhclient[891]: DHCPREQUEST of 192.168.0.16 on wlp7s0 to 192.168.0.1 port 67 (xid=0x6015a108)
+Dec 18 13:36:34 netbook dhclient[891]: DHCPACK of 192.168.0.16 from 192.168.0.1
+Dec 18 13:36:34 netbook NetworkManager[623]: <info>  [1482086194.2579]   address 192.168.0.16
+Dec 18 13:36:34 netbook NetworkManager[623]: <info>  [1482086194.2581]   gateway 192.168.0.1
+Dec 18 13:36:34 netbook NetworkManager[623]: <info>  [1482086194.2582]   server identifier 192.168.0.1
+Dec 18 13:36:34 netbook dhclient[891]: bound to 192.168.0.16 -- renewal in 1464 seconds.
+Dec 19 09:24:13 netbook dhclient[858]: DHCPREQUEST of 192.168.0.16 on wlp7s0 to 255.255.255.255 port 67 (xid=0x2b27484)
+Dec 19 09:24:13 netbook dhclient[858]: DHCPOFFER of 192.168.0.16 from 192.168.0.1
+Dec 19 09:24:14 netbook dhclient[858]: DHCPACK of 192.168.0.16 from 192.168.0.1
+Dec 19 09:24:14 netbook NetworkManager[651]: <info>  [1482157454.6317]   address 192.168.0.16
+Dec 19 09:24:14 netbook NetworkManager[651]: <info>  [1482157454.6319]   gateway 192.168.0.1
+Dec 19 09:24:14 netbook NetworkManager[651]: <info>  [1482157454.6320]   server identifier 192.168.0.1
+Dec 19 09:24:14 netbook avahi-daemon[587]: Joining mDNS multicast group on interface wlp7s0.IPv4 with address 192.168.0.16.
+Dec 19 09:24:14 netbook avahi-daemon[587]: Registering new address record for 192.168.0.16 on wlp7s0.IPv4.
+Dec 19 09:24:14 netbook dhclient[858]: bound to 192.168.0.16 -- renewal in 1574 seconds.
+Dec 19 09:50:28 netbook dhclient[858]: DHCPREQUEST of 192.168.0.16 on wlp7s0 to 192.168.0.1 port 67 (xid=0x2b27484)
+Dec 19 09:50:29 netbook dhclient[858]: DHCPACK of 192.168.0.16 from 192.168.0.1
+Dec 19 09:50:29 netbook NetworkManager[651]: <info>  [1482159029.8719]   address 192.168.0.16
+Dec 19 09:50:29 netbook NetworkManager[651]: <info>  [1482159029.8721]   gateway 192.168.0.1
+Dec 19 09:50:29 netbook NetworkManager[651]: <info>  [1482159029.8722]   server identifier 192.168.0.1
+Dec 19 09:50:30 netbook dhclient[858]: bound to 192.168.0.16 -- renewal in 1730 seconds.
+Dec 19 10:19:19 netbook dhclient[858]: DHCPREQUEST of 192.168.0.16 on wlp7s0 to 192.168.0.1 port 67 (xid=0x2b27484)
+Dec 19 10:19:20 netbook dhclient[858]: DHCPACK of 192.168.0.16 from 192.168.0.1
+Dec 19 10:19:20 netbook NetworkManager[651]: <info>  [1482160760.5659]   address 192.168.0.16
+Dec 19 10:19:20 netbook NetworkManager[651]: <info>  [1482160760.5661]   gateway 192.168.0.1
+Dec 19 10:19:20 netbook NetworkManager[651]: <info>  [1482160760.5666]   server identifier 192.168.0.1
+Dec 19 10:19:20 netbook dhclient[858]: bound to 192.168.0.16 -- renewal in 1709 seconds.
+Dec 19 10:47:49 netbook dhclient[858]: DHCPREQUEST of 192.168.0.16 on wlp7s0 to 192.168.0.1 port 67 (xid=0x2b27484)
+Dec 19 10:47:50 netbook dhclient[858]: DHCPACK of 192.168.0.16 from 192.168.0.1
+Dec 19 10:47:51 netbook NetworkManager[651]: <info>  [1482162471.0006]   address 192.168.0.16
+Dec 19 10:47:51 netbook NetworkManager[651]: <info>  [1482162471.0009]   gateway 192.168.0.1
+Dec 19 10:47:51 netbook NetworkManager[651]: <info>  [1482162471.0010]   server identifier 192.168.0.1
+Dec 19 10:47:51 netbook dhclient[858]: bound to 192.168.0.16 -- renewal in 1461 seconds.
+Dec 19 11:12:12 netbook dhclient[858]: DHCPREQUEST of 192.168.0.16 on wlp7s0 to 192.168.0.1 port 67 (xid=0x2b27484)
+Dec 19 11:12:13 netbook dhclient[858]: DHCPACK of 192.168.0.16 from 192.168.0.1
+Dec 19 11:12:13 netbook NetworkManager[651]: <info>  [1482163933.5186]   address 192.168.0.16
+Dec 19 11:12:13 netbook NetworkManager[651]: <info>  [1482163933.5220]   gateway 192.168.0.1
+Dec 19 11:12:13 netbook NetworkManager[651]: <info>  [1482163933.5236]   server identifier 192.168.0.1
+Dec 19 11:12:13 netbook dhclient[858]: bound to 192.168.0.16 -- renewal in 1627 seconds.
+Dec 19 11:39:20 netbook dhclient[858]: DHCPREQUEST of 192.168.0.16 on wlp7s0 to 192.168.0.1 port 67 (xid=0x2b27484)
+Dec 19 11:39:21 netbook dhclient[858]: DHCPACK of 192.168.0.16 from 192.168.0.1
+Dec 19 11:39:21 netbook NetworkManager[651]: <info>  [1482165561.8291]   address 192.168.0.16
+Dec 19 11:39:21 netbook NetworkManager[651]: <info>  [1482165561.8295]   gateway 192.168.0.1
+Dec 19 11:39:21 netbook NetworkManager[651]: <info>  [1482165561.8296]   server identifier 192.168.0.1
+Dec 19 11:39:21 netbook dhclient[858]: bound to 192.168.0.16 -- renewal in 1391 seconds.
+Dec 19 12:02:33 netbook dhclient[858]: DHCPREQUEST of 192.168.0.16 on wlp7s0 to 192.168.0.1 port 67 (xid=0x2b27484)
+Dec 19 12:02:34 netbook dhclient[858]: DHCPACK of 192.168.0.16 from 192.168.0.1
+Dec 19 12:02:34 netbook NetworkManager[651]: <info>  [1482166954.1516]   address 192.168.0.16
+Dec 19 12:02:34 netbook NetworkManager[651]: <info>  [1482166954.1552]   gateway 192.168.0.1
+Dec 19 12:02:34 netbook NetworkManager[651]: <info>  [1482166954.1570]   server identifier 192.168.0.1
+Dec 19 12:02:34 netbook dhclient[858]: bound to 192.168.0.16 -- renewal in 1747 seconds.
+Dec 19 12:31:41 netbook dhclient[858]: DHCPREQUEST of 192.168.0.16 on wlp7s0 to 192.168.0.1 port 67 (xid=0x2b27484)
+Dec 19 12:31:42 netbook dhclient[858]: DHCPACK of 192.168.0.16 from 192.168.0.1
+Dec 19 12:31:42 netbook NetworkManager[651]: <info>  [1482168702.2811]   address 192.168.0.16
+Dec 19 12:31:42 netbook NetworkManager[651]: <info>  [1482168702.2815]   gateway 192.168.0.1
+Dec 19 12:31:42 netbook NetworkManager[651]: <info>  [1482168702.2816]   server identifier 192.168.0.1
+Dec 19 12:31:42 netbook dhclient[858]: bound to 192.168.0.16 -- renewal in 1438 seconds.
+Dec 19 12:55:40 netbook dhclient[858]: DHCPREQUEST of 192.168.0.16 on wlp7s0 to 192.168.0.1 port 67 (xid=0x2b27484)
+Dec 19 12:55:41 netbook dhclient[858]: DHCPACK of 192.168.0.16 from 192.168.0.1
+Dec 19 12:55:41 netbook NetworkManager[651]: <info>  [1482170141.6141]   address 192.168.0.16
+Dec 19 12:55:41 netbook NetworkManager[651]: <info>  [1482170141.6144]   gateway 192.168.0.1
+Dec 19 12:55:41 netbook NetworkManager[651]: <info>  [1482170141.6145]   server identifier 192.168.0.1
+Dec 19 12:55:41 netbook dhclient[858]: bound to 192.168.0.16 -- renewal in 1669 seconds.
+Dec 19 13:23:31 netbook dhclient[858]: DHCPREQUEST of 192.168.0.16 on wlp7s0 to 192.168.0.1 port 67 (xid=0x2b27484)
+Dec 19 13:23:32 netbook dhclient[858]: DHCPACK of 192.168.0.16 from 192.168.0.1
+Dec 19 13:23:32 netbook NetworkManager[651]: <info>  [1482171812.1013]   address 192.168.0.16
+Dec 19 13:23:32 netbook NetworkManager[651]: <info>  [1482171812.1047]   gateway 192.168.0.1
+Dec 19 13:23:32 netbook NetworkManager[651]: <info>  [1482171812.1065]   server identifier 192.168.0.1
+Dec 19 13:23:32 netbook dhclient[858]: bound to 192.168.0.16 -- renewal in 1697 seconds.
+Dec 19 13:51:49 netbook dhclient[858]: DHCPREQUEST of 192.168.0.16 on wlp7s0 to 192.168.0.1 port 67 (xid=0x2b27484)
+Dec 19 13:51:50 netbook dhclient[858]: DHCPACK of 192.168.0.16 from 192.168.0.1
+Dec 19 13:51:50 netbook NetworkManager[651]: <info>  [1482173510.3936]   address 192.168.0.16
+Dec 19 13:51:50 netbook NetworkManager[651]: <info>  [1482173510.3938]   gateway 192.168.0.1
+Dec 19 13:51:50 netbook NetworkManager[651]: <info>  [1482173510.3939]   server identifier 192.168.0.1
+Dec 19 13:51:50 netbook dhclient[858]: bound to 192.168.0.16 -- renewal in 1427 seconds.
+Dec 19 14:15:37 netbook dhclient[858]: DHCPREQUEST of 192.168.0.16 on wlp7s0 to 192.168.0.1 port 67 (xid=0x2b27484)
+Dec 19 14:15:38 netbook dhclient[858]: DHCPACK of 192.168.0.16 from 192.168.0.1
+Dec 19 14:15:38 netbook NetworkManager[651]: <info>  [1482174938.4626]   address 192.168.0.16
+Dec 19 14:15:38 netbook NetworkManager[651]: <info>  [1482174938.4658]   gateway 192.168.0.1
+Dec 19 14:15:38 netbook NetworkManager[651]: <info>  [1482174938.4675]   server identifier 192.168.0.1
+Dec 19 14:15:38 netbook dhclient[858]: bound to 192.168.0.16 -- renewal in 1649 seconds.
+Dec 19 14:43:08 netbook dhclient[858]: DHCPREQUEST of 192.168.0.16 on wlp7s0 to 192.168.0.1 port 67 (xid=0x2b27484)
+Dec 19 14:43:09 netbook dhclient[858]: DHCPACK of 192.168.0.16 from 192.168.0.1
+Dec 19 14:43:09 netbook NetworkManager[651]: <info>  [1482176589.0542]   address 192.168.0.16
+Dec 19 14:43:09 netbook NetworkManager[651]: <info>  [1482176589.0544]   gateway 192.168.0.1
+Dec 19 14:43:09 netbook NetworkManager[651]: <info>  [1482176589.0545]   server identifier 192.168.0.1
+Dec 19 14:43:09 netbook dhclient[858]: bound to 192.168.0.16 -- renewal in 1618 seconds.
+Dec 19 15:10:07 netbook dhclient[858]: DHCPREQUEST of 192.168.0.16 on wlp7s0 to 192.168.0.1 port 67 (xid=0x2b27484)
+Dec 19 15:10:08 netbook dhclient[858]: DHCPACK of 192.168.0.16 from 192.168.0.1
+Dec 19 15:10:08 netbook NetworkManager[651]: <info>  [1482178208.6080]   address 192.168.0.16
+Dec 19 15:10:08 netbook NetworkManager[651]: <info>  [1482178208.6097]   gateway 192.168.0.1
+Dec 19 15:10:08 netbook NetworkManager[651]: <info>  [1482178208.6098]   server identifier 192.168.0.1
+Dec 19 15:10:08 netbook dhclient[858]: bound to 192.168.0.16 -- renewal in 1421 seconds.
+Dec 19 15:33:49 netbook dhclient[858]: DHCPREQUEST of 192.168.0.16 on wlp7s0 to 192.168.0.1 port 67 (xid=0x2b27484)
+Dec 19 15:33:50 netbook dhclient[858]: DHCPACK of 192.168.0.16 from 192.168.0.1
+Dec 19 15:33:50 netbook NetworkManager[651]: <info>  [1482179630.5882]   address 192.168.0.16
+Dec 19 15:33:50 netbook NetworkManager[651]: <info>  [1482179630.5885]   gateway 192.168.0.1
+Dec 19 15:33:50 netbook NetworkManager[651]: <info>  [1482179630.5886]   server identifier 192.168.0.1
+Dec 19 15:33:50 netbook dhclient[858]: bound to 192.168.0.16 -- renewal in 1413 seconds.
+Dec 19 15:57:23 netbook dhclient[858]: DHCPREQUEST of 192.168.0.16 on wlp7s0 to 192.168.0.1 port 67 (xid=0x2b27484)
+Dec 19 15:57:24 netbook dhclient[858]: DHCPACK of 192.168.0.16 from 192.168.0.1
+Dec 19 15:57:24 netbook NetworkManager[651]: <info>  [1482181044.6178]   address 192.168.0.16
+Dec 19 15:57:24 netbook NetworkManager[651]: <info>  [1482181044.6181]   gateway 192.168.0.1
+Dec 19 15:57:24 netbook NetworkManager[651]: <info>  [1482181044.6182]   server identifier 192.168.0.1
+Dec 19 15:57:25 netbook dhclient[858]: bound to 192.168.0.16 -- renewal in 1563 seconds.
+Dec 19 16:23:27 netbook dhclient[858]: DHCPREQUEST of 192.168.0.16 on wlp7s0 to 192.168.0.1 port 67 (xid=0x2b27484)
+Dec 19 16:23:28 netbook dhclient[858]: DHCPACK of 192.168.0.16 from 192.168.0.1
+Dec 19 16:23:28 netbook NetworkManager[651]: <info>  [1482182608.9812]   address 192.168.0.16
+Dec 19 16:23:28 netbook NetworkManager[651]: <info>  [1482182608.9815]   gateway 192.168.0.1
+Dec 19 16:23:28 netbook NetworkManager[651]: <info>  [1482182608.9816]   server identifier 192.168.0.1
+Dec 19 16:23:29 netbook dhclient[858]: bound to 192.168.0.16 -- renewal in 1549 seconds.
+Dec 19 16:49:17 netbook dhclient[858]: DHCPREQUEST of 192.168.0.16 on wlp7s0 to 192.168.0.1 port 67 (xid=0x2b27484)
+Dec 19 16:49:18 netbook dhclient[858]: DHCPACK of 192.168.0.16 from 192.168.0.1
+Dec 19 16:49:18 netbook NetworkManager[651]: <info>  [1482184158.8743]   address 192.168.0.16
+Dec 19 16:49:18 netbook NetworkManager[651]: <info>  [1482184158.8746]   gateway 192.168.0.1
+Dec 19 16:49:18 netbook NetworkManager[651]: <info>  [1482184158.8747]   server identifier 192.168.0.1
+Dec 19 16:49:19 netbook dhclient[858]: bound to 192.168.0.16 -- renewal in 1744 seconds.
+Dec 19 17:18:22 netbook dhclient[858]: DHCPREQUEST of 192.168.0.16 on wlp7s0 to 192.168.0.1 port 67 (xid=0x2b27484)
+Dec 19 17:18:23 netbook dhclient[858]: DHCPACK of 192.168.0.16 from 192.168.0.1
+Dec 19 17:18:23 netbook NetworkManager[651]: <info>  [1482185903.8549]   address 192.168.0.16
+Dec 19 17:18:23 netbook NetworkManager[651]: <info>  [1482185903.8552]   gateway 192.168.0.1
+Dec 19 17:18:23 netbook NetworkManager[651]: <info>  [1482185903.8553]   server identifier 192.168.0.1
+Dec 19 17:18:23 netbook dhclient[858]: bound to 192.168.0.16 -- renewal in 1393 seconds.
+Dec 19 17:41:36 netbook dhclient[858]: DHCPREQUEST of 192.168.0.16 on wlp7s0 to 192.168.0.1 port 67 (xid=0x2b27484)
+Dec 19 17:41:37 netbook dhclient[858]: DHCPACK of 192.168.0.16 from 192.168.0.1
+Dec 19 17:41:37 netbook NetworkManager[651]: <info>  [1482187297.2122]   address 192.168.0.16
+Dec 19 17:41:37 netbook NetworkManager[651]: <info>  [1482187297.2125]   gateway 192.168.0.1
+Dec 19 17:41:37 netbook NetworkManager[651]: <info>  [1482187297.2125]   server identifier 192.168.0.1
+Dec 19 17:41:37 netbook dhclient[858]: bound to 192.168.0.16 -- renewal in 1775 seconds.
+Dec 19 18:11:12 netbook dhclient[858]: DHCPREQUEST of 192.168.0.16 on wlp7s0 to 192.168.0.1 port 67 (xid=0x2b27484)
+Dec 19 18:11:13 netbook dhclient[858]: DHCPACK of 192.168.0.16 from 192.168.0.1
+Dec 19 18:11:13 netbook NetworkManager[651]: <info>  [1482189073.7451]   address 192.168.0.16
+Dec 19 18:11:13 netbook NetworkManager[651]: <info>  [1482189073.7459]   gateway 192.168.0.1
+Dec 19 18:11:13 netbook NetworkManager[651]: <info>  [1482189073.7460]   server identifier 192.168.0.1
+Dec 19 18:11:13 netbook dhclient[858]: bound to 192.168.0.16 -- renewal in 1394 seconds.
+Dec 19 18:34:27 netbook dhclient[858]: DHCPREQUEST of 192.168.0.16 on wlp7s0 to 192.168.0.1 port 67 (xid=0x2b27484)
+Dec 19 18:34:28 netbook dhclient[858]: DHCPACK of 192.168.0.16 from 192.168.0.1
+Dec 19 18:34:28 netbook NetworkManager[651]: <info>  [1482190468.7679]   address 192.168.0.16
+Dec 19 18:34:28 netbook NetworkManager[651]: <info>  [1482190468.7681]   gateway 192.168.0.1
+Dec 19 18:34:28 netbook NetworkManager[651]: <info>  [1482190468.7682]   server identifier 192.168.0.1
+Dec 19 18:34:28 netbook dhclient[858]: bound to 192.168.0.16 -- renewal in 1733 seconds.
+Dec 19 19:03:21 netbook dhclient[858]: DHCPREQUEST of 192.168.0.16 on wlp7s0 to 192.168.0.1 port 67 (xid=0x2b27484)
+Dec 19 19:03:22 netbook dhclient[858]: DHCPACK of 192.168.0.16 from 192.168.0.1
+Dec 19 19:03:22 netbook NetworkManager[651]: <info>  [1482192202.7863]   address 192.168.0.16
+Dec 19 19:03:22 netbook NetworkManager[651]: <info>  [1482192202.7879]   gateway 192.168.0.1
+Dec 19 19:03:22 netbook NetworkManager[651]: <info>  [1482192202.7880]   server identifier 192.168.0.1
+Dec 19 19:03:23 netbook dhclient[858]: bound to 192.168.0.16 -- renewal in 1565 seconds.
+Dec 19 19:29:28 netbook dhclient[858]: DHCPREQUEST of 192.168.0.16 on wlp7s0 to 192.168.0.1 port 67 (xid=0x2b27484)
+Dec 19 19:29:29 netbook dhclient[858]: DHCPACK of 192.168.0.16 from 192.168.0.1
+Dec 19 19:29:29 netbook NetworkManager[651]: <info>  [1482193769.4034]   address 192.168.0.16
+Dec 19 19:29:29 netbook NetworkManager[651]: <info>  [1482193769.4068]   gateway 192.168.0.1
+Dec 19 19:29:29 netbook NetworkManager[651]: <info>  [1482193769.4084]   server identifier 192.168.0.1
+Dec 19 19:29:29 netbook dhclient[858]: bound to 192.168.0.16 -- renewal in 1783 seconds.
+Dec 19 19:59:13 netbook dhclient[858]: DHCPREQUEST of 192.168.0.16 on wlp7s0 to 192.168.0.1 port 67 (xid=0x2b27484)
+Dec 19 19:59:14 netbook dhclient[858]: DHCPACK of 192.168.0.16 from 192.168.0.1
+Dec 19 19:59:14 netbook NetworkManager[651]: <info>  [1482195554.0468]   address 192.168.0.16
+Dec 19 19:59:14 netbook NetworkManager[651]: <info>  [1482195554.0471]   gateway 192.168.0.1
+Dec 19 19:59:14 netbook NetworkManager[651]: <info>  [1482195554.0472]   server identifier 192.168.0.1
+Dec 19 19:59:14 netbook dhclient[858]: bound to 192.168.0.16 -- renewal in 1680 seconds.
+Dec 19 20:27:14 netbook dhclient[858]: DHCPREQUEST of 192.168.0.16 on wlp7s0 to 192.168.0.1 port 67 (xid=0x2b27484)
+Dec 19 20:27:15 netbook dhclient[858]: DHCPACK of 192.168.0.16 from 192.168.0.1
+Dec 19 20:27:15 netbook NetworkManager[651]: <info>  [1482197235.7307]   address 192.168.0.16
+Dec 19 20:27:15 netbook NetworkManager[651]: <info>  [1482197235.7323]   gateway 192.168.0.1
+Dec 19 20:27:15 netbook NetworkManager[651]: <info>  [1482197235.7324]   server identifier 192.168.0.1
+Dec 19 20:27:15 netbook dhclient[858]: bound to 192.168.0.16 -- renewal in 1616 seconds.
+Dec 19 20:54:11 netbook dhclient[858]: DHCPREQUEST of 192.168.0.16 on wlp7s0 to 192.168.0.1 port 67 (xid=0x2b27484)
+Dec 19 20:54:12 netbook dhclient[858]: DHCPACK of 192.168.0.16 from 192.168.0.1
+Dec 19 20:54:12 netbook NetworkManager[651]: <info>  [1482198852.8387]   address 192.168.0.16
+Dec 19 20:54:12 netbook NetworkManager[651]: <info>  [1482198852.8390]   gateway 192.168.0.1
+Dec 19 20:54:12 netbook NetworkManager[651]: <info>  [1482198852.8391]   server identifier 192.168.0.1
+Dec 19 20:54:12 netbook dhclient[858]: bound to 192.168.0.16 -- renewal in 1586 seconds.
+Dec 19 21:20:38 netbook dhclient[858]: DHCPREQUEST of 192.168.0.16 on wlp7s0 to 192.168.0.1 port 67 (xid=0x2b27484)
+Dec 19 21:20:39 netbook dhclient[858]: DHCPACK of 192.168.0.16 from 192.168.0.1
+Dec 19 21:20:39 netbook NetworkManager[651]: <info>  [1482200439.2826]   address 192.168.0.16
+Dec 19 21:20:39 netbook NetworkManager[651]: <info>  [1482200439.2828]   gateway 192.168.0.1
+Dec 19 21:20:39 netbook NetworkManager[651]: <info>  [1482200439.2829]   server identifier 192.168.0.1
+Dec 19 21:20:39 netbook dhclient[858]: bound to 192.168.0.16 -- renewal in 1610 seconds.
+Dec 19 21:47:29 netbook dhclient[858]: DHCPREQUEST of 192.168.0.16 on wlp7s0 to 192.168.0.1 port 67 (xid=0x2b27484)
+Dec 19 21:47:30 netbook dhclient[858]: DHCPACK of 192.168.0.16 from 192.168.0.1
+Dec 19 21:47:30 netbook NetworkManager[651]: <info>  [1482202050.7370]   address 192.168.0.16
+Dec 19 21:47:30 netbook NetworkManager[651]: <info>  [1482202050.7373]   gateway 192.168.0.1
+Dec 19 21:47:30 netbook NetworkManager[651]: <info>  [1482202050.7374]   server identifier 192.168.0.1
+Dec 19 21:47:30 netbook dhclient[858]: bound to 192.168.0.16 -- renewal in 1583 seconds.
+Dec 19 22:13:53 netbook dhclient[858]: DHCPREQUEST of 192.168.0.16 on wlp7s0 to 192.168.0.1 port 67 (xid=0x2b27484)
+Dec 19 22:13:54 netbook dhclient[858]: DHCPACK of 192.168.0.16 from 192.168.0.1
+Dec 19 22:13:54 netbook NetworkManager[651]: <info>  [1482203634.8679]   address 192.168.0.16
+Dec 19 22:13:54 netbook NetworkManager[651]: <info>  [1482203634.8682]   gateway 192.168.0.1
+Dec 19 22:13:54 netbook NetworkManager[651]: <info>  [1482203634.8683]   server identifier 192.168.0.1
+Dec 19 22:13:54 netbook dhclient[858]: bound to 192.168.0.16 -- renewal in 1675 seconds.
+Dec 19 22:41:49 netbook dhclient[858]: DHCPREQUEST of 192.168.0.16 on wlp7s0 to 192.168.0.1 port 67 (xid=0x2b27484)
+Dec 19 22:41:50 netbook dhclient[858]: DHCPACK of 192.168.0.16 from 192.168.0.1
+Dec 19 22:41:50 netbook NetworkManager[651]: <info>  [1482205310.7246]   address 192.168.0.16
+Dec 19 22:41:50 netbook NetworkManager[651]: <info>  [1482205310.7250]   gateway 192.168.0.1
+Dec 19 22:41:50 netbook NetworkManager[651]: <info>  [1482205310.7251]   server identifier 192.168.0.1
+Dec 19 22:41:50 netbook dhclient[858]: bound to 192.168.0.16 -- renewal in 1754 seconds.
+Dec 19 23:11:04 netbook dhclient[858]: DHCPREQUEST of 192.168.0.16 on wlp7s0 to 192.168.0.1 port 67 (xid=0x2b27484)
+Dec 19 23:11:05 netbook dhclient[858]: DHCPACK of 192.168.0.16 from 192.168.0.1
+Dec 19 23:11:05 netbook NetworkManager[651]: <info>  [1482207065.5864]   address 192.168.0.16
+Dec 19 23:11:05 netbook NetworkManager[651]: <info>  [1482207065.5866]   gateway 192.168.0.1
+Dec 19 23:11:05 netbook NetworkManager[651]: <info>  [1482207065.5867]   server identifier 192.168.0.1
+Dec 19 23:11:05 netbook dhclient[858]: bound to 192.168.0.16 -- renewal in 1609 seconds.
