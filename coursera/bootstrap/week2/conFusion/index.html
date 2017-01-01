@@ -58,21 +58,21 @@
 					</li>
 				</ul>
 
-				<form class="navbar-form navbar-right"> 
+				<form class="navbar-form navbar-right" action="#"> 
 						<div class="form-group"> 
 								<label class="sr-only" for="email">Email address</label> 
-								<input type="email" class="form-control" id="email" placeholder="Email"> 
+								<input type="email" class="form-control" id="email" name="email" placeholder="Email"> 
 						</div> 
 						<div class="form-group"> 
 								<label class="sr-only" for="password">Password</label> 
-								<input type="password" class="form-control" id="password" placeholder="Password"> 
+								<input type="password" class="form-control" id="password" name="password" placeholder="Password"> 
 						</div>
-						<div class="checkbox"> 
+						<div class="checkbox form-horizontal"> 
 								<label for="rememberme">
 									<input type="checkbox" id="rememberme" name="rememberme"><span style="color:white"> Remember Me </span> 
 								</label>
 						</div> 
-						<button type="button" class="btn btn-info">Sign in</button> 
+						<button type="submit" class="btn btn-info">Sign in</button> 
 				</form> 
 
 			</div>
@@ -101,7 +101,7 @@
 
                 <div class="col-xs-12 col-sm-2">
                   <p style="padding:40px;"></p>
-				    <a href="#reservetable" class="btn btn-warning btn-lg" role="button">Reserve Table</a>
+				    <a href="#reservetable" class="btn btn-warning btn-block" role="button">Reserve Table</a>
                 </div>
 
             </div>
@@ -138,15 +138,28 @@
         </div>
 
         <div class="row row-content">
+            
             <div class="col-xs-12 col-sm-3">
                 <p style="padding:20px;"></p>
                 <h3 align=center>This Month's Promotions</h3>
             </div>
             <div class="col-xs-12 col-sm-9">
-                <h2>Weekend Grand Buffet</h2>
-                <p>Featuring mouthwatering combinations with a choice of five different salads, six enticing appetizers, six main entrees and five choicest desserts. Free flowing bubbly and soft drinks. All for just $19.99 per person </p>
-                <p><a class="btn btn-primary btn-xs" href="#">More &raquo;</a></p>
+                <div class="media">
+                    <div class="media-body">
+                        <h2>Weekend Grand Buffet <span class="label label-danger">New</span></h2>
+                        <p>Featuring mouthwatering combinations with a choice of five different salads, six enticing appetizers, six main entrees and five choicest desserts. Free flowing bubbly and soft drinks. All for just $19.99 per person 
+                         </p>
+                        <p><a class="btn btn-primary btn-xs" href="#">More &raquo;</a></p>
+                    </div>
+                    <div class="media-right media-middle">
+                        <a href="#">
+                        <img class="media-object img-thumbnail"
+                         src="img/buffet.png" alt="Weekend Grand Buffet">
+                        </a>
+                    </div>
+                </div>
             </div>
+
         </div>
 
         <div class="row row-content">
@@ -178,80 +191,90 @@
         </div>
 
 
-        <div id="reservetable" class="row row-content">
-
+        <div id="reservetable" class="row">
+            
             <div class="col-xs-12 col-sm-3">
-                    <p style="padding:20px;"></p>
+                    <p style="padding:30px;"></p>
                     <h3 align=center>Reserve a Table</h3>
             </div>
-
+            
             <div class="col-xs-12 col-sm-9">
-
-                <div class="row">
-
-                    <div class="col-xs-12 col-sm-2">
-                        <h4 align="right">Number of Guests</h4>
-                    </div>
-
-                    <div class="col-xs-12 col-sm-10">
-                        <form>
-                            <div class="form-inline">
-                                <label class="radio-inline control-label">
-                                    <input type="radio" name="tablecount" id="tablecount" value="option1"> 1
-                                </label>
-                                <label class="radio-inline control-label">
-                                    <input type="radio" name="tablecount" id="tablecount" value="option2"> 2
-                                </label>
-                                <label class="radio-inline control-label">
-                                    <input type="radio" name="tablecount" id="tablecount" value="option3"> 3
-                                </label>
-                                <label class="radio-inline control-label">
-                                    <input type="radio" name="tablecount" id="tablecount" value="option4"> 4
-                                </label>
-                                <label class="radio-inline control-label">
-                                    <input type="radio" name="tablecount" id="tablecount" value="option5"> 5
-                                </label>
-                                <label class="radio-inline control-label">
-                                    <input type="radio" name="tablecount" id="tablecount" value="option6"> 6
-                                </label>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-
-                <div class="row">
-
-                    <div class="col-xs-12 col-sm-2">
-                        <h4 align="right">Date and Time</h4>
-                    </div>
-
-                    <div class="col-xs-12 col-sm-10">
-                        <form>
-						<div class="form-group">
-                            <div class="col-xs-12 col-md-5">
-                                <label class="sr-only" for="reservationdate"></label> 
-                                <input type="date" class="form-control glyphicon glyphicon-calendar" id="reservationdate" placeholder="date"> 
-                            </div>
-                            <div class="col-xs-12 col-md-5">
-                                <label class="sr-only" for="reservationtime"></label> 
-                                <input type="time" class="form-control glyphicon glyphicon-time" id="reservationtime" placeholder="Time"> 
-                            </div>
-						</div>
-                        </form>
-                    </div>
-                </div>
                 
-                <div class="row">
-                    <div class="col-xs-12 col-sm-2">
+                <p style="padding:20px"></p>
+
+                <form action="#" class="form-horizontal">
+
+                    <div class="form-group">
+
+                        <label for="persons" class="col-xs-12 col-sm-3 control-label">Number of Guests</label>
+
+                        <div class="col-xs-12 col-sm-9" id=persons name=persons>
+                            <label class="radio-inline control-label">
+                                <input type="radio" name="tablecount" id="tablecount" value="1person">1
+                            </label>
+                            <label class="radio-inline control-label">
+                                <input type="radio" name="tablecount" id="tablecount" value="2person">2
+                            </label>
+                            <label class="radio-inline control-label">
+                                <input type="radio" name="tablecount" id="tablecount" value="3person">3
+                            </label>
+                            <label class="radio-inline control-label">
+                                <input type="radio" name="tablecount" id="tablecount" value="4person">4
+                            </label>
+                            <label class="radio-inline control-label">
+                                <input type="radio" name="tablecount" id="tablecount" value="5person">5
+                            </label>
+                            <label class="radio-inline control-label">
+                                <input type="radio" name="tablecount" id="tablecount" value="6person">6
+                            </label>
+                        </div>
+
                     </div>
 
-                    <div class="col-xs-12 col-sm-10">
-                        <p style="padding:10px;"></p>
-                        <a href="#" class="btn btn-primary" role="button">Reserve</a>
-                    </div>                
-                </div>
-            </div>
+                    <div class="form-group">
 
+                        <label class="col-xs-12 col-sm-3 control-label">Date and Time</label>
+
+                        <div class="col-xs-12 col-sm-9">
+                            <div class="col-xs-12 col-sm-5">
+                                <label class="sr-only control-label col-sm-1" for="reservationdate" name="reservationdate"></label> 
+                                <div class="form-group has-feedback">
+                                    <input type="date" class="form-control col-sm-5" id="reservationdate" name="reservationdate" placeholder="Date" />
+                                    <i class="glyphicon glyphicon-calendar form-control-feedback"></i>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-1"></div>
+                            <div class="col-xs-12 col-sm-5">
+                                <label class="sr-only control-label col-sm-1" for="reservationtime" name="reservationtime"></label> 
+                                <div class="form-group has-feedback">
+                                    <input type="time" class="form-control col-sm-5" id="reservationtime" name="reservationtime" placeholder="Time" />
+                                    <i class="glyphicon glyphicon-time glyphicon-pull form-control-feedback"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-xs-12 col-sm-3">
+                        </div>
+
+                        <div class="col-xs-12 col-sm-9">
+                            <button type="submit" class="btn btn-primary">Reserve</button>
+                        </div>                
+                    </div>
+                    
+                    <div class="alert alert-warning alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <strong>Warning:</strong> Please <strong>call</strong> us to reserve for more than six guests.
+                    </div>
+
+                </form>
+                
+            </div>
+                
         </div>
 
     </div>
