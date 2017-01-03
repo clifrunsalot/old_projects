@@ -50,7 +50,8 @@ function _get_count(){
 	src=$1
 	idx=$2
 	src_cnt=0
-	src_cnt=$(egrep -o "$src" "$FILE" | wc -l)
+	# -v option does not work; directly use $src variable in awk command
+	src_cnt=$(cat "$FILE" | awk '$5 ~ /'"$src"'/{print $0}' | wc -l)
 	(( sum = sum + src_cnt ))
 	source[$idx]="${source[$idx]}:$src_cnt"
 }
@@ -70,7 +71,7 @@ function _display_totals(){
 
 	printf "\n\n%10s %-50s%s\n" "Count" "Field #5"
 	printf -v underline "%60s" " "
-	echo "${underline// /-}"	
+	echo "${underline// /=}"	
 	for(( i=0; i<${#source[@]}; i++ ))
 	do
 		nm=${source[$i]%%:[0-9]*}
