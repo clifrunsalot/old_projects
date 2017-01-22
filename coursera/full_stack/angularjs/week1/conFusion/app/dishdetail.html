@@ -32,14 +32,14 @@
                 <div class="media">
                     <div class="media-left media-middle">
                         <a href="#">
-                            <img class="media-object img-thumbnail" ng-src='images/uthapizza.png' alt="Uthappizza">
+                            <img class="media-object img-thumbnail" ng-src='{{detailCtrl.dish.image}}' alt="{{detailCtrl.dish.name}}">
                         </a>
                     </div>
                     <div class="media-body">
-                        <h2 class="media-heading">Uthapizza
-                         <span class="label label-danger">Hot</span>
-                         <span class="badge">4.99</span></h2>
-                        <p>A unique combination of Indian Uthappam (pancake) and Italian pizza, topped with Cerignola olives, ripe vine cherry tomatoes, Vidalia onion, Guntur chillies and Buffalo Paneer.</p>
+                        <h2 class="media-heading">{{detailCtrl.dish.name}}
+                         <span class="label label-danger">{{detailCtrl.dish.label}}</span>
+                         <span class="badge">{{detailCtrl.dish.price}}</span></h2>
+                        <p>{{detailCtrl.dish.description}}</p>
                     </div>
                 </div>
 
