@@ -1,10 +1,8 @@
-*.pyc
-*.class
-*.pyc
-*.class
-coursera/angularjs/week1/__MACOSX/
-coursera/angularjs/week1/conFusion/bower_components
-coursera/angularjs/week1/conFusion/node_modules
-coursera/angularjs/week1/conFusion/.DS_Store
-coursera/python_data_science/python_fundamentals/data_files/__MACOSX
+**/*.pyc
+**/*.class
+**/__MACOSX
+**/node_modules
+**/.DS_Store
+**/bower_components
+**/.tmp
 
