@@ -5,14 +5,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Bootstrap Starter Template</title>
 
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
-    <link href="css/font-awesome.min.css" rel="stylesheet">
-    <link href="css/bootstrap-social.css" rel="stylesheet">
-    <link href="css/mystyles.css" rel="stylesheet">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -24,12 +18,67 @@
 
 <body>
 
-    <script>
-        var newValue = practice.setValue(6);
+    <h2>Person</h2>
+    <ul id="person">
+    </ul>
+
+    <script type="text/javascript">
+        var mydom = [
+            {
+                'first': 'clif',
+                'last': 'hudson',
+                'age': '13'
+            }, {
+                'first': 'joann',
+                'last': 'hudson',
+                'age': '51'
+            }, {
+                'first': 'sirena',
+                'last': 'hudson',
+                'age': '23'
+            }
+        ];
+
+        var wtr = function (ary) {
+            var lst = '';
+            for (var i = 0; i < ary.length; i++) {
+                lst += "<li>" + ary[i].first + " " + ary[i].last + " " + ary[i].age + "</li>";
+            }
+            document.getElementById("person").innerHTML = lst;
+        }
+
+        function times(p) {
+            return {
+                'first': p.first,
+                'last': p.last,
+                'age': p.age * 2
+            };
+        }
+
+        function young(p) {
+            if (p.age < 50) {
+                return true;
+            }
+            return false;
+        }
+
+        wtr(mydom);
+        var mydom_2 = mydom.map(times).filter(young);
+        wtr(mydom_2);
+
+        function getSum(ary) {
+            var sum = 0;
+            for (var i = 0; i < ary.length; i++) {
+                sum += ary[i].age;
+            }
+            return sum;
+        }
+
+        var total = getSum(mydom_2);
+
+        document.write("<p>Total age: " + total + "</p>");
     </script>
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="practice.js" type="text/javascript"></script>
 </body>
 
 </html>
