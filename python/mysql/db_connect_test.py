@@ -104,7 +104,7 @@ def connect():
 
 		config = {
 			'user': 'clif',
-			'password': '********',
+			'password': '*********',
 			'host': '127.0.0.1',
 			'database': 'bedrock',
 			'raise_on_warnings': True,
