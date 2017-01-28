@@ -194,7 +194,10 @@ angular.module("confusionApp", [])
         // Use the current date and time upon submission.
         $scope.real_time_cmts.date_time = new Date().toISOString();
 
-        // Add viewers comments to the list.
+        /*
+        Add viewers comments to the list.
+        Invoke parseInt on rating for sorting purposes later.
+        */
         $scope.comments.push({
             rating: parseInt($scope.real_time_cmts.rating),
             comment: $scope.real_time_cmts.comment,
@@ -202,8 +205,6 @@ angular.module("confusionApp", [])
             date: $scope.real_time_cmts.date_time
         });
         
-        console.log($scope.comments);
-
         // Reset the real-time field values.
         $scope.real_time_cmts = {
             name: "",
