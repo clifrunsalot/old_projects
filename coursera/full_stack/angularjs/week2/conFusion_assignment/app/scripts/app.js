@@ -2,48 +2,48 @@
 
 angular.module("confusionApp", [])
 
-.controller('MenuController', ['$scope', function ($scope) {
+.controller("MenuController", ["$scope", function ($scope) {
 
     $scope.tab = 1;
-    $scope.filtText = '';
+    $scope.filtText = "";
     $scope.showDetails = false;
 
     $scope.dishes = [
         {
-            name: 'Uthapizza',
-            image: 'images/uthapizza.png',
-            category: 'mains',
-            label: 'Hot',
-            price: '4.99',
-            description: 'A unique combination of Indian Uthappam (pancake) and Italian pizza, topped with Cerignola olives, ripe vine cherry tomatoes, Vidalia onion, Guntur chillies and Buffalo Paneer.',
-            comment: ''
+            name: "Uthapizza",
+            image: "images/uthapizza.png",
+            category: "mains",
+            label: "Hot",
+            price: "4.99",
+            description: "A unique combination of Indian Uthappam (pancake) and Italian pizza, topped with Cerignola olives, ripe vine cherry tomatoes, Vidalia onion, Guntur chillies and Buffalo Paneer.",
+            comment: ""
                         },
         {
-            name: 'Zucchipakoda',
-            image: 'images/zucchipakoda.png',
-            category: 'appetizer',
-            label: '',
-            price: '1.99',
-            description: 'Deep fried Zucchini coated with mildly spiced Chickpea flour batter accompanied with a sweet-tangy tamarind sauce',
-            comment: ''
+            name: "Zucchipakoda",
+            image: "images/zucchipakoda.png",
+            category: "appetizer",
+            label: "",
+            price: "1.99",
+            description: "Deep fried Zucchini coated with mildly spiced Chickpea flour batter accompanied with a sweet-tangy tamarind sauce",
+            comment: ""
                         },
         {
-            name: 'Vadonut',
-            image: 'images/vadonut.png',
-            category: 'appetizer',
-            label: 'New',
-            price: '1.99',
-            description: 'A quintessential ConFusion experience, is it a vada or is it a donut?',
-            comment: ''
+            name: "Vadonut",
+            image: "images/vadonut.png",
+            category: "appetizer",
+            label: "New",
+            price: "1.99",
+            description: "A quintessential ConFusion experience, is it a vada or is it a donut?",
+            comment: ""
                         },
         {
-            name: 'ElaiCheese Cake',
-            image: 'images/elaicheesecake.png',
-            category: 'dessert',
-            label: '',
-            price: '2.99',
-            description: 'A delectable, semi-sweet New York Style Cheese Cake, with Graham cracker crust and spiced with Indian cardamoms',
-            comment: ''
+            name: "ElaiCheese Cake",
+            image: "images/elaicheesecake.png",
+            category: "dessert",
+            label: "",
+            price: "2.99",
+            description: "A delectable, semi-sweet New York Style Cheese Cake, with Graham cracker crust and spiced with Indian cardamoms",
+            comment: ""
                         }
                         ];
 
@@ -71,7 +71,7 @@ angular.module("confusionApp", [])
         }])
 
 
-.controller('ContactController', ['$scope', function ($scope) {
+.controller("ContactController", ["$scope", function ($scope) {
 
     $scope.feedback = {
         mychannel: "",
@@ -94,7 +94,7 @@ angular.module("confusionApp", [])
 
         }])
 
-.controller('FeedbackController', ['$scope', function ($scope) {
+.controller("FeedbackController", ["$scope", function ($scope) {
 
     $scope.sendFeedback = function () {
 
@@ -102,7 +102,7 @@ angular.module("confusionApp", [])
 
         if ($scope.feedback.agree && ($scope.feedback.mychannel == "")) {
             $scope.invalidChannelSelection = true;
-            console.log('incorrect');
+            console.log("incorrect");
         } else {
             $scope.invalidChannelSelection = false;
             $scope.feedback = {
@@ -137,9 +137,8 @@ angular.module("confusionApp", [])
 .controller("DishCommentController", ["$scope", function ($scope) {
 
     /*
-    Step 1: Create a JavaScript object to hold the comment from the form
+    Prepopulate comments list.
     */
-
     var comments = [
         {
             rating: 5,
@@ -167,41 +166,55 @@ angular.module("confusionApp", [])
         },
         {
             rating: 2,
-            comment: "It's your birthday, we're gonna party!",
+            comment: "It's your birthday, were gonna party!",
             author: "25 Cent",
             date: "2011-12-02T17:57:28.556094Z"
         }];
 
     $scope.comments = comments;
 
+    /*
+    Capture real-time entry here.
+    */
+    var real_time_cmts = {
+        rating: 5,
+        comment: "",
+        name: "",
+        date_time: ""
+    };
+    $scope.real_time_cmts = real_time_cmts;
+
+    /*
+    Assuming the angularjs error handling in the form is 
+    correct, this method is executed without 
+    additional checks.
+    */
     $scope.submitComment = function () {
 
-        /*
-        Step 2: This is how you record the date. The date property of your JavaScript object holding the
-        comment"
-        */
-        var cmtDate = new Date().toISOString();
+        // Use the current date and time upon submission.
+        $scope.real_time_cmts.date_time = new Date().toISOString();
 
-        var commentor = {
+        // Add viewers comments to the list.
+        $scope.comments.push({
+            rating: parseInt($scope.real_time_cmts.rating),
+            comment: $scope.real_time_cmts.comment,
+            author: $scope.real_time_cmts.name,
+            date: $scope.real_time_cmts.date_time
+        });
+        
+        console.log($scope.comments);
+
+        // Reset the real-time field values.
+        $scope.real_time_cmts = {
+            name: "",
             rating: 5,
             comment: "",
-            name: "",
-            cmtDate: cmtDate
+            date_time: ""
         };
-        $scope.commentor = commentor;
 
-        /*
-        Step 3: Push your comment into the dish"s comment array
-        */
-        $scope.dish.comments.push("Your JavaScript Object holding the comment");
+        // Reset the form to a pristine state.
+        $scope.commentForm.$setPristine();
 
-        /*
-        Step 4: reset your form to pristine
-        */
-
-        /*
-        Step 5: reset your JavaScript object that holds your comment
-        */
     };
 }])
 
