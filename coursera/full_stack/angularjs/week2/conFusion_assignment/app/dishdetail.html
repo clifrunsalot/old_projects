@@ -80,7 +80,7 @@
 
                 <!------ Display Real-time Entry --------->
                 <!-- Only show when valid real-time comments are entered -->
-                <div id="real_time_block" ng-show="!commentForm.comment.$error.required && !commentForm.comment.$pristine">
+                <div id="real_time_block" ng-show="!commentForm.name.$error.required  && !commentForm.comment.$error.required && !commentForm.comment.$pristine">
                     <blockquote>
                         <div>{{real_time_cmts.rating}} Stars</div>
                         <div>{{real_time_cmts.comment}}</div>
