@@ -5,4 +5,5 @@
 **/.DS_Store
 **/bower_components
 **/.tmp
-
+**/.o
+**/.ali
