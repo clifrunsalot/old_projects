@@ -2,6 +2,12 @@
 
 angular.module("confusionApp")
 
+.controller('IndexController', ['$scope', '$stateParams', 'menuFactory', function ($scope, $stateParams, menuFactory) {
+        //        var dish = menuFactory.getDish(parseInt($stateParams.id, 10));
+        //$scope.dish = dish;
+            }
+        ])
+
 .controller('MenuController', ['$scope', 'menuFactory', function ($scope, menuFactory) {
 
     $scope.tab = 1;
@@ -82,11 +88,11 @@ angular.module("confusionApp")
     };
 }])
 
-.controller('DishDetailController', ['$scope', '$routeParams', 'menuFactory', function ($scope, $routeParams, menuFactory) {
-
-    var dish = menuFactory.getDish(parseInt($routeParams.id, 10));
-    $scope.dish = dish;
-}])
+.controller('DishDetailController', ['$scope', '$stateParams', 'menuFactory', function ($scope, $stateParams, menuFactory) {
+        var dish = menuFactory.getDish(parseInt($stateParams.id, 10));
+        $scope.dish = dish;
+            }
+        ])
 
 .controller("DishCommentController", ["$scope", function ($scope) {
 
