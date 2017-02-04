@@ -2,12 +2,6 @@
 
 angular.module("confusionApp")
 
-.controller('IndexController', ['$scope', '$stateParams', 'menuFactory', function ($scope, $stateParams, menuFactory) {
-        //        var dish = menuFactory.getDish(parseInt($stateParams.id, 10));
-        //$scope.dish = dish;
-            }
-        ])
-
 .controller('MenuController', ['$scope', 'menuFactory', function ($scope, menuFactory) {
 
     $scope.tab = 1;
@@ -89,49 +83,55 @@ angular.module("confusionApp")
 }])
 
 .controller('DishDetailController', ['$scope', '$stateParams', 'menuFactory', function ($scope, $stateParams, menuFactory) {
-        var dish = menuFactory.getDish(parseInt($stateParams.id, 10));
-        $scope.dish = dish;
+
+    var dish = menuFactory.getDish(parseInt($stateParams.id, 10));
+    $scope.dish = dish;
             }
         ])
 
-.controller("DishCommentController", ["$scope", function ($scope) {
+.controller("DishCommentController", ["$scope", '$stateParams', 'menuFactory', function ($scope, $stateParams, menuFactory) {
+
+        var dish = menuFactory.getDish(parseInt($stateParams.id, 10));
+        $scope.dish = dish;
+
+//    .controller("DishCommentController", ["$scope", function ($scope) {
 
     /*
     Prepopulate comments list.
     */
-    var comments = [
-        {
-            rating: 5,
-            comment: "Imagine all the eatables, living in conFusion!",
-            author: "John Lemon",
-            date: "2012-10-16T17:57:28.556094Z"
-        },
-        {
-            rating: 4,
-            comment: "Sends anyone to heaven, I wish I could get my mother-in-law to eat it!",
-            author: "Paul McVites",
-            date: "2014-09-05T17:57:28.556094Z"
-        },
-        {
-            rating: 3,
-            comment: "Eat it, just eat it!",
-            author: "Michael Jaikishan",
-            date: "2015-02-13T17:57:28.556094Z"
-        },
-        {
-            rating: 4,
-            comment: "Ultimate, Reaching for the stars!",
-            author: "Ringo Starry",
-            date: "2013-12-02T17:57:28.556094Z"
-        },
-        {
-            rating: 2,
-            comment: "It's your birthday, were gonna party!",
-            author: "25 Cent",
-            date: "2011-12-02T17:57:28.556094Z"
-        }];
-
-    $scope.comments = comments;
+//    var comments = [
+//        {
+//            rating: 5,
+//            comment: "Imagine all the eatables, living in conFusion!",
+//            author: "John Lemon",
+//            date: "2012-10-16T17:57:28.556094Z"
+//        },
+//        {
+//            rating: 4,
+//            comment: "Sends anyone to heaven, I wish I could get my mother-in-law to eat it!",
+//            author: "Paul McVites",
+//            date: "2014-09-05T17:57:28.556094Z"
+//        },
+//        {
+//            rating: 3,
+//            comment: "Eat it, just eat it!",
+//            author: "Michael Jaikishan",
+//            date: "2015-02-13T17:57:28.556094Z"
+//        },
+//        {
+//            rating: 4,
+//            comment: "Ultimate, Reaching for the stars!",
+//            author: "Ringo Starry",
+//            date: "2013-12-02T17:57:28.556094Z"
+//        },
+//        {
+//            rating: 2,
+//            comment: "It's your birthday, were gonna party!",
+//            author: "25 Cent",
+//            date: "2011-12-02T17:57:28.556094Z"
+//        }];
+//
+    $scope.comments = $scope.dish.comments;
 
     /*
     Capture real-time entry here.

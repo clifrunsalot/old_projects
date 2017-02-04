@@ -36,8 +36,9 @@ gulp.task('default', ['clean'], function () {
 });
 
 // register the usemin task
+// Be sure to use **/* for nested files
 gulp.task('usemin',['jshint'], function () {
-  return gulp.src('app/index.html')
+  return gulp.src('./app/**/*.html')
     .pipe(usemin({
       css:[minifycss(),rev()],
       js: [ngannotate(),uglify(),rev()]
