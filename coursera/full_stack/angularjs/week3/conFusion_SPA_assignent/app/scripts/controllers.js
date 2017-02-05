@@ -89,7 +89,7 @@ angular.module('confusionApp')
 
 }])
 
-.controller('DishCommentController', ['$scope', function ($scope) {
+.controller('DishCommentController', ['$scope', '$stateParams', 'menuFactory', function ($scope, $stateParams, menuFactory) {
 
     $scope.mycomment = {
         rating: 5,
@@ -97,6 +97,11 @@ angular.module('confusionApp')
         author: "",
         date: ""
     };
+    
+    /*
+    * Be sure to add the comments of the dish shown in dishdetail.html.
+    */
+    $scope.comments = menuFactory.getDish(parseInt($stateParams.id, 10)).comments;
 
     $scope.submitComment = function () {
 
