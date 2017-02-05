@@ -10,7 +10,6 @@ angular.module('confusionApp')
 
     $scope.dishes = menuFactory.getDishes();
 
-
     $scope.select = function (setTab) {
         $scope.tab = setTab;
 
@@ -32,7 +31,7 @@ angular.module('confusionApp')
     $scope.toggleDetails = function () {
         $scope.showDetails = !$scope.showDetails;
     };
-        }])
+}])
 
 .controller('ContactController', ['$scope', function ($scope) {
 
@@ -55,7 +54,7 @@ angular.module('confusionApp')
     $scope.channels = channels;
     $scope.invalidChannelSelection = false;
 
-        }])
+}])
 
 .controller('FeedbackController', ['$scope', function ($scope) {
 
@@ -63,7 +62,7 @@ angular.module('confusionApp')
 
         console.log($scope.feedback);
 
-        if ($scope.feedback.agree && ($scope.feedback.mychannel == "")) {
+        if ($scope.feedback.agree && ($scope.feedback.mychannel === "")) {
             $scope.invalidChannelSelection = true;
             console.log('incorrect');
         } else {
@@ -80,7 +79,7 @@ angular.module('confusionApp')
             console.log($scope.feedback);
         }
     };
-        }])
+}])
 
 .controller('DishDetailController', ['$scope', '$stateParams', 'menuFactory', function ($scope, $stateParams, menuFactory) {
 
@@ -88,7 +87,7 @@ angular.module('confusionApp')
 
     $scope.dish = dish;
 
-        }])
+}])
 
 .controller('DishCommentController', ['$scope', function ($scope) {
 
@@ -114,19 +113,22 @@ angular.module('confusionApp')
             author: "",
             date: ""
         };
-    }
-        }])
+    };
+}])
 
-// implement the IndexController
-.controller('IndexController', ['$scope', function ($scope) {
+// Implement the IndexController
+.controller('IndexController', ['$scope', 'menuFactory', 'corporateFactory', function ($scope, menuFactory, corporateFactory) {
 
-        }])
+    $scope.dish = menuFactory.getDish(0);
+    $scope.promotion = menuFactory.getPromotion(0);
+    $scope.leader = corporateFactory.getLeader(3);
 
-// and About Controller here
-.controller('AboutController',['$scope', 'corporateFactory',function($scope, corporateFactory){
-    
+}])
+
+// Implement the AboutController
+.controller('AboutController', ['$scope', 'corporateFactory', function ($scope, corporateFactory) {
+
     $scope.leaders = corporateFactory.getLeaders();
-    
 }])
 
 ;

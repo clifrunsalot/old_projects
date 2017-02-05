@@ -58,8 +58,8 @@
                         <img class="media-object img-thumbnail" ng-src={{leader.image}} alt={{leader.name}}>
                     </div>
                     <div class="media-body">
-                        <h3 class="media-heading">{{leader.name}}</h3>
-                        <span>{{leader.designation}}</span>
+                        <h3>{{leader.name}}
+                        <small>{{leader.designation}}</small></h3>
                         <p>{{leader.description}}</p>
                     </div>
                 </li>
@@ -70,6 +70,8 @@
             <p style="padding:20px;"></p>
         </div>
     </div>
+    
+    
     <div class="row row-content">
         <div class="col-xs-12 col-sm-9">
             <h2>Facts &amp; Figures</h2>
