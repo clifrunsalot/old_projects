@@ -9,3 +9,5 @@
 **/*.ali
 **/.ipynb_checkpoints
 **/*.min.js
+**/main-*.js
+**/main-*.css
