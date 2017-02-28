@@ -11,19 +11,17 @@
         </p>
       </div>
     </div>
-    <div class="card">
+    <div class="list list-inset">
       <div class="item item-divider">
         Corporate Leadership
       </div>
-      <div class="list list-inset">
-        <div class="item" ng-repeat="leader in leaders">
-          <a class="item item-avatar item-text-wrap" href="#">
-            <img ng-src="{{baseURL+leader.image}}" alt="{{leader.name}}">
-            <h3>{{leader.name}}<br>
+      <div ng-repeat="leader in leaders">
+        <a class="item item-avatar item-text-wrap" href="#">
+          <img ng-src="{{baseURL+leader.image}}" alt="{{leader.name}}">
+          <h3>{{leader.name}}<br>
         <small>{{leader.designation}}</small></h3>
-            <p>{{leader.description}}</p>
-          </a>
-        </div>
+          <p>{{leader.description}}</p>
+        </a>
       </div>
     </div>
   </ion-content>
