@@ -1,0 +1,17 @@
+1) In week1/conFusion, run these
+  - npm install
+  - bower install
+  - sudo npm install -g gulp
+  - sudo npm install -g bower
+
+2) In week1/json-server, run this to mock REST server
+
+  - json-server --watch db.json
+
+3) Follow the steps related to the running only the ionic server in the files:
+
+Setting up the Ionic Framework.pdf
+Setting up a Server using json-server.pdf
+Ionic and AngularJS.pdf
+Exploring Ionic Part 1.pdf
+Exploring Ionic Part 2.pdf
