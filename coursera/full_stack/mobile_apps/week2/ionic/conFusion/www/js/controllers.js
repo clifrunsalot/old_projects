@@ -90,7 +90,6 @@ angular.module('conFusion.controllers', [])
             $scope.message = "Error: " + response.status + " " + response.statusText;
         });
 
-
     $scope.select = function (setTab) {
         $scope.tab = setTab;
 
@@ -172,7 +171,7 @@ angular.module('conFusion.controllers', [])
     };
   }])
 
-.controller('DishDetailController', ['$scope', '$stateParams', 'menuFactory', 'baseURL', function ($scope, $stateParams, menuFactory, baseURL) {
+.controller('DishDetailController', ['$scope', '$stateParams', 'menuFactory', 'favoriteFactory', 'baseURL', '$ionicModal', '$ionicPopover', '$ionicListDelegate', function ($scope, $stateParams, menuFactory, favoriteFactory, baseURL, $ionicModal, $ionicPopover, $ionicListDelegate) {
 
     $scope.baseURL = baseURL;
     $scope.dish = {};
@@ -191,8 +190,108 @@ angular.module('conFusion.controllers', [])
                 $scope.message = "Error: " + response.status + " " + response.statusText;
             }
         );
+    
+    /*
+    * Nested menu
+    */
 
+    $ionicPopover.fromTemplateUrl('templates/dish-detail-popover.html', {
+        scope: $scope
+    }).then(function (popover) {
+        $scope.popover = popover;
+    });
 
+    // Triggered by "..."  button
+    $scope.openPopover = function ($event) {
+        $scope.popover.show($event);
+    }
+    
+    // Triggered after addFavorite is invoked.
+    $scope.closePopover = function () {
+        $scope.popover.hide();
+    };
+
+    $scope.$on('$destroy', function () {
+        $scope.popover.remove();
+    });
+
+    $scope.$on('popover.hidden', function () {
+        // ignored 
+    });
+
+    $scope.$on('popover.removed', function () {
+        // ignored 
+    });
+
+    /*
+    * Methods for processing a favorite dish.
+    */
+
+    $scope.addFavorite = function () {
+        console.log("index is " + $scope.dish.id);
+        favoriteFactory.addToFavorites($scope.dish.id);
+        $scope.closePopover();
+    }
+    
+    /*
+    * Methods for processing a comment.
+    */
+
+    $ionicModal.fromTemplateUrl('templates/dish-comment.html',{
+        scope: $scope
+    }).then(function(modal){
+        $scope.commentForm = modal;
+    });
+    
+    $scope.closeCommentForm = function(){
+        $scope.commentForm.hide();
+    };
+    
+    $scope.showCommentForm = function(){
+        $scope.commentForm.show();
+    };
+    
+    $scope.mycomment = {
+        rating: 5,
+        comment: "",
+        author: "",
+        date: ""
+    };
+
+    $scope.submitComment = function () {
+
+        $scope.mycomment.date = new Date().toISOString();
+        
+        console.log($scope.mycomment);
+
+//        $scope.dish.comments.push($scope.mycomment);
+
+        /*
+         * The rating must be converted to an int before persisting
+         * to accommodate sorting.
+         */
+        $scope.dish.comments.push({
+            rating: parseInt($scope.mycomment.rating, 10),
+            comment: $scope.mycomment.comment,
+            author: $scope.mycomment.author,
+            date: $scope.mycomment.date
+        });
+
+        menuFactory.getDishes().update({
+            id: $scope.dish.id
+        }, $scope.dish);
+
+        $scope.mycomment = {
+            rating: 5,
+            comment: "",
+            author: "",
+            date: ""
+        };
+        
+        $scope.closePopover();
+        $scope.closeCommentForm();
+    }
+    
   }])
 
 .controller('DishCommentController', ['$scope', 'menuFactory', function ($scope, menuFactory) {
