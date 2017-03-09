@@ -36,20 +36,18 @@ angular.module('conFusion.services', ['ngResource'])
 
 .factory('corporateFactory', ['$resource', 'baseURL', function ($resource, baseURL) {
 
-        //var corpfac = {};
-        //
-        //corpfac.getLeaders = function () {
-        //    return $resource(baseURL + "leadership/:id", null, {
-        //        'update': {
-        //            method: 'PUT'
-        //        }
-        //    });
-        //};
-        //
-        //// Remember this is a factory not a service
-        //return corpfac;
+        var corpfac = {};
 
-        return $resource(baseURL + "leadership/:id");
+        corpfac.getLeaders = function () {
+            return $resource(baseURL + "leadership/:id", null, {
+                'update': {
+                    method: 'PUT'
+                }
+            });
+        };
+
+        // Remember this is a factory not a service
+        return corpfac;
 
 }])
     .factory('feedbackFactory', ['$resource', 'baseURL', function ($resource, baseURL) {
