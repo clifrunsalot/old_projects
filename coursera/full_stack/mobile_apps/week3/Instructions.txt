@@ -1,0 +1,42 @@
+TO REBUILD THE CODE
+
+1) In week1/conFusion, run these
+  - sudo npm install -g gulp
+  - sudo npm install -g bower
+  - npm install
+  - bower install
+	- sudo npm install cordova ionic -g
+
+2) Rename week1/ionic to week1/ionic_orig
+
+3) Create the directory week1/ionic
+
+4) cd into ionic and run
+
+	- ionic  start conFusion sidemenu
+
+5) copy the following:
+
+	week1/ionic_orig/www/index.html ==>  week1/ionic/www/index.html
+	week1/ionic_orig/www/js/* ==>  week1/ionic/www/js/*
+	week1/ionic_orig/www/templates/* ==>  week1/ionic/www/templates/*
+
+
+TO RUN THE WEBPAGES
+
+1) In week1/json-server, run this to mock REST server to feed the data objects.
+
+  > json-server --watch db.json
+
+2) In week1/ionic/conFusion
+  > ionic serve --lab
+
+3) This will spawn the ionic cordova mobile webpages for iphone and android.
+
+READ THESE PAGES TO UNDERSTAND HOW TO USE CORDOVA 
+
+Setting up the Ionic Framework.pdf
+Setting up a Server using json-server.pdf
+Ionic and AngularJS.pdf
+Exploring Ionic Part 1.pdf
+Exploring Ionic Part 2.pdf
