@@ -1,16 +1,10 @@
 angular.module('conFusion.controllers', [])
 
-.controller('AppCtrl', function ($scope, $ionicModal, $timeout) {
 
-    // With the new view caching in Ionic, Controllers are only called
-    // when they are recreated or on app start, instead of every page change.
-    // To listen for when this page is active (for example, to refresh data),
-    // listen for the $ionicView.enter event:
-    //$scope.$on('$ionicView.enter', function(e) {
-    //});
+.controller('AppCtrl', function ($scope, $ionicModal, $timeout, $localStorage) {
 
     // Form data for the login modal
-    $scope.loginData = {};
+    $scope.loginData = $localStorage.getObject('userinfo','{}');
 
     // Create the login modal that we will use later
     $ionicModal.fromTemplateUrl('templates/login.html', {
@@ -32,6 +26,7 @@ angular.module('conFusion.controllers', [])
     // Perform the login action when the user submits the login form
     $scope.doLogin = function () {
         console.log('Doing login', $scope.loginData);
+        $localStorage.storeObject('userinfo',$scope.loginData);
 
         // Simulate a login delay. Remove this and replace with your login
         // code if using a login system
@@ -313,11 +308,11 @@ angular.module('conFusion.controllers', [])
     }
   }])
 
-// implement the IndexController and About Controller here
+// implement the IndexController
 .controller('IndexController', ['$scope', 'menuFactory', 'promotionFactory', 'corporateFactory', 'baseURL', function ($scope, menuFactory, promotionFactory, corporateFactory, baseURL) {
 
     $scope.baseURL = baseURL;
-    $scope.leader = corporateFactory.getLeaders().get({
+    $scope.leader = corporateFactory.get({
         id: 3
     });
 
@@ -341,18 +336,35 @@ angular.module('conFusion.controllers', [])
 
   }])
 
-.controller('AboutController', ['$scope', 'corporateFactory', 'baseURL', function ($scope, corporateFactory, baseURL) {
+//Implement About Controller here
+.controller('AboutController', ['$scope', 'leaders' , 'corporateFactory', 'baseURL', function ($scope, leaders, corporateFactory,  baseURL) {
 
     $scope.baseURL = baseURL;
-    $scope.leaders = corporateFactory.getLeaders();
-    corporateFactory.getLeaders().query(
+    $scope.leaders = leaders;
+    corporateFactory.query(
         function (response) {
             $scope.leaders = response;
         },
         function (response) {
             $scope.message = "Error: " + response.status + " " + response.statusText;
-        });
+        }
+    );
+    
   }])
+
+//.controller('AboutController', ['$scope', 'corporateFactory', 'baseURL', function ($scope, corporateFactory, baseURL) {
+//
+//    $scope.baseURL = baseURL;
+//    $scope.leaders = corporateFactory.getLeaders();
+//    corporateFactory.getLeaders().query(
+//        function (response) {
+//            $scope.leaders = response;
+//        },
+//        function (response) {
+//            $scope.message = "Error: " + response.status + " " + response.statusText;
+//        });
+//  }])
+
 
 .controller('FavoritesController', ['$scope', 'dishes', 'favorites', 'favoriteFactory', 'baseURL', '$ionicListDelegate', '$ionicPopup', '$ionicLoading', '$timeout', function ($scope, dishes, favorites, favoriteFactory, baseURL, $ionicListDelegate, $ionicPopup, $ionicLoading, $timeout) {
 

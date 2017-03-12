@@ -16,28 +16,38 @@ angular.module('conFusion.services', ['ngResource'])
 .factory('promotionFactory', ['$resource', 'baseURL', function ($resource, baseURL) {
 
     return $resource(baseURL + "promotions/:id");
-    
+
   }])
 
 .factory('corporateFactory', ['$resource', 'baseURL', function ($resource, baseURL) {
 
-        var corpfac = {};
-
-        corpfac.getLeaders = function () {
-            return $resource(baseURL + "leadership/:id", null, {
-                'update': {
-                    method: 'PUT'
-                }
-            });
-        };
-
-        // Remember this is a factory not a service
-        return corpfac;
-
+    return $resource(baseURL + "leadership/:id", null, {
+        'update': {
+            method: 'PUT'
+        }
+    });
 }])
-    .factory('feedbackFactory', ['$resource', 'baseURL', function ($resource, baseURL) {
 
-        return $resource(baseURL + "feedback/:id");
+//.factory('corporateFactory', ['$resource', 'baseURL', function ($resource, baseURL) {
+//
+//        var corpfac = {};
+//
+//        corpfac.getLeaders = function () {
+//            return $resource(baseURL + "leadership/:id", null, {
+//                'update': {
+//                    method: 'PUT'
+//                }
+//            });
+//        };
+//
+//        // Remember this is a factory not a service
+//        return corpfac;
+//
+//}])
+
+.factory('feedbackFactory', ['$resource', 'baseURL', function ($resource, baseURL) {
+
+    return $resource(baseURL + "feedback/:id");
 
   }])
 
@@ -68,6 +78,23 @@ angular.module('conFusion.services', ['ngResource'])
     };
 
     return favFac;
+}])
+
+.factory('$localStorage', ['$window', function ($window) {
+    return {
+        store: function (key, value) {
+            $window.localStorage[key] = value;
+        },
+        get: function (key, defaultValue) {
+            return $window.localStorage[key] || defaultValue;
+        },
+        storeObject: function (key, value) {
+            $window.localStorage[key] = JSON.stringify(value);
+        },
+        getObject: function (key, defaultValue) {
+            return JSON.parse($window.localStorage[key] || defaultValue);
+        }
+    }
 }])
 
 ;

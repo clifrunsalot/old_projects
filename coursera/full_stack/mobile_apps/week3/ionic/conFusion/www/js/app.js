@@ -6,7 +6,7 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('conFusion', ['ionic', 'conFusion.controllers', 'conFusion.services'])
 
-.run(function ($ionicPlatform) {
+.run(function($ionicPlatform, $rootScope, $ionicLoading) {
     $ionicPlatform.ready(function () {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
@@ -20,6 +20,27 @@ angular.module('conFusion', ['ionic', 'conFusion.controllers', 'conFusion.servic
             StatusBar.styleDefault();
         }
     });
+    
+    // Pub/Sub
+    $rootScope.$on('loading:show', function () {
+        $ionicLoading.show({
+            template: '<ion-spinner></ion-spinner> Loading ...'
+        })
+    });
+
+    $rootScope.$on('loading:hide', function () {
+        $ionicLoading.hide();
+    });
+
+    $rootScope.$on('$stateChangeStart', function () {
+        console.log('Loading ...');
+        $rootScope.$broadcast('loading:show');
+    });
+
+    $rootScope.$on('$stateChangeSuccess', function () {
+        console.log('done');
+        $rootScope.$broadcast('loading:hide');
+    });    
 })
 
 .config(function ($stateProvider, $urlRouterProvider) {
@@ -43,15 +64,21 @@ angular.module('conFusion', ['ionic', 'conFusion.controllers', 'conFusion.servic
     })
 
     .state('app.aboutus', {
-            url: '/aboutus',
-            views: {
-                'mainContent': {
-                    templateUrl: 'templates/aboutus.html',
-                    controller: 'AboutController'
+        url: '/aboutus',
+        views: {
+            'mainContent': {
+                templateUrl: 'templates/aboutus.html',
+                controller: 'AboutController',
+                resolve: {
+                    leaders: ['corporateFactory', function (corporateFactory) {
+                        return corporateFactory.query();
+                    }]
                 }
             }
-        })
-        .state('app.contactus', {
+        }
+    })
+
+    .state('app.contactus', {
             url: '/contactus',
             views: {
                 'mainContent': {
