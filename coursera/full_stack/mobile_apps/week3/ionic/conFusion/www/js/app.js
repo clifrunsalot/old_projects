@@ -20,7 +20,7 @@ angular.module('conFusion', ['ionic', 'conFusion.controllers', 'conFusion.servic
             StatusBar.styleDefault();
         }
     });
-    
+
     // Pub/Sub
     $rootScope.$on('loading:show', function () {
         $ionicLoading.show({
@@ -40,7 +40,7 @@ angular.module('conFusion', ['ionic', 'conFusion.controllers', 'conFusion.servic
     $rootScope.$on('$stateChangeSuccess', function () {
         console.log('done');
         $rootScope.$broadcast('loading:hide');
-    });    
+    });
 })
 
 .config(function ($stateProvider, $urlRouterProvider) {
@@ -58,7 +58,10 @@ angular.module('conFusion', ['ionic', 'conFusion.controllers', 'conFusion.servic
         views: {
             'mainContent': {
                 templateUrl: 'templates/home.html',
-                controller: 'IndexController'
+                controller: 'IndexController',
+                resolve: {
+                  
+                }
             }
         }
     })
