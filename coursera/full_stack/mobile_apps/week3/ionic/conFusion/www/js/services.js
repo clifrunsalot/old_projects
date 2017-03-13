@@ -1,100 +1,90 @@
 'use strict';
 
 angular.module('conFusion.services', ['ngResource'])
-    .constant("baseURL", "http://localhost:3000/")
+  .constant("baseURL", "http://localhost:3000/")
 
-.factory('menuFactory', ['$resource', 'baseURL', function ($resource, baseURL) {
+  .factory('menuFactory', ['$resource', 'baseURL', function($resource, baseURL) {
 
     return $resource(baseURL + "dishes/:id", null, {
-        'update': {
-            method: 'PUT'
-        }
+      'update': {
+        method: 'PUT'
+      }
     });
 
-}])
+  }])
 
-.factory('promotionFactory', ['$resource', 'baseURL', function ($resource, baseURL) {
+  .factory('promotionFactory', ['$resource', 'baseURL', function($resource, baseURL) {
 
     return $resource(baseURL + "promotions/:id");
 
   }])
 
-.factory('corporateFactory', ['$resource', 'baseURL', function ($resource, baseURL) {
+  .factory('corporateFactory', ['$resource', 'baseURL', function($resource, baseURL) {
 
     return $resource(baseURL + "leadership/:id", null, {
-        'update': {
-            method: 'PUT'
-        }
+      'update': {
+        method: 'PUT'
+      }
     });
-}])
+  }])
 
-//.factory('corporateFactory', ['$resource', 'baseURL', function ($resource, baseURL) {
-//
-//        var corpfac = {};
-//
-//        corpfac.getLeaders = function () {
-//            return $resource(baseURL + "leadership/:id", null, {
-//                'update': {
-//                    method: 'PUT'
-//                }
-//            });
-//        };
-//
-//        // Remember this is a factory not a service
-//        return corpfac;
-//
-//}])
-
-.factory('feedbackFactory', ['$resource', 'baseURL', function ($resource, baseURL) {
+  .factory('feedbackFactory', ['$resource', 'baseURL', function($resource, baseURL) {
 
     return $resource(baseURL + "feedback/:id");
 
   }])
 
-.factory('favoriteFactory', ['$resource', 'baseURL', function ($resource, baseURL) {
-    var favFac = {};
-    var favorites = [];
+  .factory('favoriteFactory', ['$resource', '$localStorage', 'baseURL',
+    function($resource, $localStorage, baseURL) {
 
-    favFac.addToFavorites = function (index) {
+      var favFac = {};
+      var favorites = $localStorage.getObject('favorites', '[]');
+
+      favFac.addToFavorites = function(index) {
         for (var i = 0; i < favorites.length; i++) {
-            if (favorites[i].id == index)
-                return;
+          if (favorites[i].id == index)
+            return;
         }
+
         favorites.push({
-            id: index
+          id: index
         });
-    };
 
-    favFac.deleteFromFavorites = function (index) {
+        $localStorage.storeObject('favorites', favorites);
+      };
+
+      favFac.deleteFromFavorites = function(index) {
         for (var i = 0; i < favorites.length; i++) {
-            if (favorites[i].id == index) {
-                favorites.splice(i, 1);
-            }
+          if (favorites[i].id == index) {
+            favorites.splice(i, 1);
+          }
         }
-    }
+        $localStorage.storeObject('favorites', favorites);
+      }
 
-    favFac.getFavorites = function () {
+      favFac.getFavorites = function() {
         return favorites;
-    };
+      };
 
-    return favFac;
-}])
-
-.factory('$localStorage', ['$window', function ($window) {
-    return {
-        store: function (key, value) {
-            $window.localStorage[key] = value;
-        },
-        get: function (key, defaultValue) {
-            return $window.localStorage[key] || defaultValue;
-        },
-        storeObject: function (key, value) {
-            $window.localStorage[key] = JSON.stringify(value);
-        },
-        getObject: function (key, defaultValue) {
-            return JSON.parse($window.localStorage[key] || defaultValue);
-        }
+      return favFac;
     }
-}])
+  ])
+
+  .factory('$localStorage', ['$window', function($window) {
+    return {
+      store: function(key, value) {
+        $window.localStorage[key] = value;
+      },
+      get: function(key, defaultValue) {
+        return $window.localStorage[key] || defaultValue;
+      },
+      storeObject: function(key, value) {
+        $window.localStorage[key] = JSON.stringify(value);
+      },
+      getObject: function(key, defaultValue) {
+        return JSON.parse($window.localStorage[key] || defaultValue);
+      }
+    }
+  }])
 
 ;

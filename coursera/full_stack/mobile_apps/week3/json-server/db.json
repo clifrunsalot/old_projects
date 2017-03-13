@@ -150,6 +150,12 @@
           "comment": "i hate this dish",
           "author": "clif hudson",
           "date": "2017-03-06T05:30:23.406Z"
+        },
+        {
+          "rating": 5,
+          "comment": "clif loves this place",
+          "author": "clif",
+          "date": "2017-03-13T00:42:31.762Z"
         }
       ]
     },
@@ -191,6 +197,18 @@
           "comment": "It's your birthday, we're gonna party!",
           "author": "25 Cent",
           "date": "2011-12-02T17:57:28.556094Z"
+        },
+        {
+          "rating": 1,
+          "comment": "jack hates this place",
+          "author": "jack",
+          "date": "2017-03-13T00:18:09.254Z"
+        },
+        {
+          "rating": 4,
+          "comment": "jean loves this place",
+          "author": "jean",
+          "date": "2017-03-13T00:21:52.604Z"
         }
       ]
     }
