@@ -418,10 +418,6 @@ angular.module('conFusion.controllers', [])
 					id: $scope.dish.id
 				}, $scope.dish);
 
-				// menuFactory.getDishes().update({
-				//   id: $scope.dish.id
-				// }, $scope.dish);
-
 				$scope.commentForm.$setPristine();
 
 				$scope.mycomment = {
@@ -466,7 +462,11 @@ angular.module('conFusion.controllers', [])
 		}
 	])
 
-.controller('FavoritesController', ['$scope', 'dishes', 'favorites', 'favoriteFactory', 'baseURL', '$ionicListDelegate', '$ionicPopup', '$ionicLoading', '$timeout', function ($scope, dishes, favorites, favoriteFactory, baseURL, $ionicListDelegate, $ionicPopup, $ionicLoading, $timeout) {
+.controller('FavoritesController', ['$scope', 'dishes', 'favorites', 'favoriteFactory',
+		'baseURL', '$ionicListDelegate', '$ionicPopup', '$ionicLoading', '$timeout',
+		function ($scope, dishes, favorites,
+			favoriteFactory, baseURL, $ionicListDelegate, $ionicPopup, $ionicLoading,
+			$timeout) {
 
 			$scope.baseURL = baseURL;
 			$scope.shouldShowDelete = false;
@@ -480,7 +480,7 @@ angular.module('conFusion.controllers', [])
 			$scope.toggleDelete = function () {
 				$scope.shouldShowDelete = !$scope.shouldShowDelete;
 				console.log($scope.shouldShowDelete);
-			}
+			};
 
 			$scope.deleteFavorite = function (index) {
 
@@ -499,8 +499,9 @@ angular.module('conFusion.controllers', [])
 				});
 
 				$scope.shouldShowDelete = false;
-
-			}
+				navigator.vibrate(1000);
+				console.log('Vibrating phone');
+			};
 		}
 	])
 
