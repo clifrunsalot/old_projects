@@ -5,14 +5,14 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
 angular.module('conFusion', ['ionic', 'ngCordova', 'conFusion.controllers',
-    'conFusion.services'
-  ])
+	'conFusion.services'])
 
-  .run(function($ionicPlatform, $rootScope, $ionicLoading,
-    $cordovaSplashscreen, $timeout) {
+.run(function($ionicPlatform, $rootScope, $ionicLoading, $cordovaSplashscreen, 
+	$timeout) {
+
     $ionicPlatform.ready(function() {
-      // Hide the accessory bar by default (remove this to show the accessory
-      // bar above the keyboard for form inputs)
+      // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+      // for form inputs)
       if (window.cordova && window.cordova.plugins.Keyboard) {
         cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
         cordova.plugins.Keyboard.disableScroll(true);
@@ -22,10 +22,11 @@ angular.module('conFusion', ['ionic', 'ngCordova', 'conFusion.controllers',
         // org.apache.cordova.statusbar required
         StatusBar.styleDefault();
       }
-
-      $timeout(function() {
-        $cordovaSplashscreen.hide();
-      }, 2000);
+	  
+	  $timeout(function(){
+                $cordovaSplashscreen.hide();
+      },2000);
+	  
     });
 
     // Pub/Sub
