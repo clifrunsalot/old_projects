@@ -1,9 +1,13 @@
 angular.module('conFusion.controllers', [])
 
-.controller('AppCtrl', function ($scope, $ionicModal, $timeout, $localStorage) {
-
+.controller('AppCtrl', function ($scope, $ionicModal, $timeout, $localStorage,
+		$ionicPlatform, $cordovaCamera) {
 	// Form data for the login modal
 	$scope.loginData = $localStorage.getObject('userinfo', '{}');
+
+	// Reservation section
+	//
+	$scope.reservation = {};
 
 	// Create the login modal that we will use later
 	$ionicModal.fromTemplateUrl('templates/login.html', {
@@ -34,8 +38,6 @@ angular.module('conFusion.controllers', [])
 		}, 1000);
 	};
 
-	$scope.reservation = {};
-
 	// Create the reserve modal that we will use later
 	$ionicModal.fromTemplateUrl('templates/reserve.html', {
 		scope: $scope
@@ -63,6 +65,58 @@ angular.module('conFusion.controllers', [])
 			$scope.closeReserve();
 		}, 1000);
 	};
+
+	$scope.registration = {};
+
+	// Create the registration modal that we will use later
+	$ionicModal.fromTemplateUrl('templates/register.html', {
+		scope: $scope
+	}).then(function (modal) {
+		$scope.registerform = modal;
+	});
+
+	// Triggered in the registration modal to close it
+	$scope.closeRegister = function () {
+		$scope.registerform.hide();
+	};
+
+	// Open the registration modal
+	$scope.register = function () {
+		$scope.registerform.show();
+	};
+
+	// Perform the registration action when the user submits the registration form
+	$scope.doRegister = function () {
+		// Simulate a registration delay. Remove this and replace with your registration
+		// code if using a registration system
+		$timeout(function () {
+			$scope.closeRegister();
+		}, 1000);
+	};
+
+	$ionicPlatform.ready(function () {
+		var options = {
+			quality: 50,
+			destinationType: Camera.DestinationType.DATA_URL,
+			sourceType: Camera.PictureSourceType.CAMERA,
+			allowEdit: true,
+			encodingType: Camera.EncodingType.JPEG,
+			targetWidth: 100,
+			targetHeight: 100,
+			popoverOptions: CameraPopoverOptions,
+			saveToPhotoAlbum: false
+		};
+		$scope.takePicture = function () {
+			$cordovaCamera.getPicture(options).then(function (imageData) {
+				$scope.registration.imgSrc = "data:image/jpeg;base64," + imageData;
+			}, function (err) {
+				console.log(err);
+			});
+
+			$scope.registerform.show();
+
+		};
+	});
 
 })
 
@@ -185,7 +239,12 @@ angular.module('conFusion.controllers', [])
 		}
 	])
 
-.controller('DishDetailController', ['$scope', '$stateParams', 'dish', 'menuFactory', 'favoriteFactory', 'baseURL', '$ionicModal', '$ionicPopover', '$ionicListDelegate', function ($scope, $stateParams, dish, menuFactory, favoriteFactory, baseURL, $ionicModal, $ionicPopover, $ionicListDelegate) {
+.controller('DishDetailController', ['$scope', '$stateParams', 'dish',
+		'menuFactory', 'favoriteFactory', 'baseURL', '$ionicModal', '$ionicPopover',
+		'$ionicListDelegate', '$ionicPlatform', '$cordovaLocalNotification', '$cordovaToast',
+		function ($scope, $stateParams, dish, menuFactory, favoriteFactory, baseURL,
+			$ionicModal, $ionicPopover, $ionicListDelegate, $ionicPlatform,
+			$cordovaLocalNotification, $cordovaToast) {
 
 			$scope.baseURL = baseURL;
 			$scope.dish = {};
@@ -229,11 +288,32 @@ angular.module('conFusion.controllers', [])
 			/*
 			 * Methods for processing a favorite dish.
 			 */
-
 			$scope.addFavorite = function () {
 				console.log("index is " + $scope.dish.id);
 				favoriteFactory.addToFavorites($scope.dish.id);
 				$scope.closePopover();
+
+				$ionicPlatform.ready(function () {
+					$cordovaLocalNotification.schedule({
+						id: 1,
+						title: "Added Favorite",
+						text: $scope.dish.name
+					}).then(function () {
+						console.log('Added Favorite ' + $scope.dish.name);
+					},
+						function () {
+						console.log('Failed to add Notification ');
+					});
+
+					$cordovaToast
+					.show('Added Favorite ' + $scope.dish.name, 'long', 'center')
+					.then(function (success) {
+						// success
+					}, function (error) {
+						// error
+					});
+				});
+
 			}
 
 			/*
