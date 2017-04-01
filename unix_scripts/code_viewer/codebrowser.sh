@@ -20,40 +20,47 @@ TOC=${HOST_DIR}/toc.html
 rm -f ${TOC}
 touch ${TOC}
 
-# add header tags to TOC
-echo "<html><head><title>Top Directories</title></head><body>" >> ${TOC}
-
-for dir in $(ls -1R ${SEARCH_DIR}) 
+# Create the directories
+DIRS=( $(find ${SEARCH_DIR} -type d) )
+for fn in "${DIRS[@]}" 
 do
 
-	# if directory
-	if [ $(echo "${dir}" | egrep -c ":$") -eq 1 ]
-	then
-
-		_dir=${dir%:}
-		mkdir -p "${HOST_DIR}${_dir}"	
-		DIRNAME=$(basename "${_dir}")
-		CODE_LIST_PAGE="${HOST_DIR}${_dir}.html"
-		echo "<a href=\"file://${CODE_LIST_PAGE}\" target=\"code_list\">${DIRNAME}</a><br>" >> ${TOC} 
-
-	# if readable file
-	elif [ -r "${dir}" ]
-	then
-
-		_code_unit="${dir}"
-		echo "<html><head><title>${_code_unit}</title></head><body>" >> ${CODE_LIST_PAGE}
-		PAGE="${HOST_DIR}/${_dir}/${_code_unit}.html"
-		echo "<a href=\"${PAGE}\" target=\"content\">${_code_unit}</a><br>" >> ${CODE_LIST_PAGE}
-		echo "<html><head><title>${_code_unit}</title></head><body><pre>" >> ${PAGE}
-		cat "${_dir}/${_code_unit}" >> ${PAGE}
-		echo "</pre></body></html>" >> ${PAGE}
-		echo "<a href=\"file://${PAGE}\" target=\"content\">${_code_unit}</a><br>" >> ${TOC} 
-
-	fi	
-
-	echo "</body></html>" >> ${CODE_LIST_PAGE}
+	webpath="${HOST_DIR}${fn}"
+	mkdir -p $webpath
 
 done
+
+# Add the HTML files
+for dir in "${DIRS[@]}" 
+do
+
+	for fn in $(ls -1 "${dir}")
+	do
+		is_ascii=$(file "${dir}/${fn}" | egrep -ic "ascii") 
+		if [ "${is_ascii}" -eq 1 ]
+		then 
+			webpage="${fn}.html"
+			webpagepath="${HOST_DIR}${dir}/${webpage}"
+			touch ${webpagepath}
+			echo "<html><head><title>$b_name</title></head><body><pre>" > ${webpagepath}
+			cat "${dir}/${fn}" | awk '{print NR" "$0}' >> ${webpagepath}
+			echo "</pre></body></html>" >> ${webpagepath}
+		fi
+	done
+
+done
+
+# Add the directory pages
+WEB_DIRS=( $(find ${HOST_DIR}) )
+echo "${WEB_DIRS[@]}" | tr ' ' '\n'
+#for fn in "${WEB_DIRS[@]}" 
+#do
+#	echo ""
+#done
+
+
+# add header tags to TOC
+echo "<html><head><title>Top Directories</title></head><body>" >> ${TOC}
 
 # add footer tags to TOC
 echo "</body></html>" >> ${TOC}
