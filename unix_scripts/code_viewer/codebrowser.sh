@@ -163,8 +163,8 @@ do
 						<body>
 							<script type=\"text/javascript\">
 								 function highlight(fn){
-									document.getElementById(fn).style.backgroundColor=\"yellow\";
-								}
+										document.getElementById(fn).style.backgroundColor=\"yellow\";
+									}
 							</script>
 							${CONTENT}
 						</body>
@@ -201,38 +201,75 @@ cat <<HOME_PAGE_CONTENT
 <!DOCTYPE html>
 <html>
 <head>
+<title>Code Hopper</title>
 <style>
-.box{
-    float:left;
-    margin-right:20px;
-}
-.box-bottom{
-    margin-right:20px;
-}
-.clear{
-    clear:both;
-}
+        body{
+          background: #000000;
+          background-color: #ffff99;
+        }
+        #upper {
+            width: 100%;
+            overflow: hidden;
+        }
+
+        #box-inside{
+          background: #000000;
+          background-color: #ffffff;
+        }
+
+        #box {
+            float: left;
+            margin-right: 20px;
+            top: 0;
+            overflow: auto;
+        }
+
+        #box-bottom {
+            margin-right: 20px;
+            overflow: auto;
+        }
+
+        #clear {
+            clear: both;
+        }
 </style>
 </head>
 <body>
-<label>Directories</label
-<div>
-<div class="box">
-	<iframe src="${TOC}" frameborder="1" scrolling="yes" width="100%" height="200" align="left"></iframe>
-</div>
-<div class="box">
-	<iframe src="${CODE_LIST}" frameborder="1" scrolling="yes" width="100%" height="200" align="right" name="code_list"></iframe>
-</div>
-<div><button type="button" onclick="refresh()">Refresh</button>
-<div class="box-bottom">
-	<iframe src="" frameborder="1" scrolling="yes" width="100%" height="400" align="bottom" name="content"></iframe>
-</div>
-</div>
-<script>
-function refresh() {
-    location.reload();
-}
-</script>
+    <div id="upper">
+        <div>
+            <div>
+                <div id="box">
+                    <label>Directories</label>
+                    <iframe id="box-inside" src="${TOC}" frameborder="1" scrolling="yes" width="100%" height="200" align="left"></iframe>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div>
+                <div id="box">
+                    <label>Files</label>
+                    <iframe id="box-inside" src="${CODE_LIST}" frameborder="1" scrolling="yes" width="100%" height="200" align="right" name="code_list"></iframe>
+                </div>
+            </div>
+        </div>
+        <div>
+            <button type="button" onclick="refresh()">Refresh</button>
+        </div>
+    </div>
+    <div id="clear">
+    </div>
+    <div>
+        <div id="box-bottom">
+            <label>Code Unit</label>
+            <iframe id="box-inside" src="" frameborder="1" scrolling="yes" width="100%" height="400" align="bottom" name="content"></iframe>
+        </div>
+    </div>
+    <script>
+        function refresh() {
+            location.reload();
+        }
+    </script>
+
 </body>
 </html>
 
