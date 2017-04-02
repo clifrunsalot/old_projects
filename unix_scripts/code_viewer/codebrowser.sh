@@ -5,6 +5,18 @@
 # Root directory of all code units
 SEARCH_DIR=$1
 
+if [ ! -d "${SEARCH_DIR}" ]
+then
+	cat <<USAGE
+
+	Error.
+	Root directory of code base is missing.
+	USAGE: codebrowser <Root directory of code base>
+
+USAGE
+	exit 1
+fi
+
 # Place to host generated HTML files
 HOST_DIR="${HOME}/codehopper"
 rm -rf ${HOST_DIR}
@@ -195,7 +207,7 @@ echo "</body></html>" >> ${TOC}
 ###################
 
 # Create the homepage with placeholders
-HOME_PAGE="${HOST_DIR}/home.html"
+HOME_PAGE="${HOST_DIR}/index.html"
 (
 cat <<HOME_PAGE_CONTENT
 <!DOCTYPE html>
@@ -273,8 +285,26 @@ cat <<HOME_PAGE_CONTENT
 </body>
 </html>
 
-
 HOME_PAGE_CONTENT
 
 ) > $HOME_PAGE
 
+show_success(){
+
+cat<<-SUCCESS
+
+     ######################################################
+     #                                      
+     #  Success!                            
+     #  Spawn your favorite web brower and  
+     #  open the following webpage.         
+     #                                      
+     #  ${HOST_DIR}/index.html
+     #
+     ######################################################
+
+SUCCESS
+
+}
+
+show_success
