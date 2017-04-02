@@ -36,7 +36,7 @@ done
 ##############################################
 #
 # Create a webpage per code unit
-# in a same structure as the code base.
+# in the same structure as the code base.
 #
 ##############################################
 for dir in "${DIRS[@]}" 
@@ -56,7 +56,7 @@ do
 	done
 done
 
-echo "<html><head><title>TOC</title></head><body>" >> ${TOC}
+echo "<html><head><title>TOC</title></head><body><script type=\"text/javascript\">function highlightParent(fn){document.getElementById(fn).style.backgroundColor=\"yellow\";}</script>" > ${TOC}
 
 # Add the directory pages
 WEB_DIRS=( $(find ${HOST_DIR} -type d | sort ) )
@@ -84,7 +84,8 @@ do
 		ITEM_NAME=$(basename ${curr_item})
 		if [ "$(dirname ${curr_item})" == "${curr_dir}" -a $(echo ${ITEM_NAME} | egrep -c "\.html") -eq 1 ]
 		then
-			CONTENT="${CONTENT}<a href=\"file://${curr_item}\" target="content">${ITEM_NAME}</a><br>" 
+			ITEM_NAME=$(echo "${ITEM_NAME}" | sed 's/\.html$//')
+			CONTENT="${CONTENT}<a href=\"file://${curr_item}\" id=\"${ITEM_NAME}\" target="content" onclick=\"highlight('${ITEM_NAME}');\">${ITEM_NAME}</a><br>" 
 		fi
 	done 
 
@@ -93,15 +94,16 @@ do
 
 		# Count slashes
 		brkt_cnt=$(echo "${curr_dir}" | sed 's/[0-9a-zA-Z\-\_\.]//g' | wc -c)
-		INDENT=$(awk -v cnt=${brkt_cnt} 'BEGIN{printf("|"," ")}END{for(i=0;i<cnt;i++){printf("%s","-")};print ">";}' /dev/null)
+		INDENT=$(awk -v cnt=${brkt_cnt} 'BEGIN{printf("|","")}END{for(i=0;i<cnt;i++){printf("%s","_");}}' /dev/null)
 
 		DIR_NAME=$(basename ${curr_dir})
 		DIR_PAGE="${curr_dir}.html"
 		touch ${DIR_PAGE}
-		echo "<html><head><title>${DIR_NAME}</title></head><body>" > ${DIR_PAGE}	
+		echo "<html><head><title>${DIR_NAME}</title></head><body>" > ${DIR_PAGE}
+		echo "<script type=\"text/javascript\">function highlight(fn){document.getElementById(fn).style.backgroundColor=\"yellow\";}</script>" >> ${DIR_PAGE}
 		echo "${CONTENT}" >> ${DIR_PAGE}
 		echo "</body></html>" >> ${DIR_PAGE}
-		echo "<a href=\"file://${DIR_PAGE}\" target=\"code_list\">${INDENT}${DIR_NAME}</a><br>" >> ${TOC}
+		echo "<a href=\"file://${DIR_PAGE}\" id=\"${DIR_NAME}\" target=\"code_list\" onclick=\"highlightParent('${DIR_NAME}');\">${INDENT}${DIR_NAME}</a><br>" >> ${TOC}
 	fi
 
 done	
@@ -143,10 +145,15 @@ cat <<HOME_PAGE_CONTENT
 <div class="box">
 	<iframe src="${CODE_LIST}" frameborder="1" scrolling="yes" width="100%" height="200" align="right" name="code_list"></iframe>
 </div>
+<div><button type="button" onclick="refresh()">Refresh</button>
 <div class="box-bottom">
 	<iframe src="" frameborder="1" scrolling="yes" width="100%" height="400" align="bottom" name="content"></iframe>
 </div>
-
+<script>
+function refresh() {
+    location.reload();
+}
+</script>
 </body>
 </html>
 
