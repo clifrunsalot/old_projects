@@ -48,7 +48,7 @@ do
 			webpage="${fn}.html"
 			webpagepath="${HOST_DIR}${dir}/${webpage}"
 			touch ${webpagepath}
-			echo "<!DOCTYPE html><html><head><title>$b_name</title></head><body><pre>" > ${webpagepath}
+			echo "<!DOCTYPE html><html><head><title>$b_name</title></head><body><h2>${dir}/${fn}</h2><pre>" > ${webpagepath}
 			cat -n "${dir}/${fn}" >> ${webpagepath}
 			echo "</pre></body></html>" >> ${webpagepath}
 		fi
@@ -261,7 +261,7 @@ cat <<HOME_PAGE_CONTENT
     <div>
         <div id="box-bottom">
             <label>Code Unit</label>
-            <iframe id="box-inside" src="" frameborder="1" scrolling="yes" width="100%" height="400" align="bottom" name="content"></iframe>
+            <iframe id="box-inside" src="" frameborder="1" scrolling="yes" width="100%" height="500px" align="bottom" name="content"></iframe>
         </div>
     </div>
     <script>
