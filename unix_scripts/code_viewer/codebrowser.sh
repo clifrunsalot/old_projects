@@ -25,13 +25,12 @@ touch ${TOC}
 # Create the directories in $SEARCH_DIR area
 #
 ##############################################
-DIRS=( $(find ${SEARCH_DIR} -type d) )
+DIRS=( $(find "${SEARCH_DIR}/" -type d) )
 for fn in "${DIRS[@]}" 
 do
 	webpath="${HOST_DIR}${fn}"
 	mkdir -p $webpath
 done
-
 
 ##############################################
 #
@@ -49,18 +48,45 @@ do
 			webpage="${fn}.html"
 			webpagepath="${HOST_DIR}${dir}/${webpage}"
 			touch ${webpagepath}
-			echo "<html><head><title>$b_name</title></head><body><pre>" > ${webpagepath}
-			cat "${dir}/${fn}" | awk '{print NR" "$0}' >> ${webpagepath}
+			echo "<!DOCTYPE html><html><head><title>$b_name</title></head><body><pre>" > ${webpagepath}
+			cat -n "${dir}/${fn}" >> ${webpagepath}
 			echo "</pre></body></html>" >> ${webpagepath}
 		fi
 	done
 done
 
-echo "<html><head><title>TOC</title></head><body><script type=\"text/javascript\">function highlightParent(fn){document.getElementById(fn).style.backgroundColor=\"yellow\";}</script>" > ${TOC}
+# Add header to TOC
+(
+	echo "<!DOCTYPE html><html>
+				<head>
+					<title>TOC</title>
+					<style>
+						a:link {
+								color: red;
+						}
+						a:visited {
+								color: green;
+						}
+						a:hover {
+								color: hotpink;
+						}
+						a:active {
+								color: blue;
+						}
+					</style>	
+					<script type=\"text/javascript\">
+						function highlightParent(fn){
+							document.getElementById(fn).style.backgroundColor=\"yellow\";
+						}
+					</script>
+				</head>
+				<body>"
+) > ${TOC}
+
 
 # Add the directory pages
-WEB_DIRS=( $(find ${HOST_DIR} -type d | sort ) )
-ALL_FILES=( $(find ${HOST_DIR} | sort ) )
+WEB_DIRS=( $(find "${HOST_DIR}/" -type d | sort ) )
+ALL_FILES=( $(find "${HOST_DIR}/" | sort ) )
 
 for curr_dir in "${WEB_DIRS[@]}"
 do
@@ -85,9 +111,22 @@ do
 		if [ "$(dirname ${curr_item})" == "${curr_dir}" -a $(echo ${ITEM_NAME} | egrep -c "\.html") -eq 1 ]
 		then
 			ITEM_NAME=$(echo "${ITEM_NAME}" | sed 's/\.html$//')
-			CONTENT="${CONTENT}<a href=\"file://${curr_item}\" id=\"${ITEM_NAME}\" target="content" onclick=\"highlight('${ITEM_NAME}');\">${ITEM_NAME}</a><br>" 
+
+			# Add links to CONTENT
+			CONTENT=$(
+								echo "${CONTENT}
+											<a href=\"file://${curr_item}\" 
+												id=\"${ITEM_NAME}\" 
+												target="content" 
+												onclick=\"highlight('${ITEM_NAME}');\">${ITEM_NAME}
+											</a><br>"
+							)
 		fi
 	done 
+
+	# if CONTENT is not empty,
+	# 	create a page and add it
+	# 	to the directory structure
 
 	if [ ! -z "${CONTENT}" ]
 	then
@@ -99,11 +138,48 @@ do
 		DIR_NAME=$(basename ${curr_dir})
 		DIR_PAGE="${curr_dir}.html"
 		touch ${DIR_PAGE}
-		echo "<html><head><title>${DIR_NAME}</title></head><body>" > ${DIR_PAGE}
-		echo "<script type=\"text/javascript\">function highlight(fn){document.getElementById(fn).style.backgroundColor=\"yellow\";}</script>" >> ${DIR_PAGE}
-		echo "${CONTENT}" >> ${DIR_PAGE}
-		echo "</body></html>" >> ${DIR_PAGE}
-		echo "<a href=\"file://${DIR_PAGE}\" id=\"${DIR_NAME}\" target=\"code_list\" onclick=\"highlightParent('${DIR_NAME}');\">${INDENT}${DIR_NAME}</a><br>" >> ${TOC}
+
+		# Build directory main page and create it in the structure
+		(
+			echo "<!DOCTYPE html>
+						<html>
+						<head>
+							<title>${DIR_NAME}</title>
+							<style>
+								a:link {
+										color: red;
+								}
+								a:visited {
+										color: green;
+								}
+								a:hover {
+										color: hotpink;
+								}
+								a:active {
+										color: blue;
+								}
+							</style>	
+						</head>
+						<body>
+							<script type=\"text/javascript\">
+								 function highlight(fn){
+									document.getElementById(fn).style.backgroundColor=\"yellow\";
+								}
+							</script>
+							${CONTENT}
+						</body>
+					</html>"
+		) >> ${DIR_PAGE}
+
+		# Add link to TOC
+		(
+			echo "<a href=\"file://${DIR_PAGE}\" 
+						id=\"${DIR_NAME}\" 
+						target=\"code_list\" 
+						onclick=\"highlightParent('${DIR_NAME}');\">${INDENT}${DIR_NAME}
+					</a><br>"
+		) >> ${TOC}
+
 	fi
 
 done	
@@ -139,6 +215,8 @@ cat <<HOME_PAGE_CONTENT
 </style>
 </head>
 <body>
+<label>Directories</label
+<div>
 <div class="box">
 	<iframe src="${TOC}" frameborder="1" scrolling="yes" width="100%" height="200" align="left"></iframe>
 </div>
@@ -148,6 +226,7 @@ cat <<HOME_PAGE_CONTENT
 <div><button type="button" onclick="refresh()">Refresh</button>
 <div class="box-bottom">
 	<iframe src="" frameborder="1" scrolling="yes" width="100%" height="400" align="bottom" name="content"></iframe>
+</div>
 </div>
 <script>
 function refresh() {
