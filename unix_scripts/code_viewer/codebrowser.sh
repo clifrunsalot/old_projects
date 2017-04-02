@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -x
+#set -x
 
 # Root directory of all code units
 SEARCH_DIR=$1
@@ -20,20 +20,27 @@ TOC=${HOST_DIR}/toc.html
 rm -f ${TOC}
 touch ${TOC}
 
-# Create the directories
+##############################################
+#
+# Create the directories in $SEARCH_DIR area
+#
+##############################################
 DIRS=( $(find ${SEARCH_DIR} -type d) )
 for fn in "${DIRS[@]}" 
 do
-
 	webpath="${HOST_DIR}${fn}"
 	mkdir -p $webpath
-
 done
 
-# Add the HTML files
+
+##############################################
+#
+# Create a webpage per code unit
+# in a same structure as the code base.
+#
+##############################################
 for dir in "${DIRS[@]}" 
 do
-
 	for fn in $(ls -1 "${dir}")
 	do
 		is_ascii=$(file "${dir}/${fn}" | egrep -ic "ascii") 
@@ -47,20 +54,56 @@ do
 			echo "</pre></body></html>" >> ${webpagepath}
 		fi
 	done
-
 done
 
+# Count slashes
+#	brkt_cnt=$(echo "${w_dir}" | sed 's/[0-9a-zA-Z\-\_\.]//g' | wc -c)
+#	awk -v cnt=${brkt_cnt} 'BEGIN{printf("|"," ")}END{for(i=0;i<cnt;i++){printf("%s","--")};print ">";}' /dev/null
+
+echo "<html><head><title>TOC</title></head><body>" >> ${TOC}
+
 # Add the directory pages
-WEB_DIRS=( $(find ${HOST_DIR}) )
-echo "${WEB_DIRS[@]}" | tr ' ' '\n'
-#for fn in "${WEB_DIRS[@]}" 
-#do
-#	echo ""
-#done
+WEB_DIRS=( $(find ${HOST_DIR} -type d | sort ) )
+ALL_FILES=( $(find ${HOST_DIR} | sort ) )
 
+for curr_dir in "${WEB_DIRS[@]}"
+do
 
-# add header tags to TOC
-echo "<html><head><title>Top Directories</title></head><body>" >> ${TOC}
+	# get dir_name
+	# build dir_page
+	# for each item in SEARCH_DIR 
+		# if item_path == dir_name
+			# get page name
+			# add page_path and page_name to dir_page
+	# write dir_page to path 
+	# add dir_page link to TOC
+
+	CONTENT=""
+
+	for curr_item in "${ALL_FILES[@]}"
+	do
+		ITEM_NAME=$(basename ${curr_item})
+		if [ "$(dirname ${curr_item})" == "${curr_dir}" -a $(echo ${ITEM_NAME} | egrep -c "\.html") -eq 1 ]
+		then
+			CONTENT="${CONTENT}<a href=\"file://${curr_item}\" target="content">${ITEM_NAME}</a><br>" 
+		fi
+	done 
+
+	if [ ! -z "${CONTENT}" ]
+	then
+
+		DIR_NAME=$(basename ${curr_dir})
+		DIR_PAGE="${curr_dir}.html"
+		touch ${DIR_PAGE}
+set -x	
+		echo "<html><head><title>${DIR_NAME}</title></head><body>" > ${DIR_PAGE}	
+		echo "${CONTENT}" >> ${DIR_PAGE}
+		echo "</body></html>" >> ${DIR_PAGE}
+		echo "<a href=\"file://${DIR_PAGE}\" target=\"code_list\">${DIR_NAME}</a><br>" >> ${TOC}
+set +x
+	fi
+
+done	
 
 # add footer tags to TOC
 echo "</body></html>" >> ${TOC}
