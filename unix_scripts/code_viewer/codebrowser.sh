@@ -56,10 +56,6 @@ do
 	done
 done
 
-# Count slashes
-#	brkt_cnt=$(echo "${w_dir}" | sed 's/[0-9a-zA-Z\-\_\.]//g' | wc -c)
-#	awk -v cnt=${brkt_cnt} 'BEGIN{printf("|"," ")}END{for(i=0;i<cnt;i++){printf("%s","--")};print ">";}' /dev/null
-
 echo "<html><head><title>TOC</title></head><body>" >> ${TOC}
 
 # Add the directory pages
@@ -69,14 +65,17 @@ ALL_FILES=( $(find ${HOST_DIR} | sort ) )
 for curr_dir in "${WEB_DIRS[@]}"
 do
 
-	# get dir_name
-	# build dir_page
-	# for each item in SEARCH_DIR 
-		# if item_path == dir_name
-			# get page name
-			# add page_path and page_name to dir_page
-	# write dir_page to path 
-	# add dir_page link to TOC
+	# create temp_var to hold page contents
+	# for each item in curr_dir 
+	# 	if item_path == curr_name
+	# 		get page name
+	# 		add page_path and page_name to temp_var
+	# end for each
+	# if temp_var not 0 len
+	#		get dir_name
+	#		build dir_page
+	#		write dir_page to path 
+	#		add dir_page link to TOC
 
 	CONTENT=""
 
@@ -92,15 +91,17 @@ do
 	if [ ! -z "${CONTENT}" ]
 	then
 
+		# Count slashes
+		brkt_cnt=$(echo "${curr_dir}" | sed 's/[0-9a-zA-Z\-\_\.]//g' | wc -c)
+		INDENT=$(awk -v cnt=${brkt_cnt} 'BEGIN{printf("|"," ")}END{for(i=0;i<cnt;i++){printf("%s","-")};print ">";}' /dev/null)
+
 		DIR_NAME=$(basename ${curr_dir})
 		DIR_PAGE="${curr_dir}.html"
 		touch ${DIR_PAGE}
-set -x	
 		echo "<html><head><title>${DIR_NAME}</title></head><body>" > ${DIR_PAGE}	
 		echo "${CONTENT}" >> ${DIR_PAGE}
 		echo "</body></html>" >> ${DIR_PAGE}
-		echo "<a href=\"file://${DIR_PAGE}\" target=\"code_list\">${DIR_NAME}</a><br>" >> ${TOC}
-set +x
+		echo "<a href=\"file://${DIR_PAGE}\" target=\"code_list\">${INDENT}${DIR_NAME}</a><br>" >> ${TOC}
 	fi
 
 done	
