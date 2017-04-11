@@ -109,14 +109,12 @@ angular.module('conFusion.controllers', [])
 		};
 
 		$scope.takePicture = function () {
-			$cordovaCamera.getPicture(options).then(function (imageData) {
+			$cordovaCamera.getPicture(options).then(
+			function (imageData) {
 				$scope.registration.imgSrc = "data:image/jpeg;base64," + imageData;
 			}, function (err) {
 				console.log(err);
 			});
-
-			$scope.registerform.show();
-
 		};
 
 		$scope.selectPicture = function () {
@@ -130,12 +128,10 @@ angular.module('conFusion.controllers', [])
 
 			$cordovaImagePicker.getPictures(getImageOptions)
 			.then(function (results) {
-				for (var i = 0; i < results.length; i++) {
-					$scope.registration.imgSrc = results[i];
-					console.log('Image URI: ' + results[i]);
-				}
+				$scope.registration.imgSrc = results[0];
+				console.log('Image URI: ' + results[0]);
 			}, function (error) {
-				// error getting photos
+				console.log(err);
 			});
 		};
 	});
@@ -328,7 +324,7 @@ angular.module('conFusion.controllers', [])
 					});
 
 					$cordovaToast
-					.show('Added Favorite ' + $scope.dish.name, 'long', 'center')
+					.show('Added Favorite ' + $scope.dish.name, 'long', 'bottom')
 					.then(function (success) {
 						// success
 					}, function (error) {
