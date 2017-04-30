@@ -19,6 +19,7 @@ bower_components/
 **/*.min.js
 **/main-*.js
 **/main-*.css
+**/ionic.bundle.js
 
 # Archives #
 ############
@@ -27,7 +28,8 @@ bower_components/
 # Logs and databases #
 ######################
 **/*.sqlite
-mongdb/data/
+prealloc.*
+local.*
 
 # OS generated files #
 ######################
