@@ -13,8 +13,8 @@
 
 # Application libraries #
 #########################
-**/node_modules
-**/bower_components
+node_modules/
+bower_components/
 **/.ipynb_checkpoints
 **/*.min.js
 **/main-*.js
@@ -27,7 +27,7 @@
 # Logs and databases #
 ######################
 **/*.sqlite
-**/mongdb/data
+mongdb/data/
 
 # OS generated files #
 ######################
