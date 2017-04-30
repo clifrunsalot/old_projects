@@ -27,7 +27,7 @@
 # Logs and databases #
 ######################
 **/*.sqlite
-**/mongdb
+**/mongdb/data
 
 # OS generated files #
 ######################
