@@ -1,0 +1,147 @@
+#!/bin/ksh
+
+code_unit=$1
+coverage_data=$2
+
+usage(){
+
+	cat<<USAGE
+
+	Error!
+	Usage: coverage_view <code_unit> <coverage_data>
+
+	The code_unit is any type of file.
+	The coverage_data is a text-based file with the following entries embedded,
+
+	e.g.
+
+	3 x 1 2 4 5 6 15 25
+	0 x 23 45 67 89
+	1 x 3 7 8 9 10
+
+	where each line represents the format 
+
+	<number of times executed> x <line> [line number] [line number] ...
+
+	The script will create an HTML file that color-codes lines based on the
+	format described above.
+
+	Lines highlighted in green means they have been executed.
+
+USAGE
+
+}
+
+execution_ary=""
+temp_code="./temp_code.txt"
+temp_code_2="./temp_code_2.txt"
+
+# Create a temp file with the line numbers prepended
+add_line_numbers(){
+	code=$1
+	cat -n $code > ${temp_code}
+}
+
+# Create an array of the lines to execution count
+collect_coverage(){
+
+	# This is the main associative array
+	exec_ary=""
+
+	coverage_file=$1	
+	cat $coverage_file  | egrep "x" | tr -s ' ' | sed 's/^ //' 
+
+	# loop thru the data file, line by line
+	cat $coverage_file  | egrep "x" | tr -s ' ' | sed 's/^ //' | while read line
+	do
+
+		# get the execution count
+		cnt=$(echo $line | cut -d' ' -f1)
+
+		# build array of lines with that execution count
+		lines=( $(echo $line | cut -d' ' -f3-) )
+
+#		echo "$cnt : ${lines[@]}"
+
+		# only processed where cnt > 0
+		if [ $cnt -gt 0 ]
+		then
+
+			# add an element to the exec_ary.
+			for l in "${lines[@]}"
+			do
+				exec_ary=( "${exec_ary[@]}" "$l=$cnt" )
+			done
+
+		fi
+	done
+
+#	echo "${exec_ary[@]}" | tr ' ' '\n' 
+	execution_ary=( ${exec_ary[@]} )
+
+}
+
+output_file="./output.html"
+
+# Create html file
+add_markup(){
+
+	echo "<html><head><title></title></head><body><br><pre>" > ${output_file}
+	cat "${temp_code}" | while read line
+	do
+
+		search_this="${line}"
+
+		yes=0
+		for elem in "${execution_ary[@]}"
+		do
+
+			ln=$(echo "${elem}" | cut -d"=" -f1 | tr -d ' ')
+			cnt=$(echo "${elem}" | cut -d"=" -f2)
+
+			found=$(echo "${search_this}" | egrep -c "^${ln}	")
+
+			if [ ${found} -gt 0 ]
+			then
+				echo "${search_this}" | sed 's#^\(.*\)$#<span style=\"background-color: yellow\">\1<\/span>#' >> ${output_file}
+				yes=1
+				break
+
+			fi
+
+		done
+
+		if [ ${yes} -eq 1 ]
+		then
+			yes=0
+			continue
+		else
+			echo "${line}" >> ${output_file}
+		fi
+
+	done
+
+	echo "</pre></body></html>" >> ${output_file}
+
+}
+
+if [ $# -ne 2 ]
+then
+	usage
+
+else
+	if [ ! -f "${code_unit}" -o ! -f "${coverage_data}" ]
+	then
+
+		usage
+
+	else
+
+		add_line_numbers ${code_unit}
+		collect_coverage ${coverage_data}
+		add_markup
+	fi
+
+fi
+
+	
